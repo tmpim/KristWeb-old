@@ -1,0 +1,26 @@
+{
+  "extends": "eslint:recommended",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
+  "plugins": [
+    "babel"
+  ],
+  "envs": [
+    "browser",
+    "es6",
+    "commonjs"
+  ],
+  "ecmaFeatures": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": 0,
+    "quotes": ["error", "double"],
+    "semi": ["error", "always"]
+  }
+}

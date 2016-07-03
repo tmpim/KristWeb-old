@@ -1,0 +1,128 @@
+.button {
+	$color: $primary-light-grey;
+	$textColor: #333;
+	
+	display: inline-block;
+	position: relative;
+	top: 0;
+
+	background: $color;
+
+	color: $textColor;
+
+	border-radius: 3px;
+	border-bottom: 3px solid darken($color,10%);
+
+	padding: 0.25rem 0.75rem;
+	margin-top: 0;
+	margin-right: 0.25rem;
+
+	outline: none;
+
+	transition: all 100ms ease, box-shadow 225ms ease;
+
+	box-shadow: 0 0 0 0 transparent;
+
+	&:last-of-type {
+		margin-right: 0;
+	}
+
+	&:focus {
+		outline: none !important;
+		box-shadow: 0 0 0 3px rgba($color, 0.5);
+	}
+
+	&:hover {
+		background: darken($color, 5%);
+		border-bottom: 3px solid darken($color, 15%);
+		box-shadow: none;
+	}
+
+	&:active {
+		top: 3px;
+		margin-bottom: 3px;
+
+		background: darken($color, 10%);
+		border-bottom: 0 solid darken($color, 15%);
+	}
+
+	&.loader {
+		&:after {
+			content: "";
+
+			width: 16px;
+			height: 16px;
+
+			display: inline-block;
+			position: relative;
+
+			border: 2px solid transparent;
+			border-left-color: $textColor;
+			border-radius: 50%;
+
+			transform: translateZ(0);
+			animation: spinner 1s infinite linear;
+
+			margin-left: -1rem;
+			opacity: 0;
+
+			transition: all 250ms ease;
+
+			@keyframes spinner {
+				0% {
+					transform: rotate(0deg);
+				}
+
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+		}
+
+		&.loading {
+			&:after {
+				margin-left: 0.5em;
+				opacity: 1;
+			}
+		}
+	}
+}
+
+@mixin button-style($color, $textColor) {
+	background: $color;
+	color: $textColor;
+
+	border-bottom-color: darken($color,10%);
+
+	&:focus {
+		box-shadow: 0 0 0 3px rgba($color, 0.3);
+	}
+
+	&:hover {
+		background: darken($color, 5%);
+		border-bottom-color: darken($color, 15%);
+	}
+
+	&:active {
+		background: darken($color, 10%);
+		border-bottom-color: darken($color, 15%);
+	}
+
+	&.loader {
+		&:after {
+			border-left-color: $textColor;
+		}
+	}
+}
+
+.button-primary {
+	@include button-style($primary-blue, #fff);
+}
+
+.button-green {
+	@include button-style($primary-green, #fff);
+}
+
+.button-red {
+	@include button-style($primary-red, #fff);
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="description" content="Krist Web Wallet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="msapplication-tap-highlight" content="no">
+
+	<title>KristWeb</title>
+
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="application-name" content="kristweb">
+	<link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="kristweb">
+	<link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+	<meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+	<meta name="msapplication-TileColor" content="#3897d9">
+	<meta name="msapplication-config" content="none">
+	<meta name="theme-color" content="#3897d9">
+
+	<link rel="canonical" href="https://kristweb.ceriat.net">
+
+	<link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/app.css">
+</head>
+<body class="dense-retina">
+	<div class="container" id="app">
+		<noscript>
+			KristWeb requires JavaScript to be enabled in order to run. Please enable it in your browser, or exclude
+			KristWeb in your NoScript addon.
+		</noscript>
+
+		<div id="loader-spinner"></div>
+		<div id="loader-text">Loading...</div>
+		<div id="loader-progress-bar" style="opacity: 0;"><div class="progress" id="loader-progress"></div></div>
+
+		<script>
+			if (navigator.userAgent.indexOf("MSIE") != -1 || navigator.userAgent.match(/Trident.*rv\:11\./)) {
+				document.write("btw ur browser sucks");
+			}
+		</script>
+	</div>
+
+	<script>
+		var sr = new XMLHttpRequest();
+
+		var progressBar = document.getElementById("loader-progress-bar");
+		var progress = document.getElementById("loader-progress");
+
+		var loaderText = document.getElementById("loader-text");
+
+		progressBar.style.opacity = 1.0;
+
+		loaderText.innerText = "Loading required files";
+
+		sr.addEventListener("progress", function (e) {
+			if (e.lengthComputable) {
+				loaderText.innerText = "Loading required files (" + Math.floor(e.loaded / e.total * 100) + "%)";
+				progress.style.width = (Math.floor(e.loaded / e.total * progressBar.offsetWidth)) + "px";
+			} else {
+				loaderText.innerText = "Loading required files";
+			}
+		});
+
+		sr.addEventListener("load", function () {
+			progressBar.style.opacity = 0;
+			loaderText.innerText = "Loading...";
+
+			eval(this.responseText);
+		});
+
+		sr.open("GET", "js/bundle.js");
+		sr.send();
+	</script>
+</body>
+</html>

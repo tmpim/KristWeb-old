@@ -1,0 +1,39 @@
+.searchBox {
+    color: #fff;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: 300;
+    padding: 8px 12px;
+    border: 1px solid transparent;
+    outline: none;
+    border-radius: 3px;
+    width: 100%;
+
+    transition: all 250ms ease;
+
+    &:focus {
+        background-color: rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    
+    &::-webkit-input-placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:-moz-placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    &::-moz-placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:-ms-input-placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    &:placeholder-shown {
+        color: rgba(255, 255, 255, 0.4);
+    }
+}

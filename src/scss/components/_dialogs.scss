@@ -1,0 +1,156 @@
+@keyframes modal-dialog-in {
+	0% {
+		transform: translate3d(0%, 50%, 0);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translate3d(0%, 0%, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes modal-dialog-out {
+	0% {
+		transform: translate3d(0%, -0%, 0);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translate3d(0%, -50%, 0);
+		opacity: 0;
+	}
+}
+
+.bbm-wrapper {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 100vh;
+	z-index: 200;
+	background: rgba(0, 0, 0, 0.25);
+	transition: background-color 0.3s;
+
+	backface-visibility: hidden;
+	//noinspection CssInvalidPropertyValue
+	perspective: 1000;
+
+	display: flex !important;
+	align-items: center;
+	justify-content: center;
+}
+
+.bbm-modal {
+	z-index: 201;
+	transform: translate3d(0%, -50%, 0);
+	border-radius: 3px;
+
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+	min-width: 300px;
+
+	animation: modal-dialog-in 0.5s ease 1;
+	animation-fill-mode: both;
+
+	max-width: 620px;
+
+	@media screen and (max-width: $break-small) {
+		min-width: 128px;
+		width: 95vw;
+	}
+
+	.modal-header {
+		background: $primary-blue;
+		border-radius: 3px 3px 0 0;
+		padding: 0.5rem;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		color: #fff;
+		opacity: 1;
+
+		transition: all 200ms ease;
+
+		.modal-title {
+			margin: 0 0.75rem;
+			font-weight: 400;
+			flex: 1 0 0;
+		}
+
+		.modal-close:not(.modal-button) {
+			&:before {
+				display: inline-block;
+				flex: 0 1 0;
+				font-family: 'kristweb';
+				content: '\e805';
+				cursor: pointer;
+				padding: 0 0.5rem;
+				color: #fff;
+			}
+
+			&:hover:before {
+				opacity: 0.9;
+			}
+		}
+	}
+
+	.modal-body {
+		background: #fff;
+		padding: 1rem 1.25rem;
+		width: 100%;
+
+		&:last-child {
+			border-radius: 0 0 3px 3px;
+		}
+	}
+
+	.modal-footer {
+		background: #fff;
+		border-top: 1px solid #eee;
+		padding: 0.5rem 0.5rem;
+		width: 100%;
+		min-height: 54px;
+
+		display: flex;
+
+		.button.modal-close {
+			margin-right: auto;
+		}
+
+		.button {
+			margin-right: 0.5rem;
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+
+		&.has-close-button {
+			.button:nth-child(2) {
+				margin-left: 0.5rem;
+			}
+		}
+
+		&:last-child {
+			border-radius: 0 0 3px 3px;
+		}
+
+		@media screen and (max-width: $break-small) {
+			flex-direction: column;
+
+			.button {
+				width: 100%;
+				margin: 0 0 0.25rem !important;
+
+				&:last-child {
+					margin: 0 !important;
+				}
+			}
+		}
+	}
+}
+
+.bbm-modal--destroy {
+	animation: modal-dialog-out 0.5s ease 1;
+	animation-fill-mode: both;
+}

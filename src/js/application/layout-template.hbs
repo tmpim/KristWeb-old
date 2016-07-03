@@ -1,0 +1,39 @@
+<div class="topBar">
+	<div class="topBar-left">
+		<div class="sidebar-opener" id="sidebar-opener"></div>
+		<span class="topBar-title">
+			KristWeb
+		</span>
+		<span class="topBar-version">
+			b0.0.0
+		</span>
+	</div>
+	<div class="topBar-right">
+		<div class="topBar-addressInfo">
+			{{#if currentWallet}}
+				<span class="topBar-addressInfo-address">
+					kxopdv8xaf
+				</span>
+				<span class="topBar-addressInfo-balance">
+					1,000 KST
+				</span>
+			{{else}}
+				<span class="topBar-addressInfo-address">
+					Not logged in
+				</span>
+			{{/if}}
+		</div>
+		<div class="topBar-addressSelector" id="wallet-chooser-button">
+			<i class="icon-caret-down"></i>
+		</div>
+	</div>
+</div>
+<div id="wallet-chooser" class="nano nano-primary nano-margin"></div>
+<div class="pageContainer" id="page-container">
+	<div id="modalsContainer"></div>
+
+	<div class="sidebar nano" id="sidebar"></div>
+	<div class="sidebar-dim" id="sidebar-dim"></div>
+
+	<div class="pageMain" id="app-content"></div>
+</div>

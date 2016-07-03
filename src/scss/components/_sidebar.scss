@@ -1,0 +1,33 @@
+.sidebar {
+    background: $primary-blue-darker;
+
+    .sidebar-item {
+        padding: 12px 16px;
+        color: #fff;
+        font-size: 20px;
+        display: inline-block;
+        width: 100%;
+        transition: all 200ms ease;
+
+        &:not(.sidebar-top) {
+            cursor: pointer;
+
+            &:hover {
+                background: $primary-blue;
+            }
+
+            &.active {
+                background: $primary-blue-lighter;
+
+                &:hover {
+                    background: lighten($primary-blue-lighter, 10%);
+                }
+            }
+        }
+    }
+
+    .sidebar-top {
+        padding: 16px;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+}
