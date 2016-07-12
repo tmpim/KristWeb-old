@@ -1,9 +1,9 @@
-import TestModalTemplate from "../modal/test-modal.hbs";
-import TestModalButtons from "../modal/test-modal-buttons.hbs";
+import TestModalTemplate from "./template.hbs";
+import TestModalButtons from "./buttons.hbs";
 
-import Modal from "./modal";
+import Modal from "./../modal";
 
-import app from "../app.js";
+import app from "../../app.js";
 
 export default Modal.extend({
 	dialog: TestModalTemplate,

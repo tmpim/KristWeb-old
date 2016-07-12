@@ -28,9 +28,9 @@ gulp.task("sass", function() {
 });
 
 gulp.task("lint", function() {
-	return gulp.src(['src/js/**/*.js', '!src/js/**/*.min.js'])
+	return gulp.src(["src/js/**/*.js", "!src/js/**/*.min.js", "!src/js/**/*.lib.js"])
 		.pipe($.eslint({
-			extends: 'eslint:recommended',
+			extends: "eslint:recommended",
 			parser: "babel-eslint",
 			parserOptions: {
 				sourceType: "module",
@@ -55,7 +55,7 @@ gulp.task("lint", function() {
 				"semi": ["error", "always"]
 			}
 		}))
-		.pipe($.eslint.formatEach('compact', process.stderr));
+		.pipe($.eslint.formatEach("compact", process.stderr));
 });
 
 var bundler = _.memoize(function(watch) {

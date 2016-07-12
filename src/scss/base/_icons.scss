@@ -1,11 +1,11 @@
 @font-face {
 	font-family: 'kristweb';
-	src: url('/font/kristweb.eot?81648438');
-	src: url('/font/kristweb.eot?81648438#iefix') format('embedded-opentype'),
-	url('/font/kristweb.woff2?81648438') format('woff2'),
-	url('/font/kristweb.woff?81648438') format('woff'),
-	url('/font/kristweb.ttf?81648438') format('truetype'),
-	url('/font/kristweb.svg?81648438#kristweb') format('svg');
+	src: url('/font/kristweb.eot?1');
+	src: url('/font/kristweb.eot?1#iefix') format('embedded-opentype'),
+	url('/font/kristweb.woff2?1') format('woff2'),
+	url('/font/kristweb.woff?1') format('woff'),
+	url('/font/kristweb.ttf?1') format('truetype'),
+	url('/font/kristweb.svg?1#kristweb') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -38,3 +38,4 @@
 .icon-bell:before { content: '\e803'; }
 .icon-bell-off:before { content: '\e804'; }
 .icon-cancel:before { content: '\e805'; }
+.icon-plus:before { content: '\e806'; }

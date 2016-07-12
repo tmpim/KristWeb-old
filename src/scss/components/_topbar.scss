@@ -51,6 +51,8 @@
 
         border-right: 1px solid $primary-blue-darker;
 
+        user-select: none;
+
         &:before {
             display: inline-block;
             content: '\e800';

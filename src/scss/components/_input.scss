@@ -3,10 +3,12 @@ input {
 }
 
 .text-input {
+    background: #fff;
+
     font-family: 'Lato', sans-serif;
     font-size: 20px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 300;
 
     color: #666;
 
@@ -22,8 +24,12 @@ input {
 
     transition: all 250ms ease;
 
+    box-shadow: 0 0 0 0 transparent;
+
     &:focus {
-        border: 1px soid $primary-blue;
+        outline: none !important;
+        box-shadow: 0 0 0 2px rgba($primary-blue, 0.25);
+        border: 1px solid $primary-blue;
         color: #333;
 
         outline: none;
@@ -75,7 +81,7 @@ input {
     }
 }
 
-label {
+.label-hint {
     display: block;
     transition: all 250ms ease;
 
@@ -89,4 +95,13 @@ label {
         pointer-events: none;
         margin-bottom: 1rem;
     }
+}
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }

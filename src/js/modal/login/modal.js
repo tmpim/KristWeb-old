@@ -1,17 +1,17 @@
 
 import SecureRandom from "securerandom";
 
-import LoginModalTemplate from "../modal/template-login.hbs";
-import LoginModalButtons from "../modal/template-login-buttons.hbs";
+import LoginModalTemplate from "./template.hbs";
+import LoginModalButtons from "./buttons.hbs";
 
-import ForgotPasswordTemplate from "../modal/template-forgot-password.hbs";
-import ForgotPasswordButtons from "../modal/template-forgot-password-buttons.hbs";
+import ForgotPasswordTemplate from "./../forgot-password/template.hbs";
+import ForgotPasswordButtons from "./../forgot-password/buttons.hbs";
 
-import WalletStorageTemplate from "../modal/template-help-wallet-storage.hbs";
+import WalletStorageTemplate from "./../help/wallet-storage.hbs";
 
-import Modal from "./modal";
+import Modal from "./../modal";
 
-import app from "../app.js";
+import app from "../../app.js";
 
 export default Modal.extend({
 	dialog: LoginModalTemplate,

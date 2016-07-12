@@ -1,7 +1,7 @@
 .button {
 	$color: $primary-light-grey;
 	$textColor: #333;
-	
+
 	display: inline-block;
 	position: relative;
 	top: 0;
@@ -22,6 +22,9 @@
 	transition: all 100ms ease, box-shadow 225ms ease;
 
 	box-shadow: 0 0 0 0 transparent;
+
+	cursor: pointer;
+	user-select: none;
 
 	&:last-of-type {
 		margin-right: 0;
@@ -125,4 +128,15 @@
 
 .button-red {
 	@include button-style($primary-red, #fff);
+}
+
+.button-large {
+	padding: 0.5rem 1.25rem;
+	font-size: 24px;
+}
+
+.button:disabled {
+	@include button-style($primary-dark, #fff);
+
+	cursor: default;
 }

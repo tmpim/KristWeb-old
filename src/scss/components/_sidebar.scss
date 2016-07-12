@@ -1,5 +1,7 @@
 .sidebar {
     background: $primary-blue-darker;
+    overflow-y: auto;
+    height: 100%;
 
     .sidebar-item {
         padding: 12px 16px;

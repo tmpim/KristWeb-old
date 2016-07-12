@@ -5,7 +5,7 @@ import template from "./template.hbs";
 export default ItemView.extend({
 	template: template,
 	tagName: "nav",
-	className: "nano-content",
+	id: "sidebar-content",
 
 	collectionEvents: {
 		all: "render"

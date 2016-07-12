@@ -48,8 +48,6 @@ const SidebarService = Service.extend({
 	start() {
 		this.view = new View({ collection: this.collection });
 		this.container.show(this.view);
-
-		this.container.$el.nanoScroller();
 	},
 
 	requests: {
@@ -60,15 +58,11 @@ const SidebarService = Service.extend({
 
 	add(model) {
 		this.collection.add(model);
-
-		this.container.$el.nanoScroller();
 	},
 
 	remove(model) {
 		model = this.collection.findWhere(model);
 		this.collection.remove(model);
-
-		this.container.$el.nanoScroller();
 	},
 
 	activate(model) {
@@ -79,8 +73,6 @@ const SidebarService = Service.extend({
 		if (model) {
 			model.set("active", true);
 		}
-
-		this.container.$el.nanoScroller();
 	}
 });
 

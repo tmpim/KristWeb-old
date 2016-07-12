@@ -4,8 +4,8 @@ import template from "./template.hbs";
 
 import Modal from "../modal/modal";
 
-import TestModal from "../modal/modal-test";
-import LoginModal from "../modal/modal-login";
+import TestModal from "../modal/test/modal";
+import LoginModal from "../modal/login/modal";
 
 import Wallet from "../wallet/model";
 
@@ -52,9 +52,11 @@ export default LayoutView.extend({
 	},
 
 	onClickButton4() {
+		let s = "abcdefghijklmnopqrstuvwxyz0123456789";
+
 		let wallet = new Wallet({
 			label: "Test",
-			address: "kre3w0i79j"
+			address: "k" + Array(9).join().split(",").map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join("")
 		});
 
 		app.wallets.add(wallet);
@@ -63,7 +65,7 @@ export default LayoutView.extend({
 	},
 
 	onClickButtonSync() {
-		app.wallets.models.forEach(function(model) {
+		app.wallets.models.forEach(model => {
 			model.save();
 		});
 	},

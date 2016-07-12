@@ -1,40 +1,63 @@
 import "./plugins";
+import _ from "lodash";
 import Backbone from "backbone";
-import $ from "jquery";
 
 import Application from "./application/application";
 
-import UnsupportedBrowserTemplate from "./modal/template-unsupported-browser.hbs";
+import UnsupportedBrowserTemplate from "./modal/unsupported-browser/template.hbs";
 import Modal from "./modal/modal";
 
-import LoginModal from "./modal/modal-login";
+import LoginModal from "./modal/login/modal";
+import AddWalletModel from "./modal/add-wallet/modal";
 
 let app = new Application();
 export default app;
 
-if (!localStorage) {
-	app.layout.modals.show(new (Modal.extend({
-		dialog: UnsupportedBrowserTemplate,
-		title: "Unsupported Browser",
+let feelingIll = false;
+let features = {
+	"Local Storage"() {
+		return localStorage;
+	},
 
-		topCloseButton: false,
-		closeButton: false,
-		hideFooter: true,
+	"File APIs"() {
+		return window.File && window.FileReader && window.FileList && window.Blob;
+	}
+};
 
-		extraData: {
-			feature: "Local Storage"
-		},
+_.forOwn(features, (value, key) => {
+	if (feelingIll) return;
 
-		beforeCancel() {
-			return false;
-		}
-	}))());
+	if (!value()) {
+		feelingIll = true;
+
+		app.layout.modals.show(new (Modal.extend({
+			dialog: UnsupportedBrowserTemplate,
+			title: "Unsupported Browser",
+
+			topCloseButton: false,
+			closeButton: false,
+			hideFooter: true,
+
+			extraData: {
+				feature: key
+			},
+
+			beforeCancel() {
+				return false;
+			}
+		}))());
+	}
+});
+
+if (feelingIll) {
+	// eslint-disable-next-line no-undef
+	throw up; // ha ha
 }
 
 Backbone.history.start({pushState: true});
 
-$(document).on("click", "a:not([data-bypass])", function (e) {
-	let href = $(this).attr("href");
+window.$(document).on("click", "a:not([data-bypass])", function (e) {
+	let href = window.$(this).attr("href");
 	let protocol = this.protocol + "//";
 
 	if (href && protocol && href.slice(protocol.length) !== protocol) {
@@ -79,3 +102,6 @@ if (localStorage.tester) {
 		success: passwordReady
 	}))());
 }
+
+app.layout.modals.show(new (AddWalletModel.extend({
+}))());
