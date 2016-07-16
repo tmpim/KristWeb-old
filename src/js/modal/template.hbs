@@ -1,12 +1,12 @@
 <div class="modal-header">
 	<h4 class="modal-title">{{title}}</h4>
-	{{#if topCloseButton}}<button class="modal-close"></button>{{/if}}
+	{{#if topCloseButton}}<a class="modal-close"></a>{{/if}}
 </div>
 <div class="modal-body">{{{content}}}</div>
 {{#unless hideFooter}}
 	<div class="modal-footer u-cf{{#if closeButton}} has-close-button{{/if}}">
 		{{#if closeButton}}
-			<button class="button modal-close">Close</button>
+			<a class="button modal-close">Close</a>
 		{{else}}
 			<div class="u-spacer"></div>
 		{{/if}}

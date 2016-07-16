@@ -102,5 +102,6 @@ export default Modal.extend({
 		});
 
 		app.wallets.add(wallet);
+		wallet.save();
 	}
 });

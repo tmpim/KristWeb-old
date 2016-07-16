@@ -1,4 +1,4 @@
-<div class="wallet-icon"></div>
+<div class="wallet-icon"{{#if icon}}style="background-image: url({{icon}});"{{/if}}></div>
 <div class="wallet-info">
 	{{#if label}}<span class="wallet-label">{{label}}</span>{{/if}}
 	{{#if address}}<span class="wallet-address">{{address}}</span>{{/if}}

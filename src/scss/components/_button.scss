@@ -26,6 +26,14 @@
 	cursor: pointer;
 	user-select: none;
 
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: 300;
+	-webkit-font-smoothing: antialiased !important;
+	-webkit-backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale !important;
+
 	&:last-of-type {
 		margin-right: 0;
 	}
