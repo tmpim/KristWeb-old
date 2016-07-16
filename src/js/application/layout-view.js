@@ -4,9 +4,17 @@ import Backbone from "backbone";
 
 import AddWalletModel from "../modal/add-wallet/modal";
 
+import Epic from "../utils/epic";
+
 export default LayoutView.extend({
 	el: "#app",
 	template: template,
+
+	behaviors: {
+		Epic: {
+			behaviorClass: Epic
+		}
+	},
 
 	regions: {
 		content: "#app-content",

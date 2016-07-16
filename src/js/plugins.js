@@ -26,3 +26,7 @@ import Modals from "backbone.modal";
 if (window.__agent) {
 	window.__agent.start(Backbone, Marionette);
 }
+
+Marionette.Behaviors.behaviorsLookup = function() {
+	return window.Behaviors;
+};

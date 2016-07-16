@@ -8,7 +8,6 @@ import UnsupportedBrowserTemplate from "./modal/unsupported-browser/template.hbs
 import Modal from "./modal/modal";
 
 import LoginModal from "./modal/login/modal";
-// import AddWalletModel from "./modal/add-wallet/modal";
 
 let app = new Application();
 export default app;

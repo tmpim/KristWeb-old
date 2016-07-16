@@ -26,11 +26,7 @@
 
 <select class="dropdown-input" id="wallet-format" style="width: 100%">
 	<option value="kristwallet">KristWallet, KWallet, smallet (recommended)</option>
-	<!-- sha256("KRISTWALLET" + password) + "-000" -->
 	<option value="krist">Local Vault, krist.dia, Krist API</option>
-	<!-- password -->
 	<option value="kristwallet_username_appendhashes">KW-Username (appendhashes)</option>
-	<!-- sha256("KRISTWALLETEXTENSION" + sha256(sha256(username) + "^" + sha256(password))) + "-000" -->
 	<option value="kristwallet_username">KW-Username (pre-appendhashes)</option>
-	<!-- sha256(sha256(username) + "^" + sha256(password)) -->
 </select>

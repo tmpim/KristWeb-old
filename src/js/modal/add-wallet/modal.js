@@ -16,6 +16,10 @@ export default Modal.extend({
 
 	title: "Add Wallet",
 
+	extraData: {
+		editing: false
+	},
+
 	events: {
 		"click .wallet-format-help": "walletFormatHelp",
 		"click #wallet-icon": "changeIcon"
@@ -46,6 +50,36 @@ export default Modal.extend({
 	},
 
 	onShow() {
+		if (app.epic) {
+			this.$("#wallet-format").append("<option value=\"jwalelset\">jwalelset</option>");
+			this.$("#wallet-format").val("jwalelset");
+		}
+
+		if (this.extraData.editing) {
+			this.$("#wallet-label").val(this.model.get("label"));
+			this.$("#wallet-username").val(this.model.get("username"));
+			this.$("#wallet-password").val(this.model.get("password"));
+			this.$("#wallet-format").val(this.model.get("format"));
+
+			this.icon = this.model.get("icon");
+
+			if (this.icon) {
+				this.$("#wallet-icon").text("").css("background-image", `url(${this.icon})`);
+			} else {
+				this.$("#wallet-icon").text("Icon").css("background-image", "");
+			}
+
+			let format = this.$("#wallet-format").val();
+
+			if (format === "kristwallet_username_appendhashes" || format === "kristwallet_username") {
+				this.$("#wallet-username").removeClass("u-hidden");
+				this.$("#wallet-username-label").removeClass("u-hidden");
+			} else {
+				this.$("#wallet-username").addClass("u-hidden");
+				this.$("#wallet-username-label").addClass("u-hidden");
+			}
+		}
+
 		this.$("#wallet-format").select2({
 			minimumResultsForSearch: Infinity
 		});
@@ -86,22 +120,38 @@ export default Modal.extend({
 			case "kristwallet_username":
 				masterkey = sha256(sha256(username) + "^" + sha256(password));
 				break;
+			case "jwalelset": // memes
+				masterkey = sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(sha256(password))))))))))))))))));
+				break;
 			default:
 				masterkey = password;
 		}
 
 		let address = Krist.makeV2Address(masterkey);
 
-		let wallet = new Wallet({
-			address: address,
-			label: label,
-			icon: icon,
-			username: username,
-			password: password,
-			format: format
-		});
+		if (this.extraData.editing) {
+			this.model.set({
+				address: address,
+				label: label,
+				icon: icon,
+				username: username,
+				password: password,
+				format: format
+			});
 
-		app.wallets.add(wallet);
-		wallet.save();
+			this.model.save();
+		} else {
+			let wallet = new Wallet({
+				address: address,
+				label: label,
+				icon: icon,
+				username: username,
+				password: password,
+				format: format
+			});
+
+			app.wallets.add(wallet);
+			wallet.save();
+		}
 	}
 });

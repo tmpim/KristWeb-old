@@ -11,5 +11,17 @@ export default CollectionView.extend({
 	collectionEvents: {
 		all: "render",
 		sync: "render"
+	},
+
+	_onCollectionRemove(model) {
+		let view = this.children.findByModel(model);
+
+		view.$el.animate({
+			"margin-right": "-" + view.$el.width() + "px",
+			"opacity": 0
+		}, 500, () => {
+			this.removeChildView(view);
+			this.checkEmpty();
+		});
 	}
 });
