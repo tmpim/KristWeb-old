@@ -8,7 +8,7 @@ import UnsupportedBrowserTemplate from "./modal/unsupported-browser/template.hbs
 import Modal from "./modal/modal";
 
 import LoginModal from "./modal/login/modal";
-import AddWalletModel from "./modal/add-wallet/modal";
+// import AddWalletModel from "./modal/add-wallet/modal";
 
 let app = new Application();
 export default app;
@@ -102,6 +102,3 @@ if (localStorage.tester) {
 		success: passwordReady
 	}))());
 }
-
-app.layout.modals.show(new (AddWalletModel.extend({
-}))());

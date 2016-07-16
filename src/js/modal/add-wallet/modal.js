@@ -7,6 +7,8 @@ import Modal from "./../modal";
 import WalletIconModal from "./../wallet-icon/modal";
 
 import app from "../../app.js";
+import Krist from "../../utils/krist.js";
+import Wallet from "../../wallet/model.js";
 
 export default Modal.extend({
 	dialog: AddWalletModalTemplate,
@@ -59,5 +61,46 @@ export default Modal.extend({
 				this.$("#wallet-username-label").addClass("u-hidden");
 			}
 		});
+	},
+
+	submit() {
+		function sha256(a) {
+			return window.CryptoJS.SHA256(a).toString();
+		}
+
+		let label = this.$("#wallet-label").val();
+		let password = this.$("#wallet-password").val();
+		let username = this.$("#wallet-username").val();
+		let format = this.$("#wallet-format").val();
+		let icon = this.icon;
+
+		let masterkey = "";
+
+		switch (format) {
+			case "kristwallet":
+				masterkey = sha256("KRISTWALLET" + password) + "-000";
+				break;
+			case "kristwallet_username_appendhashes":
+				masterkey = sha256("KRISTWALLETEXTENSION" + sha256(sha256(username) + "^" + sha256(password))) + "-000";
+				break;
+			case "kristwallet_username":
+				masterkey = sha256(sha256(username) + "^" + sha256(password));
+				break;
+			default:
+				masterkey = password;
+		}
+
+		let address = Krist.makeV2Address(masterkey);
+
+		let wallet = new Wallet({
+			address: address,
+			label: label,
+			icon: icon,
+			username: username,
+			password: password,
+			format: format
+		});
+
+		app.wallets.add(wallet);
 	}
 });

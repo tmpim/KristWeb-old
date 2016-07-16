@@ -9,6 +9,7 @@ export default Model.extend({
 		label: "",
 		icon: "",
 		username: "",
+		password: "",
 		format: ""
 	},
 

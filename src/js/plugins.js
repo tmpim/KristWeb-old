@@ -4,6 +4,7 @@ require("browserify-cryptojs/components/md5");
 require("browserify-cryptojs/components/evpkdf");
 require("browserify-cryptojs/components/cipher-core");
 require("browserify-cryptojs/components/aes");
+require("browserify-cryptojs/components/sha256");
 
 import Backbone from "backbone";
 
