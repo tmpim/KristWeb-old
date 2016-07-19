@@ -39,6 +39,18 @@ const SidebarService = Service.extend({
 		});
 
 		this.request("add", {
+			name: "Webhook Manager",
+			path: "webhooks",
+			key: "webhooks"
+		});
+
+		this.request("add", {
+			name: "Double Vault",
+			path: "doublevault",
+			key: "doublevault"
+		});
+
+		this.request("add", {
 			name: "Settings",
 			path: "settings",
 			key: "settings"

@@ -53,6 +53,7 @@
     "jquery": "^2.2.4",
     "lodash": "^4.13.1",
     "malihu-custom-scrollbar-plugin": "^3.1.4",
+    "nprogress": "^0.2.0",
     "prefixfree": "^1.0.0",
     "securerandom": "0.0.2",
     "select2": "^4.0.3"

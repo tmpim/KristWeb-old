@@ -63,3 +63,31 @@
         }
     }
 }
+
+@keyframes trumpet {
+    0% {
+        top: -120px;
+        transform: rotate(0deg);
+    }
+
+    100% {
+        top: 100%;
+        transform: rotate(1080deg);
+    }
+}
+
+.trumpet {
+    position: absolute;
+    z-index: 1200;
+
+    animation: trumpet 2s linear infinite;
+    animation-iteration-count: 1;
+}
+
+.yin {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    opacity: 0.1;
+}

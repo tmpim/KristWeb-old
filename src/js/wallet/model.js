@@ -10,7 +10,9 @@ export default Model.extend({
 		icon: "",
 		username: "",
 		password: "",
-		format: ""
+		masterkey: "",
+		format: "",
+		syncNode: "https://krist.ceriat.net"
 	},
 
 	localStorage: new LocalStorage("Wallet", {

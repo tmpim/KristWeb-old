@@ -9,6 +9,7 @@ import WalletIconModal from "./../wallet-icon/modal";
 import app from "../../app.js";
 import Krist from "../../utils/krist.js";
 import Wallet from "../../wallet/model.js";
+import NProgress from "nprogress";
 
 export default Modal.extend({
 	dialog: AddWalletModalTemplate,
@@ -98,6 +99,8 @@ export default Modal.extend({
 	},
 
 	submit() {
+		NProgress.start();
+
 		function sha256(a) {
 			return window.CryptoJS.SHA256(a).toString();
 		}
@@ -129,6 +132,8 @@ export default Modal.extend({
 
 		let address = Krist.makeV2Address(masterkey);
 
+		NProgress.set(0.5);
+
 		if (this.extraData.editing) {
 			this.model.set({
 				address: address,
@@ -136,6 +141,7 @@ export default Modal.extend({
 				icon: icon,
 				username: username,
 				password: password,
+				masterkey: masterkey,
 				format: format
 			});
 
@@ -147,11 +153,14 @@ export default Modal.extend({
 				icon: icon,
 				username: username,
 				password: password,
+				masterkey: masterkey,
 				format: format
 			});
 
 			app.wallets.add(wallet);
 			wallet.save();
 		}
+
+		NProgress.done();
 	}
 });

@@ -1,5 +1,6 @@
 import "./plugins";
 import _ from "lodash";
+import $ from "jquery";
 import Backbone from "backbone";
 
 import Application from "./application/application";
@@ -11,6 +12,7 @@ import LoginModal from "./modal/login/modal";
 
 let app = new Application();
 export default app;
+window.app = app;
 
 let feelingIll = false;
 let features = {
@@ -55,7 +57,7 @@ if (feelingIll) {
 
 Backbone.history.start({pushState: true});
 
-window.$(document).on("click", "a:not([data-bypass])", function (e) {
+$(document).on("click", "a:not([data-bypass])", function (e) {
 	let href = window.$(this).attr("href");
 	let protocol = this.protocol + "//";
 

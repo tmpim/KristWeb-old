@@ -4,6 +4,7 @@ import WalletIconButtons from "./buttons.hbs";
 import Modal from "./../modal";
 
 import app from "../../app.js";
+import NProgress from "nprogress";
 
 export default Modal.extend({
 	dialog: WalletIconTemplate,
@@ -20,6 +21,8 @@ export default Modal.extend({
 		this.$el.find("#wallet-icon-crop").hide();
 
 		this.$el.find("#wallet-icon-file").on("change", () => {
+			NProgress.start();
+
 			let input = this.$el.find("#wallet-icon-file")[0];
 			if (!input.files || input.files.length <= 0) return;
 
@@ -28,7 +31,13 @@ export default Modal.extend({
 			let file = input.files[0];
 			let fr = new FileReader();
 
+			fr.onprogress = (e) => {
+				NProgress.set(e.loaded / e.total);
+			};
+
 			fr.onload = (e) => {
+				NProgress.done();
+
 				this.$el.find(".modal-remove").fadeOut();
 				this.$el.find("#wallet-icon-file").removeClass("loading");
 
@@ -67,6 +76,8 @@ export default Modal.extend({
 
 	submit() {
 		if (this.success) {
+			NProgress.start();
+
 			let img = this.$el.find("#wallet-icon-preview").cropper("getCroppedCanvas");
 
 			let c = document.createElement("canvas");
@@ -89,6 +100,8 @@ export default Modal.extend({
 			}
 
 			this.success(c.toDataURL());
+
+			NProgress.done();
 		}
 	},
 

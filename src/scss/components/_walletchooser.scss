@@ -95,9 +95,11 @@
 			align-items: center;
 			background: transparent;
 			transition: 250ms all ease;
-			padding: 0.75rem;
+			padding: 0.5rem;
+			margin: 0.5rem;
 			border-radius: 6px;
 			cursor: pointer;
+			border: 1px solid transparent;
 
 			.wallet-icon {
 				width: 38px;
@@ -179,6 +181,11 @@
 						font-size: 20px;
 					}
 				}
+			}
+
+			&.active {
+				background: $primary-blue-white;
+				border-color: lighten($primary-blue, 15%);
 			}
 		}
 	}
