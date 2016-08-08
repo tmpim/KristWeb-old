@@ -122,8 +122,6 @@ export default LayoutView.extend({
 	},
 
 	websocketConnectionStatusChanged(status) {
-		console.log(`Connection status changed to ${status}`);
-
 		this.ui.connectionInfo.removeClass("connecting");
 		this.ui.connectionInfo.removeClass("connected");
 

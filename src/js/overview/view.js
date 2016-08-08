@@ -3,6 +3,7 @@ import template from "./template.hbs";
 
 import app from "../app.js";
 import MOTDPanel from "./motd-panel/panel";
+import WalletOverview from "./wallet-overview/view";
 
 import Radio from "backbone.radio";
 
@@ -16,6 +17,7 @@ export default LayoutView.extend({
 	className: "overview",
 
 	regions: {
+		overview: "#overview",
 		motdPanel: "#motd-panel"
 	},
 
@@ -34,5 +36,6 @@ export default LayoutView.extend({
 
 	onShow() {
 		this.motdPanel.show(new MOTDPanel());
+		this.overview.show(new WalletOverview());
 	}
 });

@@ -13,6 +13,8 @@
 @import "components/_print";
 
 @import "components/_dialogs";
+@import "components/_panel";
+@import "components/_badge";
 
 @import "components/_browserchoice";
 @import "components/_addwallet";
@@ -20,7 +22,6 @@
 @import "components/_scroller";
 @import "components/_topbar";
 @import "components/_page";
-@import "components/_panel";
 @import "components/_sidebar";
 @import "components/_walletchooser";
 
@@ -29,6 +30,8 @@
 
 @import "components/_preloader";
 @import "components/_searchbox";
+
+@import "components/_overview";
 
 @import "libs/_nprogress";
 @import "libs/_select2";

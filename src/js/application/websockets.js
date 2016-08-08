@@ -84,11 +84,7 @@ const WebsocketService = Service.extend({
 				this.connectionStatus = WEBSOCKET_CONNECTED;
 				appChannel.trigger("websocket:connectionStatusChanged", this.connectionStatus);
 
-				this.send("me").then(result => {
-					console.log(result);
-				}).catch(error => {
-					console.error(error);
-				});
+				this.send("me");
 
 				break;
 
@@ -122,11 +118,13 @@ const WebsocketService = Service.extend({
 		this.connectionStatus = WEBSOCKET_DISCONNECTED;
 		appChannel.trigger("websocket:connectionStatusChanged", this.connectionStatus);
 
-		setTimeout(() => {
-			if (!this.websocket) {
+		setTimeout((() => {
+			if (!this.websocket || (this.websocket && this.websocket.readyState >= 2)) {
+				console.log("Attempting reconnect");
+
 				this.connect();
 			}
-		}, 500);
+		}).bind(this), 500);
 
 		console.log(`Websocket closed with code ${event.code} for reason ${event.reason}`);
 	},
@@ -153,14 +151,6 @@ const WebsocketService = Service.extend({
 
 		this.send("login", {
 			privatekey: wallet.get("masterkey")
-		}).then(result => {
-			this.send("me").then(result => {
-				console.log(result);
-			}).catch(error => {
-				console.error(error);
-			});
-		}).catch(error => {
-			console.error(error);
 		});
 	}
 });
