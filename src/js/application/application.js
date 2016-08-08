@@ -76,8 +76,10 @@ export default Application.extend({
 		walletChannel.trigger("wallet:activeChanging", wallet);
 
 		let syncNode = wallet.get("syncNode") || "https://krist.ceriat.net";
+		let didSyncNodeChange = false;
 
 		if (this.syncNode !== syncNode) {
+			didSyncNodeChange = true;
 			appChannel.trigger("syncNode:changed", syncNode);
 		}
 
@@ -93,14 +95,14 @@ export default Application.extend({
 				NProgress.done();
 				console.error(data);
 				this.activeWallet = null;
-				walletChannel.trigger("wallet:changeFailed", wallet);
+				walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
 				return this.error("Unknown Error", `Server returned an unknown error: ${data.error || ""}`);
 			}
 
 			if (!data.authed) {
 				NProgress.done();
 				this.activeWallet = null;
-				walletChannel.trigger("wallet:changeFailed", wallet);
+				walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
 				return this.error("Authentication Failed", "You are not the owner of this wallet.");
 			}
 
@@ -116,13 +118,13 @@ export default Application.extend({
 						NProgress.done();
 						console.error(response);
 						self.activeWallet = null;
-						walletChannel.trigger("wallet:changeFailed", wallet);
+						walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
 						return self.error("Error", `Server returned an error: ${response.error || ""}`);
 					}
 
 					self.activeWallet.boundAddress = model;
 
-					walletChannel.trigger("wallet:activeChanged", wallet);
+					walletChannel.trigger("wallet:activeChanged", wallet, didSyncNodeChange);
 					self.layout.topBarAddressInfo.show(new WalletInfoView({
 						model: model
 					}));
@@ -134,7 +136,7 @@ export default Application.extend({
 					NProgress.done();
 					console.error(response);
 					self.activeWallet = null;
-					walletChannel.trigger("wallet:changeFailed", wallet);
+					walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
 					return self.error("Error", `Server returned an error: ${response}`);
 				}
 			});

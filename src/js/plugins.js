@@ -19,7 +19,7 @@ import "./libs/dense.min.js";
 import "prefixfree";
 import "select2";
 import "cropper";
-import "timeago";              
+import "timeago";
 
 import Marionette from "backbone.marionette";
 import Modals from "backbone.modal";
