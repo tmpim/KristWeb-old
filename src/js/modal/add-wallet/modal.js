@@ -2,6 +2,7 @@ import AddWalletModalTemplate from "./template.hbs";
 import AddWalletModalButtons from "./buttons.hbs";
 
 import HelpWalletFormatsTemplate from "./../help/wallet-formats.hbs";
+import HelpSyncNodesTemplate from "./../help/sync-nodes.hbs";
 
 import Modal from "./../modal";
 import WalletIconModal from "./../wallet-icon/modal";
@@ -23,6 +24,7 @@ export default Modal.extend({
 
 	events: {
 		"click .wallet-format-help": "walletFormatHelp",
+		"click .sync-node-help": "syncNodeHelp",
 		"click #wallet-icon": "changeIcon"
 	},
 
@@ -30,6 +32,13 @@ export default Modal.extend({
 		app.layout.modals.show(new (Modal.extend({
 			dialog: HelpWalletFormatsTemplate,
 			title: "Help: Wallet Formats"
+		}))());
+	},
+
+	syncNodeHelp() {
+		app.layout.modals.show(new (Modal.extend({
+			dialog: HelpSyncNodesTemplate,
+			title: "Help: Sync Nodes"
 		}))());
 	},
 
@@ -61,6 +70,7 @@ export default Modal.extend({
 			this.$("#wallet-username").val(this.model.get("username"));
 			this.$("#wallet-password").val(this.model.get("password"));
 			this.$("#wallet-format").val(this.model.get("format"));
+			this.$("#wallet-syncnode").val(this.model.get("syncNode"));
 
 			this.icon = this.model.get("icon");
 
@@ -109,6 +119,7 @@ export default Modal.extend({
 		let password = this.$("#wallet-password").val();
 		let username = this.$("#wallet-username").val();
 		let format = this.$("#wallet-format").val();
+		let syncNode = this.$("#wallet-syncnode").val();
 		let icon = this.icon;
 
 		let masterkey = "";
@@ -142,6 +153,7 @@ export default Modal.extend({
 				username: username,
 				password: password,
 				masterkey: masterkey,
+				syncNode: syncNode,
 				format: format
 			});
 
@@ -154,6 +166,7 @@ export default Modal.extend({
 				username: username,
 				password: password,
 				masterkey: masterkey,
+				syncNode: syncNode,
 				format: format
 			});
 

@@ -1,0 +1,26 @@
+.panel {
+	.panel-header {
+		background: $primary-blue;
+		border-radius: 3px 3px 0 0;
+		padding: 0.5rem 0.75rem;
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		color: #fff;
+		opacity: 1;
+
+		transition: all 200ms ease;
+
+		.panel-title {
+			font-weight: 400;
+			flex: 1 0 0;
+		}
+	}
+
+	.panel-body {
+		background: #fff;
+		border: 1px solid $primary-blue;
+		border-radius: 0 0 3px 3px;
+		padding: 0.75rem;
+	}
+}

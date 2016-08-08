@@ -4,11 +4,13 @@ import {Application} from "backbone.marionette";
 import LayoutView from "./layout-view";
 
 import SidebarService from "../sidebar/service";
+import WebsocketService from "./websockets";
 
 import Address from "../address/model";
 
 import WalletCollection from "../wallet/collection";
 import WalletChooserView from "../wallet/chooser-view";
+import WalletInfoView from "../wallet/view-wallet-info";
 
 import Router from "../router";
 import Radio from "backbone.radio";
@@ -18,6 +20,7 @@ import NProgress from "nprogress";
 import Modal from "../modal/modal";
 
 let walletChannel = Radio.channel("wallet");
+let appChannel = Radio.channel("global");
 
 export default Application.extend({
 	initialize() {
@@ -35,12 +38,16 @@ export default Application.extend({
 		this.router = new Router({
 			container: this.layout.content
 		});
+
+		appChannel.on("syncNode:changed", syncNode => {
+			this.syncNodeChanged(syncNode);
+		});
 	},
 
 	error(title, text) {
 		this.layout.modals.show(new (Modal.extend({
 			title: title,
-			text: text
+			dialog: text
 		}))());
 	},
 
@@ -66,9 +73,14 @@ export default Application.extend({
 		let self = this;
 		this.activeWallet = wallet;
 
-		walletChannel.trigger("wallet:activeChanging");
+		walletChannel.trigger("wallet:activeChanging", wallet);
 
 		let syncNode = wallet.get("syncNode") || "https://krist.ceriat.net";
+
+		if (this.syncNode !== syncNode) {
+			appChannel.trigger("syncNode:changed", syncNode);
+		}
+
 		this.syncNode = syncNode;
 
 		$.ajax(syncNode + "/login", {
@@ -76,14 +88,19 @@ export default Application.extend({
 			data: {
 				privatekey: wallet.get("masterkey")
 			}
-		}).done((data) => {
+		}).done(data => {
 			if (!data || !data.ok) {
 				NProgress.done();
-				return this.error("Unknown Error", "Server returned an unknown error: " + (data.error || ""));
+				console.error(data);
+				this.activeWallet = null;
+				walletChannel.trigger("wallet:changeFailed", wallet);
+				return this.error("Unknown Error", `Server returned an unknown error: ${data.error || ""}`);
 			}
 
 			if (!data.authed) {
 				NProgress.done();
+				this.activeWallet = null;
+				walletChannel.trigger("wallet:changeFailed", wallet);
 				return this.error("Authentication Failed", "You are not the owner of this wallet.");
 			}
 
@@ -97,21 +114,46 @@ export default Application.extend({
 				success(model, response) {
 					if (!response || !response.ok) {
 						NProgress.done();
-						return self.error("Error", "Server returned an error: " + (response.error || ""));
+						console.error(response);
+						self.activeWallet = null;
+						walletChannel.trigger("wallet:changeFailed", wallet);
+						return self.error("Error", `Server returned an error: ${response.error || ""}`);
 					}
 
 					self.activeWallet.boundAddress = model;
 
-					walletChannel.trigger("wallet:activeChanged");
+					walletChannel.trigger("wallet:activeChanged", wallet);
+					self.layout.topBarAddressInfo.show(new WalletInfoView({
+						model: model
+					}));
 
 					NProgress.done();
 				},
 
 				error(model, response) {
 					NProgress.done();
-					return self.error("Error", "Server returned an error: " + response);
+					console.error(response);
+					self.activeWallet = null;
+					walletChannel.trigger("wallet:changeFailed", wallet);
+					return self.error("Error", `Server returned an error: ${response}`);
 				}
 			});
+		}).fail((jqXHR, textStatus, error) => {
+			NProgress.done();
+
+			return this.error("Unknown Error", `Failed to connect to the sync node: ${error}`);
 		});
+	},
+
+	syncNodeChanged(syncNode) {
+		let self = this;
+
+		$.ajax(syncNode + "/motd").done(data => {
+			self.motd = data;
+
+			appChannel.trigger("motd:changed", data);
+		});
+
+		WebsocketService.request("connect");
 	}
 });

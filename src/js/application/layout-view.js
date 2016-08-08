@@ -1,10 +1,14 @@
-import {LayoutView} from "backbone.marionette";
+import {LayoutView, ItemView} from "backbone.marionette";
 import template from "./layout-template.hbs";
 import Backbone from "backbone";
+import Radio from "backbone.radio";
 
 import AddWalletModel from "../modal/add-wallet/modal";
 
 import Epic from "../utils/epic";
+
+let walletChannel = Radio.channel("wallet");
+let appChannel = Radio.channel("global");
 
 export default LayoutView.extend({
 	el: "#app",
@@ -25,7 +29,8 @@ export default LayoutView.extend({
 		},
 		walletChooserContainer: "#wallet-chooser-container",
 		walletChooser: "#wallet-chooser",
-		walletList: "#wallet-list"
+		walletList: "#wallet-list",
+		topBarAddressInfo: "#topBar-address-info"
 	},
 
 	ui: {
@@ -38,7 +43,8 @@ export default LayoutView.extend({
 		walletChooserContainer: "#wallet-chooser-container",
 		walletChooser: "#wallet-chooser",
 		walletChooserAddWallet: "#wallet-chooser-add-wallet",
-		topBar: ".topBar"
+		topBar: ".topBar",
+		connectionInfo: "#topBar-connectionInfo"
 	},
 
 	triggers: {
@@ -46,6 +52,32 @@ export default LayoutView.extend({
 		"click @ui.sidebarDim": "click:sidebarDim",
 		"click @ui.walletChooserButton": "toggle:walletChooser",
 		"click @ui.walletChooserAddWallet": "add:wallet"
+	},
+
+	initialize() {
+		walletChannel.on("wallet:activeChanging", wallet => {
+			this.topBarAddressInfo.show(new ItemView({ template: "<span>Loading...</span>" }));
+
+			if (wallet.has("icon") && wallet.get("icon")) {
+				this.ui.walletChooserButton.addClass("has-icon");
+				this.ui.walletChooserButton.css("background-image", `url(${wallet.get("icon")})`);
+			} else {
+				this.ui.walletChooserButton.removeClass("has-icon");
+				this.ui.walletChooserButton.css("background-image", "");
+			}
+		});
+
+		walletChannel.on("wallet:changeFailed", wallet => {
+			this.topBarAddressInfo.show(new ItemView({ template: "<span>Not logged in</span>" }));
+		});
+
+		appChannel.on("websocket:connectionStatusChanged", status => {
+			this.websocketConnectionStatusChanged(status);
+		});
+
+		appChannel.on("websocket:keepalive", status => {
+			this.ui.connectionInfo.find(".connectionBulb").addClass("pulse");
+		});
 	},
 
 	onClickSidebarOpener() {
@@ -82,11 +114,38 @@ export default LayoutView.extend({
 				scrollInertia: 500,
 				theme: "dark"
 			});
-		}).bind(this), 1000);
+		}).bind(this), 500);
 	},
 
 	onAddWallet() {
-		this.modals.show(new (AddWalletModel.extend({
-		}))());
+		this.modals.show(new AddWalletModel());
+	},
+
+	websocketConnectionStatusChanged(status) {
+		console.log(`Connection status changed to ${status}`);
+
+		this.ui.connectionInfo.removeClass("connecting");
+		this.ui.connectionInfo.removeClass("connected");
+
+		switch (status) {
+			case 0:
+				this.ui.connectionInfo.find(".connectionLabel").text("Disconnected");
+				break;
+			case 1:
+				this.ui.connectionInfo.find(".connectionLabel").text("Connecting");
+				this.ui.connectionInfo.addClass("connecting");
+				break;
+			case 2:
+				this.ui.connectionInfo.find(".connectionLabel").text("Connected");
+				this.ui.connectionInfo.addClass("connected");
+				break;
+			case 3:
+				this.ui.connectionInfo.find(".connectionLabel").text("Connection Failed");
+				break;
+		}
+
+		this.ui.connectionInfo.find(".connectionBulb").on("webkitAnimationEnd oanimationend msAnimationEnd animationend", () => {
+			this.ui.connectionInfo.find(".connectionBulb").removeClass("pulse");
+		});
 	}
 });

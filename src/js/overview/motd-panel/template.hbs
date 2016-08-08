@@ -1,0 +1,17 @@
+<div class="panel-header">
+	<h4 class="panel-title">Krist</h4>
+</div>
+<div class="panel-body">
+	{{#if motd}}
+		<p>
+			<span class="grey-heading" title="Server Message of the Day">MOTD</span>
+			<span class="text-mute">&mdash;</span>
+			<span class="motd" id="motd">{{motd}}</span>
+		</p>
+		<time class="text-mini" id="motd-set" style="display: block; overflow: hidden;" datetime="{{time}}"></time>
+	{{else}}
+		<p class="text-mini">
+			Waiting for login...
+		</p>
+	{{/if}}
+</div>

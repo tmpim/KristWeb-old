@@ -1,6 +1,7 @@
 import Backbone from "backbone";
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
+import Radio from "backbone.radio";
 
 import Modal from "../modal/modal";
 
@@ -10,6 +11,9 @@ import LoginModal from "../modal/login/modal";
 import Wallet from "../wallet/model";
 
 import app from "../app.js";
+
+let walletChannel = Radio.channel("wallet");
+let appChannel = Radio.channel("global");
 
 export default LayoutView.extend({
 	template: template,
@@ -33,6 +37,30 @@ export default LayoutView.extend({
 		"click @ui.buttonSync": "click:buttonSync",
 		"click @ui.buttonFetch": "click:buttonFetch",
 		"click @ui.buttonClearLocalStorage": "click:buttonClearLocalStorage"
+	},
+
+	initialize() {
+		walletChannel.on("wallet:activeChanged", () => {
+			if (this.isDestroyed) {
+				return;
+			}
+
+			this.render();
+		});
+
+		appChannel.on("syncNode:changed", () => {
+
+		});
+	},
+
+	templateHelpers: {
+		syncNode() {
+			return app.syncNode;
+		},
+
+		activeWallet() {
+			return app.activeWallet;
+		}
 	},
 
 	onClickButton1() {

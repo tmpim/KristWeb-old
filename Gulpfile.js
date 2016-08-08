@@ -51,6 +51,7 @@ gulp.task("lint", function() {
 			},
 			rules: {
 				"no-unused-vars": 0,
+				"no-console": 0,
 				"quotes": ["error", "double"],
 				"semi": ["error", "always"]
 			}

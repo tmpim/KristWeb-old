@@ -1,0 +1,45 @@
+#app.theme-blue {
+	.topBar {
+		background: $primary-blue;
+
+		.sidebar-opener {
+			border-right: 1px solid $primary-blue-darker;
+
+			&:hover {
+				background: $primary-blue-lighter;
+			}
+		}
+
+		.topBar-addressSelector {
+			&:hover {
+				background: $primary-blue-lighter;
+			}
+		}
+	}
+
+	.sidebar {
+		background: $primary-blue-darker;
+
+		.sidebar-item {
+			color: #fff;
+
+			&:not(.sidebar-top) {
+				&:hover {
+					background: $primary-blue;
+				}
+
+				&.active {
+					background: $primary-blue-lighter;
+
+					&:hover {
+						background: lighten($primary-blue-lighter, 10%);
+					}
+				}
+			}
+		}
+
+		.sidebar-search {
+			background: rgba(0, 0, 0, 0.1);
+		}
+	}
+}

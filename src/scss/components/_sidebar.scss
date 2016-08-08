@@ -1,7 +1,9 @@
 .sidebar {
-    background: $primary-blue-darker;
+    background: #555;
     overflow-y: auto;
     height: 100%;
+
+    transition: background 250ms ease;
 
     .sidebar-item {
         padding: 12px 16px;
@@ -10,19 +12,22 @@
         display: inline-block;
         width: 100%;
         transition: all 200ms ease;
+        background: rgba(#000, 0.1);
 
-        &:not(.sidebar-top) {
+        transition: background 250ms ease;
+
+        &:not(.sidebar-search) {
             cursor: pointer;
 
             &:hover {
-                background: $primary-blue;
+                background: #777;
             }
 
             &.active {
-                background: $primary-blue-lighter;
+                background: #343434;
 
                 &:hover {
-                    background: lighten($primary-blue-lighter, 10%);
+                    background: darken(#343434, 5%);
                 }
             }
         }
@@ -30,6 +35,5 @@
 
     .sidebar-top {
         padding: 16px;
-        background-color: rgba(0, 0, 0, 0.1);
     }
 }

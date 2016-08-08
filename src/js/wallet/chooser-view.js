@@ -20,6 +20,10 @@ export default CollectionView.extend({
 		walletChannel.on("wallet:activeRemoved", () => {
 			this.render();
 		});
+
+		walletChannel.on("wallet:changeFailed", () => {
+			this.render();
+		});
 	},
 
 	childView: WalletView,

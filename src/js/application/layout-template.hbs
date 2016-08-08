@@ -9,19 +9,14 @@
 		</span>
 	</div>
 	<div class="topBar-right">
-		<div class="topBar-addressInfo">
-			{{#if currentWallet}}
-				<span class="topBar-addressInfo-address">
-					kxopdv8xaf
-				</span>
-				<span class="topBar-addressInfo-balance">
-					1,000 KST
-				</span>
-			{{else}}
-				<span class="topBar-addressInfo-address">
-					Not logged in
-				</span>
-			{{/if}}
+		<div class="topBar-connectionInfo" id="topBar-connectionInfo" title="Live connection status">
+			<span class="connectionLabel">
+				Disconnected
+			</span>
+			<span class="connectionBulb"></span>
+		</div>
+		<div class="topBar-addressInfo-container" id="topBar-address-info">
+			Not logged in
 		</div>
 		<div class="topBar-addressSelector" id="wallet-chooser-button">
 			<i class="icon-caret-down"></i>
