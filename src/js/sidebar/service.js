@@ -21,6 +21,12 @@ const SidebarService = Service.extend({
 		});
 
 		this.request("add", {
+			name: "Address Book",
+			path: "addressbook",
+			key: "addressbook"
+		});
+
+		this.request("add", {
 			name: "Transactions",
 			path: "transactions",
 			key: "transactions"

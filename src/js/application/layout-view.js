@@ -82,10 +82,14 @@ export default LayoutView.extend({
 
 	onClickSidebarOpener() {
 		this.ui.pageContainer.toggleClass("sidebar-open");
+
+		localStorage.sidebarOpen = this.ui.pageContainer.hasClass("sidebar-open");
 	},
 
 	onClickSidebarDim() {
 		this.ui.pageContainer.removeClass("sidebar-open");
+
+		localStorage.sidebarOpen = this.ui.pageContainer.hasClass("sidebar-open");
 	},
 
 	onToggleWalletChooser() {
@@ -99,6 +103,10 @@ export default LayoutView.extend({
 	},
 
 	onRender() {
+		if (localStorage.sidebarOpen === "true") {
+			this.ui.pageContainer.addClass("sidebar-open");
+		}
+
 		this.ui.walletChooserContainer.css("top", this.ui.topBar.height() + "px");
 
 		this.$(window).resize(() => {

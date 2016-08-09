@@ -1,7 +1,6 @@
 import _ from "lodash";
 
 import {Model} from "backbone";
-import LocalStorage from "backbone.localstorage";
 
 import app from "../app";
 

@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 import {Model} from "backbone";
 import LocalStorage from "backbone.localstorage";
 
@@ -7,13 +9,8 @@ import EncryptedLocalStorage from "../application/encrypted-local-storage";
 export default Model.extend({
 	defaults: {
 		address: "",
-		label: "",
-		icon: "",
-		username: "",
-		password: "",
-		masterkey: "",
-		format: "",
-		syncNode: "https://krist.ceriat.net"
+		balance: 0,
+		firstseen: ""
 	},
 
 	localStorage: new LocalStorage("Wallet", EncryptedLocalStorage)

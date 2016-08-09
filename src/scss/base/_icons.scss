@@ -34,7 +34,12 @@
 
 .icon-hamburger:before { content: '\e800'; }
 .icon-caret-down:before { content: '\e801'; }
-.icon-send:before { content: '\e802'; }
+.icon-send:before {
+	content: '\e802';
+	position: relative;
+	left: -2px;
+	top: 1px;
+}
 .icon-bell:before { content: '\e803'; }
 .icon-bell-off:before { content: '\e804'; }
 .icon-cancel:before { content: '\e805'; }
