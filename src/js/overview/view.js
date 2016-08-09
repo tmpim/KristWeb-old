@@ -2,8 +2,10 @@ import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
 import app from "../app.js";
-import MOTDPanel from "./motd-panel/panel";
 import WalletOverview from "./wallet-overview/view";
+import MOTDPanel from "./motd-panel/panel";
+import ActivityPanel from "./activity-panel/panel";
+import NetworkPanel from "./network-panel/panel";
 
 import Radio from "backbone.radio";
 
@@ -18,7 +20,9 @@ export default LayoutView.extend({
 
 	regions: {
 		overview: "#overview",
-		motdPanel: "#motd-panel"
+		motdPanel: "#motd-panel",
+		activityPanel: "#activity-panel",
+		networkPanel: "#network-panel"
 	},
 
 	initialize() {
@@ -35,7 +39,9 @@ export default LayoutView.extend({
 	},
 
 	onShow() {
-		this.motdPanel.show(new MOTDPanel());
 		this.overview.show(new WalletOverview());
+		this.motdPanel.show(new MOTDPanel());
+		this.activityPanel.show(new ActivityPanel());
+		this.networkPanel.show(new NetworkPanel());
 	}
 });

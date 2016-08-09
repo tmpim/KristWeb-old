@@ -23,6 +23,14 @@ export default ItemView.extend({
 
 			this.render();
 		});
+
+		walletChannel.on("names:count", (wallet) => {
+			if (this.isDestroyed) {
+				return;
+			}
+
+			this.render();
+		});
 	},
 
 	templateHelpers: {
@@ -36,6 +44,14 @@ export default ItemView.extend({
 
 		balance() {
 			return app.activeWallet.boundAddress.get("balance").toLocaleString() + " KST";
+		},
+
+		names() {
+			if (app.activeWallet && app.activeWallet.nameCount) {
+				return app.activeWallet.nameCount;
+			} else {
+				return 0;
+			}
 		},
 
 		pluralize(number, single, plural) {

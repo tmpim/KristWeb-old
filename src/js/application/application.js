@@ -129,7 +129,15 @@ export default Application.extend({
 						model: model
 					}));
 
-					NProgress.done();
+					$.ajax(`${syncNode}/addresses/${encodeURIComponent(model.get("address"))}/names`).done(data => {
+						self.activeWallet.nameCount = data.total || 0;
+
+						walletChannel.trigger("names:count", data.total || 0);
+
+						NProgress.done();
+					}).fail(NProgress.done);
+
+					NProgress.set(0.75);
 				},
 
 				error(model, response) {
