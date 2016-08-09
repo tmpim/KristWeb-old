@@ -9,8 +9,9 @@ import EncryptedLocalStorage from "../application/encrypted-local-storage";
 export default Model.extend({
 	defaults: {
 		address: "",
-		balance: 0,
-		firstseen: ""
+		label: "",
+		icon: "",
+		syncNode: "https://krist.ceriat.net"
 	},
 
 	localStorage: new LocalStorage("Wallet", EncryptedLocalStorage)
