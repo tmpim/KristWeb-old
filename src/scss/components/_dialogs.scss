@@ -53,6 +53,9 @@
 	animation-fill-mode: both;
 
 	max-width: 620px;
+	max-height: calc(100vh - 2rem);
+
+	overflow-y: auto;
 
 	@media screen and (max-width: $break-small) {
 		min-width: 128px;
