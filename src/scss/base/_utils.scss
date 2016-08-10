@@ -403,3 +403,9 @@ $spacers: (
 .u-spacer {
   margin-right: auto;
 }
+
+.list-alternating {
+  li:nth-child(even) {
+    background: #eee;
+  }
+}

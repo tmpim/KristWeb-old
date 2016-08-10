@@ -1,4 +1,5 @@
 import $ from "jquery";
+import _ from "lodash";
 
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
@@ -7,13 +8,22 @@ export default LayoutView.extend({
 	template: template,
 	className: "storage",
 
+	initialize() {
+		this.total = 0;
+		this.objects = [];
+	},
+
 	templateHelpers: {
-		storageUsed() {
-			return `${(this.total || 0).toFixed(2)} KB`;
+		storageUsed(i) {
+			return `${(Number(i) || 0).toFixed(2)} KB`;
 		},
 
-		storagePercent() {
-			return ((this.total || 0) / 5120) * 100;
+		storagePercent(i) {
+			return ((Number(i) || 0) / 5120) * 100;
+		},
+
+		storagePercentBreakdown(i, total) {
+			return ((Number(i) || 0) / (total || 0)) * 100;
 		},
 
 		toFixed(a, b) {
@@ -23,17 +33,20 @@ export default LayoutView.extend({
 
 	serializeData() {
 		return {
-			total: this.total
+			total: this.total,
+			objects: this.objects
 		};
 	},
 
 	onBeforeRender() {
-		let total = 0;
-
 		for (var x in localStorage) {
-			total += (localStorage[x].length * 2) / 1024;
+			this.total += (localStorage[x].length * 2) / 1024;
+			this.objects.push({
+				name: x.substr(0, 50),
+				size: (localStorage[x].length * 2) / 1024
+			});
 		}
 
-		this.total = total;
+		this.objects = _.reverse(_.sortBy(this.objects, "size"));
 	}
 });

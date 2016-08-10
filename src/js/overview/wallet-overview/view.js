@@ -55,7 +55,7 @@ export default ItemView.extend({
 		},
 
 		pluralize(number, single, plural) {
-			return number === 1 ? single : plural;
+			return Number(number) == 1 ? single : plural;
 		}
 	}
 });

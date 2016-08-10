@@ -167,7 +167,8 @@ export default Modal.extend({
 				password: password,
 				masterkey: masterkey,
 				syncNode: syncNode,
-				format: format
+				format: format,
+				position: app.wallets.length
 			});
 
 			app.wallets.add(wallet);

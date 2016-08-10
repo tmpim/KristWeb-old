@@ -4,25 +4,12 @@ import LocalStorage from "backbone.localstorage";
 import app from "../app";
 
 import WalletModel from "./model";
+import EncryptedLocalStorage from "../application/encrypted-local-storage";
 
 export default Collection.extend({
 	model: WalletModel,
 
-	localStorage: new LocalStorage("Wallet", {
-		serialize(item) {
-			if (app.password) {
-				return window.CryptoJS.AES.encrypt(JSON.stringify(item), app.password).toString();
-			} else {
-				return item;
-			}
-		},
+	localStorage: new LocalStorage("Wallet", EncryptedLocalStorage),
 
-		deserialize(data) {
-			if (app.password) {
-				return JSON.parse(window.CryptoJS.AES.decrypt(data, app.password).toString(window.CryptoJS.enc.Utf8));
-			} else {
-				return data;
-			}
-		}
-	})
+	comparator: "position"
 });

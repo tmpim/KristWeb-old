@@ -25,7 +25,17 @@ export default ItemView.extend({
 		"click": "click:this"
 	},
 
+	modelEvents: {
+		change: "render"
+	},
+
+	onRender() {
+		this.$el.attr("data-id", this.model.get("id"));
+	},
+
 	onShow() {
+		this.$el.attr("data-id", this.model.get("id"));
+
 		if (app.activeWallet && app.activeWallet == this.model) {
 			this.$el.addClass("active");
 		} else {

@@ -6,7 +6,7 @@
 		</div>
 		<div class="right-col">
 			<a class="button button-green"><i class="icon-send"></i>Send Krist</a>
-			<span class="badge badge-green-light">{{#if names}}{{names}}{{else}}0{{/if}} {{pluralize names "name" "names"}}</span>
+			<span class="badge badge-green-light">{{#if names}}{{names}}{{else}}0{{/if}} {{pluralize (names) "name" "names"}}</span>
 		</div>
 	</div>
 {{/if}}

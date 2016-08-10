@@ -1,14 +1,34 @@
-<div class="row" id="overview">
+<div class="row m-b-1" id="overview">
 	<div class="col-xs-12">
-		<h1>{{toFixed (storagePercent) 2}}% Storage Used</h1>
+		<h1>{{toFixed (storagePercent total) 2}}% Storage Used</h1>
 
-		<div class="progress-bar" title="{{storageUsed}}">
-			<div class="progress" style="width: {{storagePercent}}%;">
-				<span class="progress-text">{{storageUsed}}</span>
+		<div class="progress-bar" title="{{storageUsed total}}">
+			<div class="progress" style="width: {{storagePercent total}}%;">
+				<span class="progress-text">{{storageUsed total}}</span>
 			</div>
 		</div>
 
 		<p class="text-mute text-small"><b>Note:</b> The maximum storage space shown here is an estimate based on the limits of common web browsers.
 			The actual limit in your browser may differ.</p>
+	</div>
+</div>
+
+<div class="row" id="overview">
+	<div class="panel col-xs-12">
+		<div class="panel-header">
+			<h4 class="panel-title">Breakdown per object</h4>
+		</div>
+		<ul class="panel-body panel-list list-alternating">
+			{{#each objects}}
+				<li>
+					<span>{{name}}</span>
+					<div class="progress-bar progress-bar-small" title="{{../storageUsed size}}">
+						<div class="progress" style="width: {{../storagePercentBreakdown size ../total}}%;">
+							<span class="progress-text">{{../storageUsed size}}</span>
+						</div>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
 	</div>
 </div>

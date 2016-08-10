@@ -35,6 +35,7 @@ export default LayoutView.extend({
 
 	ui: {
 		pageContainer: "#page-container",
+		pageMain: "#page-main",
 		sidebarOpener: "#sidebar-opener",
 		sidebarContent: "#sidebar-content",
 		sidebar: "#sidebar",
@@ -116,6 +117,12 @@ export default LayoutView.extend({
 		this.ui.walletChooser.mCustomScrollbar({
 			scrollInertia: 500
 		});
+
+		setTimeout((() => {
+			this.ui.pageMain.mCustomScrollbar({
+				scrollInertia: 500
+			});
+		}).bind(this), 500);
 
 		setTimeout((() => {
 			this.ui.sidebar.mCustomScrollbar({

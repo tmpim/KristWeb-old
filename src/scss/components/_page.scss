@@ -16,6 +16,7 @@
     }
 
     .pageMain {
+        height: calc(100vh - 48px);
         overflow: auto;
         padding: 24px 32px;
         transition: margin-left 250ms ease;

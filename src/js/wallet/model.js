@@ -13,7 +13,8 @@ export default Model.extend({
 		password: "",
 		masterkey: "",
 		format: "",
-		syncNode: "https://krist.ceriat.net"
+		syncNode: "https://krist.ceriat.net",
+		position: 0
 	},
 
 	localStorage: new LocalStorage("Wallet", EncryptedLocalStorage)
