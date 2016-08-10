@@ -55,7 +55,9 @@ export default Application.extend({
 		this.wallets = new WalletCollection();
 		this.wallets.fetch();
 
-		if (this.wallets.length > 0) {
+		if (localStorage.activeWallet && this.wallets.has(localStorage.activeWallet)) {
+			this.switchWallet(this.wallets.get(localStorage.activeWallet));
+		} else if (this.wallets.length > 0) {
 			this.switchWallet(this.wallets.at(0));
 		}
 
@@ -72,6 +74,8 @@ export default Application.extend({
 
 		let self = this;
 		this.activeWallet = wallet;
+
+		localStorage.activeWallet = wallet.get("id");
 
 		walletChannel.trigger("wallet:activeChanging", wallet);
 

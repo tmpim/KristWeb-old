@@ -11,5 +11,5 @@ export default Collection.extend({
 
 	localStorage: new LocalStorage("Wallet", EncryptedLocalStorage),
 
-	comparator: "position"
+	viewComparator: "position"
 });

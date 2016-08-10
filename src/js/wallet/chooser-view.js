@@ -30,6 +30,8 @@ export default CollectionView.extend({
 
 	childView: WalletView,
 
+	viewComparator: "position",
+
 	collectionEvents: {
 		sort: "render"
 	},
