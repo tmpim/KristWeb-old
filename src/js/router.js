@@ -4,6 +4,7 @@ import SidebarService from "./sidebar/service";
 
 import OverviewView from "./overview/view";
 import TestGroundView from "./testground/view";
+import FriendsView from "./friends/view";
 import StorageView from "./settings/storage/view";
 
 export default AppRouter.extend({
@@ -11,6 +12,8 @@ export default AppRouter.extend({
 		"": "testground",
 		"testground": "testground",
 		"overview": "overview",
+		"addressbook": "friends",
+		"friends": "friends",
 		"settings/storage": "storage"
 	},
 
@@ -31,6 +34,14 @@ export default AppRouter.extend({
 
 		SidebarService.request("activate", {
 			key: "overview"
+		});
+	},
+
+	friends() {
+		this.container.show(new FriendsView());
+
+		SidebarService.request("activate", {
+			key: "friends"
 		});
 	},
 

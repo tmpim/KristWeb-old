@@ -23,7 +23,7 @@ const SidebarService = Service.extend({
 		this.request("add", {
 			name: "Address Book",
 			path: "addressbook",
-			key: "addressbook"
+			key: "friends"
 		});
 
 		this.request("add", {
