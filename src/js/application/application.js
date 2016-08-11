@@ -12,6 +12,8 @@ import WalletCollection from "../wallet/collection";
 import WalletChooserView from "../wallet/chooser-view";
 import WalletInfoView from "../wallet/view-wallet-info";
 
+import FriendCollection from "../friends/collection";
+
 import Router from "../router";
 import Radio from "backbone.radio";
 
@@ -54,6 +56,9 @@ export default Application.extend({
 	passwordReady() {
 		this.wallets = new WalletCollection();
 		this.wallets.fetch();
+
+		this.friends = new FriendCollection();
+		this.friends.fetch();
 
 		if (localStorage.activeWallet && this.wallets.has(localStorage.activeWallet)) {
 			this.switchWallet(this.wallets.get(localStorage.activeWallet));

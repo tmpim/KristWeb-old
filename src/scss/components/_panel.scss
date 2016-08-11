@@ -1,4 +1,7 @@
 .panel {
+	display: flex;
+	flex-direction: column;
+
 	.panel-header {
 		background: $primary-blue;
 		border-radius: 3px 3px 0 0;
@@ -20,8 +23,19 @@
 	.panel-body {
 		background: #fff;
 		border: 1px solid $primary-blue;
-		border-radius: 0 0 3px 3px;
 		padding: 0.75rem;
+
+		flex: 1;
+
+		&:first-child {
+			border-top-left-radius: 3px;
+			border-top-right-radius: 3px;
+		}
+
+		&:last-child {
+			border-bottom-left-radius: 3px;
+			border-bottom-right-radius: 3px;
+		}
 
 		&.panel-list {
 			padding: 0;

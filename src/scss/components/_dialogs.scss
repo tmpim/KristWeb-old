@@ -78,13 +78,15 @@
 		.modal-title {
 			margin: 0 0.75rem;
 			font-weight: 400;
-			flex: 1 0 0;
+			flex: 1 0;
+			flex-basis: 0;
 		}
 
 		.modal-close:not(.modal-button) {
 			&:before {
 				display: inline-block;
-				flex: 0 1 0;
+				flex: 0 1;
+				flex-basis: 0;
 				font-family: 'kristweb';
 				content: '\e805';
 				cursor: pointer;

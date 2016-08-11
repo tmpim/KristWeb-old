@@ -1,26 +1,19 @@
 import {ItemView} from "backbone.marionette";
 import template from "./template.hbs";
 
-import AddWalletModel from "../modal/add-wallet/modal";
 import ConfirmModal from "../modal/confirm/modal";
 
 import app from "../app";
-
-import Radio from "backbone.radio";
-
-let walletChannel = Radio.channel("wallet");
 
 export default ItemView.extend({
 	template: template,
 	className: "wallet-chooser-wallet",
 
 	ui: {
-		edit: ".wallet-control-edit",
 		remove: ".wallet-control-remove"
 	},
 
 	triggers: {
-		"click @ui.edit": "click:edit",
 		"click @ui.remove": "click:remove",
 		"click": "click:this"
 	},
@@ -48,43 +41,23 @@ export default ItemView.extend({
 			address: this.model.get("address"),
 			label: this.model.get("label"),
 			icon: this.model.get("icon"),
-			username: this.model.get("username"),
-			format: this.model.get("format"),
 			active: app.activeWallet && app.activeWallet == this.model
 		};
-	},
-
-	onClickEdit() {
-		app.layout.modals.show(new (AddWalletModel.extend({
-			extraData: {
-				editing: true
-			},
-
-			model: this.model
-		}))());
 	},
 
 	onClickRemove() {
 		let self = this;
 
 		app.layout.modals.show(new (ConfirmModal.extend({
-			title: "Remove Wallet",
+			title: "Remove Contact",
 			extraData: {
-				text: "Are you sure you want to remove this wallet?",
+				text: "Are you sure you want to remove this contact?",
 				bad: true
 			},
 
 			submit() {
-				if (app.activeWallet && app.activeWallet == self.model) {
-					walletChannel.trigger("wallet:activeRemoved");
-				}
-
 				self.model.destroy();
 			}
 		}))());
-	},
-
-	onClickThis() {
-		app.switchWallet(this.model);
 	}
 });
