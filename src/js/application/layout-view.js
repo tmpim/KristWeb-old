@@ -127,13 +127,6 @@ export default LayoutView.extend({
 				scrollInertia: 500
 			});
 		}).bind(this), 500);
-
-		setTimeout((() => {
-			this.ui.sidebar.mCustomScrollbar({
-				scrollInertia: 500,
-				theme: "dark"
-			});
-		}).bind(this), 500);
 	},
 
 	onAddWallet() {

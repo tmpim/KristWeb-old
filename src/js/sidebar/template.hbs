@@ -1,6 +1,8 @@
-{{#each sidebarItems}}
-	<a class="sidebar-item{{#if active}} active{{/if}}" href="{{path}}">{{name}}</a>
-{{/each}}
+<div class="sidebar-item-container">
+	{{#each sidebarItems}}
+		<a class="sidebar-item{{#if active}} active{{/if}}" href="{{path}}">{{name}}</a>
+	{{/each}}
+</div>
 
 <div class="sidebar-item sidebar-search">
 	<input class="searchBox" type="text" placeholder="Search..." />

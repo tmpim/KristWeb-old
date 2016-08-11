@@ -15,5 +15,14 @@ export default ItemView.extend({
 		return {
 			sidebarItems: this.collection.toJSON()
 		};
+	},
+
+	onRender() {
+		setTimeout((() => {
+			this.$(".sidebar-item-container").mCustomScrollbar({
+				scrollInertia: 500,
+				theme: "dark"
+			});
+		}).bind(this), 250);
 	}
 });

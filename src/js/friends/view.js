@@ -35,11 +35,7 @@ export default LayoutView.extend({
 	},
 
 	initialize() {
-		console.log("Friends/view init");
-
 		appChannel.on("syncNode:changed", () => {
-			console.log("Syncnode was changed");
-
 			app.selectedFriend = null;
 
 			this.friendList.show(new FriendListView({
@@ -51,8 +47,6 @@ export default LayoutView.extend({
 		});
 
 		friendChannel.on("friendsList:activeChanged", friend => {
-			console.log("Active friendslist friend was changed");
-
 			this.friendEditContainer.show(new EditFriendView({
 				model: friend
 			}));
@@ -60,11 +54,7 @@ export default LayoutView.extend({
 	},
 
 	onAttach() {
-		console.log("Friends/view attach");
-
 		if (app.friends) {
-			console.log("Friends/view attach has friends");
-
 			app.selectedFriend = null;
 
 			this.friendList.show(new FriendListView({

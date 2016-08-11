@@ -1,9 +1,20 @@
 .sidebar {
-    background: #555;
+    background: #444;
     overflow-y: auto;
     height: 100%;
 
     transition: background 250ms ease;
+
+    #sidebar-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .sidebar-item-container {
+            flex: 1;
+            overflow: hidden;
+        }
+    }
 
     .sidebar-item {
         padding: 12px 16px;
@@ -11,10 +22,8 @@
         font-size: 20px;
         display: inline-block;
         width: 100%;
-        transition: all 200ms ease;
-        background: rgba(#000, 0.1);
 
-        transition: background 250ms ease;
+        transition: all 200ms ease;
 
         &:not(.sidebar-search) {
             cursor: pointer;
@@ -31,10 +40,6 @@
                 }
             }
         }
-    }
-
-    .sidebar-top {
-        padding: 16px;
     }
 
     .credit {

@@ -52,14 +52,10 @@ export default CollectionView.extend({
 	},
 
 	onAttach() {
-		console.log("Friends/list-view attach");
-
 		this.initSortable();
 	},
 
 	onRender() {
-		console.log("Friends/list-view render");
-
 		this.initSortable();
 	}
 });

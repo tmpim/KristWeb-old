@@ -23,7 +23,7 @@
 		.sidebar-item {
 			color: #fff;
 
-			&:not(.sidebar-top) {
+			&:not(.sidebar-search) {
 				&:hover {
 					background: $primary-blue;
 				}
@@ -36,10 +36,6 @@
 					}
 				}
 			}
-		}
-
-		.sidebar-search {
-			background: rgba(0, 0, 0, 0.1);
 		}
 	}
 }
