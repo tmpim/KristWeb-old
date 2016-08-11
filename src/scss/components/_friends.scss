@@ -6,12 +6,16 @@
 	}
 
 	#friends-left, #friends-right {
+		flex: 1;
 		height: 100%;
 	}
 
 	#friends-left {
-		flex: 1;
 		margin-right: 1.5rem;
+
+		.panel-body {
+			overflow: hidden;
+		}
 
 		@media screen and (max-width: 48rem) {
 			margin-right: 0;

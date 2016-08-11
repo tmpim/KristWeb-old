@@ -8,7 +8,7 @@ import Modal from "./../modal";
 import WalletIconModal from "./../wallet-icon/modal";
 
 import app from "../../app.js";
-import Friend from "../../wallet/model.js";
+import Friend from "../../friends/model.js";
 import NProgress from "nprogress";
 
 export default Modal.extend({
@@ -25,6 +25,8 @@ export default Modal.extend({
 		let self = this;
 
 		app.layout.modals.show(new (WalletIconModal.extend({
+			title: "Contact Icon",
+
 			success(imageData) {
 				self.icon = imageData;
 
@@ -36,6 +38,26 @@ export default Modal.extend({
 				self.$("#friend-icon").text("Icon").css("background-image", "");
 			}
 		}))());
+	},
+
+	beforeSubmit(e) {
+		if (!this.$el.find("#friend-address").val()) {
+			e.preventDefault();
+			this.$el.find("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Field is required.");
+
+			return false;
+		} else {
+			this.$el.find("#friend-address-label").addClass("label-hidden").removeClass("text-red");
+		}
+
+		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(this.$el.find("#friend-address").val())) {
+			e.preventDefault();
+			this.$el.find("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
+
+			return false;
+		} else {
+			this.$el.find("#friend-address-label").addClass("label-hidden").removeClass("text-red");
+		}
 	},
 
 	submit() {

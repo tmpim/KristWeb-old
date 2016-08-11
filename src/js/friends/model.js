@@ -14,5 +14,5 @@ export default Model.extend({
 		syncNode: "https://krist.ceriat.net"
 	},
 
-	localStorage: new LocalStorage("Wallet", EncryptedLocalStorage)
+	localStorage: new LocalStorage("Friend", EncryptedLocalStorage)
 });

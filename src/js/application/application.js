@@ -57,9 +57,6 @@ export default Application.extend({
 		this.wallets = new WalletCollection();
 		this.wallets.fetch();
 
-		this.friends = new FriendCollection();
-		this.friends.fetch();
-
 		if (localStorage.activeWallet && this.wallets.has(localStorage.activeWallet)) {
 			this.switchWallet(this.wallets.get(localStorage.activeWallet));
 		} else if (this.wallets.length > 0) {
@@ -89,6 +86,10 @@ export default Application.extend({
 
 		if (this.syncNode !== syncNode) {
 			didSyncNodeChange = true;
+
+			this.friends = new FriendCollection();
+			this.friends.fetch();
+
 			appChannel.trigger("syncNode:changed", syncNode);
 		}
 

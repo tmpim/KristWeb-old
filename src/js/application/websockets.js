@@ -120,13 +120,9 @@ const WebsocketService = Service.extend({
 
 		setTimeout((() => {
 			if (!this.websocket || (this.websocket && this.websocket.readyState >= 2)) {
-				console.log("Attempting reconnect");
-
 				this.connect();
 			}
 		}).bind(this), 500);
-
-		console.log(`Websocket closed with code ${event.code} for reason ${event.reason}`);
 	},
 
 	send(type, data) {

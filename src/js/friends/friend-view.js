@@ -1,5 +1,5 @@
 import {ItemView} from "backbone.marionette";
-import template from "./template.hbs";
+import template from "./friend-template.hbs";
 
 import ConfirmModal from "../modal/confirm/modal";
 

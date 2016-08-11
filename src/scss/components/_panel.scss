@@ -3,6 +3,7 @@
 	flex-direction: column;
 
 	.panel-header {
+		flex: 0 0 41px;
 		background: $primary-blue;
 		border-radius: 3px 3px 0 0;
 		padding: 0.5rem 0.75rem;

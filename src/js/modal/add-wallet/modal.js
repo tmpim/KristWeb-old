@@ -59,6 +59,30 @@ export default Modal.extend({
 		}))());
 	},
 
+	beforeSubmit(e) {
+		if (!this.$el.find("#wallet-password").val()) {
+			e.preventDefault();
+			this.$el.find("#wallet-password-label").removeClass("label-hidden").addClass("text-red").text("Field is required.");
+
+			return false;
+		} else {
+			this.$el.find("#wallet-password-label").addClass("label-hidden").removeClass("text-red");
+		}
+
+		let format = this.$("#wallet-format").val();
+
+		if (format === "kristwallet_username_appendhashes" || format === "kristwallet_username") {
+			if (!this.$el.find("#wallet-username").val()) {
+				e.preventDefault();
+				this.$el.find("#wallet-username-label").removeClass("label-hidden").addClass("text-red").text("Field is required.");
+
+				return false;
+			} else {
+				this.$el.find("#wallet-username-label").addClass("label-hidden").removeClass("text-red");
+			}
+		}
+	},
+
 	onShow() {
 		if (app.epic) {
 			this.$("#wallet-format").append("<option value=\"jwalelset\">jwalelset</option>");
