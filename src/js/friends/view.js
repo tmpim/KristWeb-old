@@ -35,9 +35,11 @@ export default LayoutView.extend({
 	},
 
 	initialize() {
-		let self = this;
+		console.log("Friends/view init");
 
 		appChannel.on("syncNode:changed", () => {
+			console.log("Syncnode was changed");
+
 			app.selectedFriend = null;
 
 			this.friendList.show(new FriendListView({
@@ -49,13 +51,30 @@ export default LayoutView.extend({
 		});
 
 		friendChannel.on("friendsList:activeChanged", friend => {
-			self.friendEditContainer.show(new EditFriendView({
+			console.log("Active friendslist friend was changed");
+
+			this.friendEditContainer.show(new EditFriendView({
 				model: friend
 			}));
 		});
 	},
 
 	onAttach() {
+		console.log("Friends/view attach");
+
+		if (app.friends) {
+			console.log("Friends/view attach has friends");
+
+			app.selectedFriend = null;
+
+			this.friendList.show(new FriendListView({
+				collection: app.friends,
+				container: this
+			}));
+
+			this.friendEditContainer.reset();
+		}
+
 		this.ui.friendListContainer.mCustomScrollbar({
 			scrollInertia: 500
 		});

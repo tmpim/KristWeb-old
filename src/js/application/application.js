@@ -44,6 +44,12 @@ export default Application.extend({
 		appChannel.on("syncNode:changed", syncNode => {
 			this.syncNodeChanged(syncNode);
 		});
+
+		walletChannel.on("wallet:activeChanged", () => {
+			if (this.layout.ui.loginFirst) {
+				this.layout.ui.loginFirst.remove();
+			}
+		});
 	},
 
 	error(title, text) {

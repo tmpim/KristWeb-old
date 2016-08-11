@@ -47,7 +47,8 @@ export default LayoutView.extend({
 		walletChooserAddWallet: "#wallet-chooser-add-wallet",
 		walletChooserLoginWallet: "#wallet-chooser-login-wallet",
 		topBar: ".topBar",
-		connectionInfo: "#topBar-connectionInfo"
+		connectionInfo: "#topBar-connectionInfo",
+		loginFirst: "#login-first"
 	},
 
 	triggers: {

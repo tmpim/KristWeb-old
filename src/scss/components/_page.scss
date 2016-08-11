@@ -26,6 +26,31 @@
         }
     }
 
+    #login-first {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background: #fff;
+
+        transition: left 250ms ease;
+
+        h1 {
+            color: $primary-blue;
+            font-weight: 300;
+            font-size: 36px;
+
+            margin-bottom: 1rem;
+        }
+    }
+
     .sidebar-dim {
         display: none;
         opacity: 0;
@@ -53,6 +78,12 @@
         .pageMain {
             @media screen and (min-width: $break-small + 1px) {
                 margin-left: 240px;
+            }
+        }
+
+        #login-first {
+            @media screen and (min-width: $break-small + 1px) {
+                left: 240px;
             }
         }
 
