@@ -4,6 +4,7 @@ import _ from "lodash";
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
+import EditFriendView from "./edit-friend-view";
 import FriendListView from "./list-view";
 import AddFriendModal from "../modal/add-friend/modal";
 
@@ -12,18 +13,21 @@ import Radio from "backbone.radio";
 import app from "../app";
 
 let appChannel = Radio.channel("global");
+let friendChannel = Radio.channel("friend");
 
 export default LayoutView.extend({
 	template: template,
 	className: "friends",
 
 	regions: {
-		friendList: "#friend-list"
+		friendList: "#friend-list",
+		friendEditContainer: "#friend-edit-container"
 	},
 
 	ui: {
 		friendListContainer: "#friend-list-container",
-		friendListAddFriend: "#friend-list-add-friend"
+		friendListAddFriend: ".friend-list-add-friend",
+		friendEditContainer: "#friend-edit-container"
 	},
 
 	triggers: {
@@ -31,10 +35,22 @@ export default LayoutView.extend({
 	},
 
 	initialize() {
-		appChannel.on("syncNode:changed", syncNode => {
+		let self = this;
+
+		appChannel.on("syncNode:changed", () => {
+			app.selectedFriend = null;
+
 			this.friendList.show(new FriendListView({
 				collection: app.friends,
-				container: this.friendList
+				container: this
+			}));
+
+			this.friendEditContainer.reset();
+		});
+
+		friendChannel.on("friendsList:activeChanged", friend => {
+			self.friendEditContainer.show(new EditFriendView({
+				model: friend
 			}));
 		});
 	},

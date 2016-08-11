@@ -2,8 +2,11 @@ import {ItemView} from "backbone.marionette";
 import template from "./friend-template.hbs";
 
 import ConfirmModal from "../modal/confirm/modal";
+import Radio from "backbone.radio";
 
 import app from "../app";
+
+let friendChannel = Radio.channel("friend");
 
 export default ItemView.extend({
 	template: template,
@@ -29,7 +32,7 @@ export default ItemView.extend({
 	onShow() {
 		this.$el.attr("data-id", this.model.get("id"));
 
-		if (app.activeWallet && app.activeWallet == this.model) {
+		if (app.selectedFriend && app.selectedFriend == this.model) {
 			this.$el.addClass("active");
 		} else {
 			this.$el.removeClass("active");
@@ -41,8 +44,14 @@ export default ItemView.extend({
 			address: this.model.get("address"),
 			label: this.model.get("label"),
 			icon: this.model.get("icon"),
-			active: app.activeWallet && app.activeWallet == this.model
+			active: app.selectedFriend && app.selectedFriend == this.model
 		};
+	},
+
+	onClickThis() {
+		app.selectedFriend = this.model;
+
+		friendChannel.trigger("friendsList:activeChanged", this.model);
 	},
 
 	onClickRemove() {

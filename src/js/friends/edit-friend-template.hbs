@@ -1,0 +1,18 @@
+<div class="panel-body-inner">
+	<h1>Editing friend <b>{{#if label}}{{label}}{{else}}{{address}}{{/if}}</b></h1>
+
+	<div class="wallet-label-group">
+		<div class="wallet-icon" id="friend-icon" {{#if icon}}style="background-image: url('{{icon}}');"{{/if}}>{{#unless icon}}Icon{{/unless}}</div>
+		<input type="text" class="text-input" placeholder="Label (optional)" id="friend-label" {{#if label}}value="{{label}}"{{/if}} />
+	</div>
+
+	<label for="friend-label" class="label-hint label-hidden" id="friend-label-label">&nbsp;</label>
+
+	<input type="text" class="text-input" placeholder="Address" id="friend-address" value="{{address}}" />
+	<label for="friend-address" class="label-hint label-hidden" id="friend-address-label">&nbsp;</label>
+</div>
+
+<div class="panel-footer u-cf">
+	<a class="button button-red" id="friend-remove">Remove Contact</a>
+	<a class="button button-primary u-floatRight" id="friend-save">Save Contact</a>
+</div>

@@ -41,22 +41,22 @@ export default Modal.extend({
 	},
 
 	beforeSubmit(e) {
-		if (!this.$el.find("#friend-address").val()) {
+		if (!this.$("#friend-address").val()) {
 			e.preventDefault();
-			this.$el.find("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Field is required.");
+			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Field is required.");
 
 			return false;
 		} else {
-			this.$el.find("#friend-address-label").addClass("label-hidden").removeClass("text-red");
+			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
 		}
 
 		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(this.$el.find("#friend-address").val())) {
 			e.preventDefault();
-			this.$el.find("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
+			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
 
 			return false;
 		} else {
-			this.$el.find("#friend-address-label").addClass("label-hidden").removeClass("text-red");
+			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
 		}
 	},
 

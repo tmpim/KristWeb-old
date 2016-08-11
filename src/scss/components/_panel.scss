@@ -17,7 +17,19 @@
 
 		.panel-title {
 			font-weight: 400;
-			flex: 1 0 0;
+			flex: 1 0;
+			flex-basis: 0;
+		}
+
+		.panel-header-button {
+			background: transparent;
+			color: #fff;
+			border-radius: 4px;
+
+			&:hover {
+				background: #fff;
+				color: $primary-blue;
+			}
 		}
 	}
 
@@ -43,6 +55,22 @@
 
 			li {
 				padding: 0.75rem;
+			}
+		}
+	}
+
+	&.panel-with-footer {
+		.panel-body {
+			padding: 0;
+
+			.panel-body-inner {
+				flex: 1;
+				padding: 0.75rem;
+			}
+
+			.panel-footer {
+				background: #f5f5f5;
+				padding: 1rem;
 			}
 		}
 	}

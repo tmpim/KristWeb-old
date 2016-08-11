@@ -8,14 +8,14 @@
 	#friends-left, #friends-right {
 		flex: 1;
 		height: 100%;
-	}
-
-	#friends-left {
-		margin-right: 1.5rem;
 
 		.panel-body {
 			overflow: hidden;
 		}
+	}
+
+	#friends-left {
+		margin-right: 1.5rem;
 
 		@media screen and (max-width: 48rem) {
 			margin-right: 0;
@@ -26,6 +26,21 @@
 		@media screen and (max-width: $break-small) {
 			margin-top: 1rem;
 			margin-bottom: 1.5rem;
+		}
+	}
+
+	#friends-right {
+		.edit-friend {
+			height: 100%;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+
+			.mCSB_container {
+				flex-direction: column;
+				display: flex;
+				height: 100%;
+			}
 		}
 	}
 }

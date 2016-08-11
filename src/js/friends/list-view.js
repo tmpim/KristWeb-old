@@ -1,16 +1,32 @@
 import {CollectionView} from "backbone.marionette";
-import FriendView from "./friend-view";
+import Radio from "backbone.radio";
 
 import Sortable from "sortablejs";
+
+import FriendView from "./friend-view";
+
+import app from "../app";
+
+let friendChannel = Radio.channel("friend");
 
 export default CollectionView.extend({
 	initialize(options = {}) {
 		this.container = options.container;
+
+		friendChannel.on("friendsList:activeChanged", friend => {
+			if (this.isDestroyed) return;
+
+			this.render();
+		});
 	},
 
 	childView: FriendView,
 
 	viewComparator: "position",
+
+	filter(child, index, collection) {
+		return child.get("syncNode") === app.syncNode;
+	},
 
 	collectionEvents: {
 		sort: "render"
