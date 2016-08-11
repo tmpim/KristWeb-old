@@ -87,7 +87,7 @@ export default Application.extend({
 		let syncNode = wallet.get("syncNode") || "https://krist.ceriat.net";
 		let didSyncNodeChange = false;
 
-		if (this.syncNode !== syncNode) {
+		if (!this.syncNode || this.syncNode !== syncNode) {
 			didSyncNodeChange = true;
 		}
 
