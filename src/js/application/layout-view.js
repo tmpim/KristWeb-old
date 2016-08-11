@@ -3,7 +3,8 @@ import template from "./layout-template.hbs";
 import Backbone from "backbone";
 import Radio from "backbone.radio";
 
-import AddWalletModel from "../modal/add-wallet/modal";
+import AddWalletModal from "../modal/add-wallet/modal";
+import LoginWalletModal from "../modal/login-wallet/modal";
 
 import Epic from "../utils/epic";
 
@@ -44,6 +45,7 @@ export default LayoutView.extend({
 		walletChooserContainer: "#wallet-chooser-container",
 		walletChooser: "#wallet-chooser",
 		walletChooserAddWallet: "#wallet-chooser-add-wallet",
+		walletChooserLoginWallet: "#wallet-chooser-login-wallet",
 		topBar: ".topBar",
 		connectionInfo: "#topBar-connectionInfo"
 	},
@@ -52,7 +54,8 @@ export default LayoutView.extend({
 		"click @ui.sidebarOpener": "click:sidebarOpener",
 		"click @ui.sidebarDim": "click:sidebarDim",
 		"click @ui.walletChooserButton": "toggle:walletChooser",
-		"click @ui.walletChooserAddWallet": "add:wallet"
+		"click @ui.walletChooserAddWallet": "add:wallet",
+		"click @ui.walletChooserLoginWallet": "login:wallet"
 	},
 
 	initialize() {
@@ -133,7 +136,11 @@ export default LayoutView.extend({
 	},
 
 	onAddWallet() {
-		this.modals.show(new AddWalletModel());
+		this.modals.show(new AddWalletModal());
+	},
+
+	onLoginWallet() {
+		this.modals.show(new LoginWalletModal());
 	},
 
 	websocketConnectionStatusChanged(status) {

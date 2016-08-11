@@ -159,6 +159,36 @@
 		}
 	}
 
+	&.wallet-login {
+		.wallet-icon {
+			border-color: $primary-blue-darker;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			opacity: 0.4;
+			transition: opacity 250ms ease;
+
+			&:before {
+				display: inline-block;
+				content: '\e808';
+				font-family: 'kristweb';
+				font-size: 16px;
+				cursor: pointer;
+				color: $primary-blue-darker;
+				position: relative;
+				left: -1px;
+				top: -1px;
+			}
+		}
+
+		&:hover {
+			.wallet-icon {
+				opacity: 1.0;
+			}
+		}
+	}
+
 	.wallet-controls {
 		display: flex;
 		flex-direction: column;

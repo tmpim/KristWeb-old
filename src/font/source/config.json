@@ -53,6 +53,12 @@
       "css": "pencil",
       "code": 59399,
       "src": "fontawesome"
+    },
+    {
+      "uid": "a204f0fa972408eaae5a363c444991b2",
+      "css": "login",
+      "code": 59400,
+      "src": "entypo"
     }
   ]
 }

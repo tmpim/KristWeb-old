@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'kristweb';
-  src: url('../font/kristweb.eot?28286374');
-  src: url('../font/kristweb.eot?28286374#iefix') format('embedded-opentype'),
-       url('../font/kristweb.woff2?28286374') format('woff2'),
-       url('../font/kristweb.woff?28286374') format('woff'),
-       url('../font/kristweb.ttf?28286374') format('truetype'),
-       url('../font/kristweb.svg?28286374#kristweb') format('svg');
+  src: url('../font/kristweb.eot?68846581');
+  src: url('../font/kristweb.eot?68846581#iefix') format('embedded-opentype'),
+       url('../font/kristweb.woff2?68846581') format('woff2'),
+       url('../font/kristweb.woff?68846581') format('woff'),
+       url('../font/kristweb.ttf?68846581') format('truetype'),
+       url('../font/kristweb.svg?68846581#kristweb') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,7 +15,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'kristweb';
-    src: url('../font/kristweb.svg?28286374#kristweb') format('svg');
+    src: url('../font/kristweb.svg?68846581#kristweb') format('svg');
   }
 }
 */
@@ -63,3 +63,4 @@
 .icon-cancel:before { content: '\e805'; } /* '' */
 .icon-plus:before { content: '\e806'; } /* '' */
 .icon-pencil:before { content: '\e807'; } /* '' */
+.icon-login:before { content: '\e808'; } /* '' */
