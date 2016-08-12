@@ -20,6 +20,7 @@ import Radio from "backbone.radio";
 import NProgress from "nprogress";
 
 import Modal from "../modal/modal";
+import GetErrorText from "../utils/errors";
 
 let walletChannel = Radio.channel("wallet");
 let appChannel = Radio.channel("global");
@@ -114,7 +115,7 @@ export default Application.extend({
 				console.error(data);
 				this.activeWallet = null;
 				walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
-				return this.error("Unknown Error", `Server returned an unknown error: ${data.error || ""}`);
+				return this.error("Unknown Error", `Server returned an error: ${GetErrorText(data)}`);
 			}
 
 			if (!data.authed) {
@@ -137,7 +138,7 @@ export default Application.extend({
 						console.error(response);
 						self.activeWallet = null;
 						walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
-						return self.error("Error", `Server returned an error: ${response.error || ""}`);
+						return self.error("Error", `Server returned an error: ${GetErrorText(response)}`);
 					}
 
 					self.activeWallet.boundAddress = model;
@@ -160,16 +161,19 @@ export default Application.extend({
 
 				error(model, response) {
 					NProgress.done();
+
 					console.error(response);
+
 					self.activeWallet = null;
 					walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
-					return self.error("Error", `Server returned an error: ${response}`);
+
+					return self.error("Error", `Server returned an error: ${GetErrorText(response)}`);
 				}
 			});
 		}).fail((jqXHR, textStatus, error) => {
 			NProgress.done();
 
-			return this.error("Unknown Error", `Failed to connect to the sync node: ${error}`);
+			return this.error("Unknown Error", `Failed to connect to the sync node: ${GetErrorText(error)}`);
 		});
 	},
 

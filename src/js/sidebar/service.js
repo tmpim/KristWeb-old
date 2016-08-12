@@ -71,7 +71,8 @@ const SidebarService = Service.extend({
 	requests: {
 		add: "add",
 		remove: "remove",
-		activate: "activate"
+		activate: "activate",
+		deactivate: "deactivate"
 	},
 
 	add(model) {
@@ -91,6 +92,10 @@ const SidebarService = Service.extend({
 		if (model) {
 			model.set("active", true);
 		}
+	},
+
+	deactivate() {
+		this.collection.invoke("set", "active", false);
 	}
 });
 

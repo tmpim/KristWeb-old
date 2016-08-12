@@ -47,6 +47,8 @@ export default LayoutView.extend({
 		});
 
 		friendChannel.on("friendsList:activeChanged", friend => {
+			if (!this.friendEditContainer) return;
+
 			this.friendEditContainer.show(new EditFriendView({
 				model: friend
 			}));

@@ -5,6 +5,7 @@ import SidebarService from "./sidebar/service";
 import OverviewView from "./overview/view";
 import TestGroundView from "./testground/view";
 import FriendsView from "./friends/view";
+import AddressView from "./address/view";
 import StorageView from "./settings/storage/view";
 
 export default AppRouter.extend({
@@ -14,6 +15,7 @@ export default AppRouter.extend({
 		"overview": "overview",
 		"addressbook": "friends",
 		"friends": "friends",
+		"address/:address": "address",
 		"settings/storage": "storage"
 	},
 
@@ -43,6 +45,14 @@ export default AppRouter.extend({
 		SidebarService.request("activate", {
 			key: "friends"
 		});
+	},
+
+	address(address) {
+		this.container.show(new AddressView({
+			address: address
+		}));
+
+		SidebarService.request("deactivate");
 	},
 
 	storage() {
