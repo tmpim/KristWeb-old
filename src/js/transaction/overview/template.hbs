@@ -9,6 +9,8 @@
 	</div>
 	<div class="info">
 		<time id="transaction-time" datetime="{{time}}"></time>
+		<a {{#unless first}}href="/transaction/{{lastTransaction}}"{{/unless}} class="u-floatLeft{{#if first}} u-invisible{{/if}}">&laquo; Prev</a>
+		<a href="/transaction/{{nextTransaction}}" class="u-floatRight">Next &raquo;</a>
 	</div>
 	<div class="meta">
 		{{#if metadata}}

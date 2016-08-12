@@ -1,7 +1,7 @@
 import {ItemView} from "backbone.marionette";
 import template from "./template.hbs";
 
-import app from "../../app.js";
+import app from "../../app";
 
 export default ItemView.extend({
 	template: template,
@@ -19,7 +19,9 @@ export default ItemView.extend({
 			value: this.model.get("value") || 0,
 			time: this.model.get("time"),
 			name: this.model.get("name"),
-			metadata: this.model.get("metadata")
+			metadata: this.model.get("metadata"),
+			lastTransaction: this.model.get("id") - 1,
+			nextTransaction: this.model.get("id") + 1
 		};
 	},
 

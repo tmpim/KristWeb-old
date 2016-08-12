@@ -40,6 +40,17 @@
 			}
 		}
 
+		.info {
+			#transaction-time {
+				display: inline-block;
+				padding: 0 2rem;
+
+				@media screen and (max-width: $break-small) {
+					display: block;
+				}
+			}
+		}
+
 		.meta {
 			width: 100%;
 			margin-top: 1rem;

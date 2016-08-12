@@ -21,6 +21,15 @@ export default LayoutView.extend({
 		overview: "#overview"
 	},
 
+	ui: {
+		gotoTransaction: "#goto-transaction",
+		gotoTransactionGo: "#goto-transaction-go"
+	},
+
+	triggers: {
+		"click @ui.gotoTransactionGo": "goto:transaction"
+	},
+
 	initialize(options) {
 		this.transaction = options.transaction;
 
@@ -59,5 +68,9 @@ export default LayoutView.extend({
 				}));
 			}
 		});
+	},
+
+	onGotoTransaction() {
+		app.router.navigate(`transaction/${this.ui.gotoTransaction.val()}`, { trigger: true });
 	}
 });
