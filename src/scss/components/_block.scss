@@ -1,0 +1,38 @@
+#block-overview {
+	width: 100%;
+
+	#block-overview-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+
+		.top {
+			display: flex;
+			flex: 1;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+
+			.address {
+				color: $primary-blue;
+				font-family: "Roboto", sans-serif;
+				font-weight: 100;
+				font-size: 36px;
+			}
+
+			.action {
+				font-size: 30px;
+				margin: 0 0.5rem;
+			}
+
+			.value {
+				font-family: "Roboto", sans-serif;
+				font-weight: 100;
+				font-size: 36px;
+				color: $primary-green;
+			}
+		}
+	}
+}

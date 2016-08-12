@@ -21,6 +21,8 @@ import "select2";
 import "cropper";
 import "timeago";
 
+window.$.timeago.settings.localeTitle = true;  
+
 import Marionette from "backbone.marionette";
 import Modals from "backbone.modal";
 

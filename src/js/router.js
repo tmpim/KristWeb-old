@@ -7,6 +7,7 @@ import TestGroundView from "./testground/view";
 import FriendsView from "./friends/view";
 import AddressView from "./address/view";
 import TransactionView from "./transaction/view";
+import BlockView from "./block/view";
 import StorageView from "./settings/storage/view";
 
 export default AppRouter.extend({
@@ -18,6 +19,7 @@ export default AppRouter.extend({
 		"friends": "friends",
 		"address/:address": "address",
 		"transaction/:transaction": "transaction",
+		"block/:block": "block",
 		"settings/storage": "storage"
 	},
 
@@ -60,6 +62,14 @@ export default AppRouter.extend({
 	transaction(transaction) {
 		this.container.show(new TransactionView({
 			transaction: transaction
+		}));
+
+		SidebarService.request("deactivate");
+	},
+
+	block(block) {
+		this.container.show(new BlockView({
+			block: block
 		}));
 
 		SidebarService.request("deactivate");
