@@ -14,4 +14,11 @@
 			Waiting for login...
 		</p>
 	{{/if}}
+	{{#if blockValue}}
+		<p class="m-t-1">
+			<span class="grey-heading" title="Krist Block Reward Value">Block Value</span>
+			<span class="text-mute">&mdash;</span>
+			<span class="blockvalue" id="blockvalue"><span class="green">{{localise blockValue}}</span> KST (<span class="green">{{localise baseValue}}</span> KST base)</span>
+		</p>
+	{{/if}}
 </div>

@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
@@ -13,9 +15,16 @@ export default LayoutView.extend({
 
 	initialize() {
 		appChannel.on("motd:changed", () => {
-			if (this.isDestroyed) {
-				return;
-			}
+			if (this.isDestroyed) return;
+
+			this.render();
+		});
+
+		$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/blocks/value`).done(data => {
+			if (this.isDestroyed) return;
+
+			this.blockValue = data.value;
+			this.baseValue = data.base_value;
 
 			this.render();
 		});
@@ -36,7 +45,18 @@ export default LayoutView.extend({
 			} else {
 				return null;
 			}
+		},
+
+		localise(number) {
+			return Number(number).toLocaleString();
 		}
+	},
+
+	serializeData() {
+		return {
+			blockValue: this.blockValue || 0,
+			baseValue: this.baseValue || 0
+		};
 	},
 
 	onAttach() {

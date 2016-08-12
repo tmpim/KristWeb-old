@@ -332,6 +332,7 @@
 .grey-heading {
   font-weight: 400;
   color: #888;
+  text-transform: uppercase;
 }
 
 $spacer:   1rem !default;
@@ -408,4 +409,8 @@ $spacers: (
   li:nth-child(even) {
     background: #eee;
   }
+}
+
+.green {
+  color: $primary-green;
 }
