@@ -1,4 +1,3 @@
-
 import SecureRandom from "securerandom";
 
 import LoginModalTemplate from "./template.hbs";

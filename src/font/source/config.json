@@ -59,6 +59,18 @@
       "css": "login",
       "code": 59400,
       "src": "entypo"
+    },
+    {
+      "uid": "661bd5ba1dad15ad9acbfcd8b8af76f3",
+      "css": "quote-left",
+      "code": 59401,
+      "src": "iconic"
+    },
+    {
+      "uid": "fb94e23ae1e7660aa63cc5f351ec7560",
+      "css": "right",
+      "code": 59408,
+      "src": "fontawesome"
     }
   ]
 }

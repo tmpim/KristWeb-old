@@ -1,7 +1,8 @@
 import app from "../app";
 
 let errorMap = {
-	"address_not_found": "Address not found."
+	"address_not_found": "Address not found.",
+	"transaction_not_found": "Transaction not found."
 };
 
 let missingParameterMap = {
@@ -9,7 +10,8 @@ let missingParameterMap = {
 };
 
 let invalidParameterMap = {
-	"address": "Invalid address."
+	"address": "Invalid address.",
+	"transaction": "Invalid transaction ID."
 };
 
 export default error => {
