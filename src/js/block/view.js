@@ -21,6 +21,15 @@ export default LayoutView.extend({
 		overview: "#overview"
 	},
 
+	ui: {
+		gotoBlock: "#goto-block",
+		gotoBlockGo: "#goto-block-go"
+	},
+
+	triggers: {
+		"click @ui.gotoBlockGo": "goto:block"
+	},
+
 	initialize(options) {
 		this.block = options.block;
 
@@ -59,5 +68,9 @@ export default LayoutView.extend({
 				}));
 			}
 		});
+	},
+
+	onGotoBlock() {
+		app.router.navigate(`block/${this.ui.gotoBlock.val()}`, { trigger: true });
 	}
 });

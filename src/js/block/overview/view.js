@@ -1,7 +1,7 @@
 import {ItemView} from "backbone.marionette";
 import template from "./template.hbs";
 
-import app from "../../app.js";
+import app from "../../app";
 
 export default ItemView.extend({
 	template: template,
@@ -19,7 +19,10 @@ export default ItemView.extend({
 			short_hash: this.model.get("short_hash"),
 			value: this.model.get("value") || 0,
 			time: this.model.get("time"),
-			difficulty: this.model.get("difficulty")
+			difficulty: this.model.get("difficulty"),
+			first: this.model.get("height") === 1,
+			lastBlock: this.model.get("height") - 1,
+			nextBlock: this.model.get("height") + 1
 		};
 	},
 
@@ -30,6 +33,10 @@ export default ItemView.extend({
 
 		localise(number) {
 			return Number(number).toLocaleString();
+		},
+
+		boldHash() {
+			return `<b>${this.short_hash}</b>${this.hash.slice(this.short_hash.length)}`;
 		}
 	},
 

@@ -9,12 +9,6 @@ const SidebarService = Service.extend({
 		this.container = options.container;
 
 		this.request("add", {
-			name: "Testing Ground",
-			path: "testground",
-			key: "testground"
-		});
-
-		this.request("add", {
 			name: "Overview",
 			path: "overview",
 			key: "overview"

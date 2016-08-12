@@ -74,4 +74,23 @@
 			}
 		}
 	}
+
+	&.panel-fullwidth {
+		width: 100%;
+	}
+}
+
+.input-group {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+
+	.text-input {
+		flex: 1;
+		display: inline-block;
+		width: auto;
+		margin: 0 0.5rem;
+	}
 }

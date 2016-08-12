@@ -12,7 +12,7 @@ import StorageView from "./settings/storage/view";
 
 export default AppRouter.extend({
 	routes: {
-		"": "testground",
+		"": "overview",
 		"testground": "testground",
 		"overview": "overview",
 		"addressbook": "friends",

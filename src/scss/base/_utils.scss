@@ -31,6 +31,11 @@
   clip: rect(1px, 1px, 1px, 1px) !important;
 }
 
+.u-invisible {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .u-inline {
   display: inline !important;
 }
