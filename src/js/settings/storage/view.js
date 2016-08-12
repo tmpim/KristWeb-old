@@ -40,9 +40,12 @@ export default LayoutView.extend({
 
 	onBeforeRender() {
 		for (var x in localStorage) {
+			//noinspection JSUnfilteredForInLoop
 			this.total += (localStorage[x].length * 2) / 1024;
 			this.objects.push({
+				//noinspection JSUnfilteredForInLoop
 				name: x.substr(0, 50),
+				//noinspection JSUnfilteredForInLoop
 				size: (localStorage[x].length * 2) / 1024
 			});
 		}

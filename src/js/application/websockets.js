@@ -114,7 +114,7 @@ const WebsocketService = Service.extend({
 		console.error(event);
 	},
 
-	onClose(event) {
+	onClose() {
 		this.connectionStatus = WEBSOCKET_DISCONNECTED;
 		appChannel.trigger("websocket:connectionStatusChanged", this.connectionStatus);
 

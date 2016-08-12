@@ -7,12 +7,7 @@ import MOTDPanel from "./motd-panel/panel";
 import ActivityPanel from "./activity-panel/panel";
 import NetworkPanel from "./network-panel/panel";
 
-import Radio from "backbone.radio";
-
 import NProgress from "nprogress";
-
-let appChannel = Radio.channel("global");
-let walletChannel = Radio.channel("wallet");
 
 export default LayoutView.extend({
 	template: template,

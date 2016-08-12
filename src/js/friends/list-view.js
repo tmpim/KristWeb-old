@@ -13,7 +13,7 @@ export default CollectionView.extend({
 	initialize(options = {}) {
 		this.container = options.container;
 
-		friendChannel.on("friendsList:activeChanged", friend => {
+		friendChannel.on("friendsList:activeChanged", () => {
 			if (this.isDestroyed) return;
 
 			this.render();
@@ -24,7 +24,7 @@ export default CollectionView.extend({
 
 	viewComparator: "position",
 
-	filter(child, index, collection) {
+	filter(child) {
 		return child.get("syncNode") === app.syncNode;
 	},
 

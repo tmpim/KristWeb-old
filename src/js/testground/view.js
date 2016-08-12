@@ -84,7 +84,7 @@ export default LayoutView.extend({
 
 		let wallet = new Wallet({
 			label: "Test",
-			address: "k" + Array(9).join().split(",").map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join("")
+			address: "k" + new Array(9).join().split(",").map(function() { return s.charAt(Math.floor(Math.random() * s.length)); }).join("")
 		});
 
 		app.wallets.add(wallet);

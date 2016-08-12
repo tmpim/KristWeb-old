@@ -72,7 +72,7 @@ export default LayoutView.extend({
 			}
 		});
 
-		walletChannel.on("wallet:changeFailed", wallet => {
+		walletChannel.on("wallet:changeFailed", () => {
 			this.topBarAddressInfo.show(new ItemView({ template: "<span>Not logged in</span>" }));
 		});
 
@@ -80,7 +80,7 @@ export default LayoutView.extend({
 			this.websocketConnectionStatusChanged(status);
 		});
 
-		appChannel.on("websocket:keepalive", status => {
+		appChannel.on("websocket:keepalive", () => {
 			this.ui.connectionInfo.find(".connectionBulb").addClass("pulse");
 		});
 	},

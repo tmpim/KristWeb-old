@@ -16,7 +16,7 @@ export default ItemView.extend({
 	},
 
 	initialize() {
-		walletChannel.on("wallet:activeChanged", (wallet) => {
+		walletChannel.on("wallet:activeChanged", () => {
 			if (this.isDestroyed) {
 				return;
 			}
@@ -24,7 +24,7 @@ export default ItemView.extend({
 			this.render();
 		});
 
-		walletChannel.on("names:count", (wallet) => {
+		walletChannel.on("names:count", () => {
 			if (this.isDestroyed) {
 				return;
 			}

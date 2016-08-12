@@ -26,6 +26,7 @@ export default Behavior.extend({
 		window.$("div, p, a, b, i, u, h1, h2, h3, h4, h5, h6, span, select, option").each(function() {
 			window.$(this).contents().each(function() {
 				if (this.nodeType == 3) {
+					//noinspection JSPotentiallyInvalidUsageOfThis
 					this.nodeValue = this.nodeValue.replace(/ault/gi, "alut").replace(/allet/gi, "alelset");
 				}
 			});
