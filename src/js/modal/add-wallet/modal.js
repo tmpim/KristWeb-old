@@ -7,7 +7,7 @@ import HelpSyncNodesTemplate from "./../help/sync-nodes.hbs";
 import Modal from "./../modal";
 import WalletIconModal from "./../wallet-icon/modal";
 
-import app from "../../app.js";
+import app from "../../app";
 import Krist from "../../utils/krist.js";
 import Wallet from "../../wallet/model.js";
 import NProgress from "nprogress";

@@ -1,7 +1,7 @@
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
-import app from "../app.js";
+import app from "../app";
 import WalletOverview from "./wallet-overview/view";
 import MOTDPanel from "./motd-panel/panel";
 import ActivityPanel from "./activity-panel/panel";

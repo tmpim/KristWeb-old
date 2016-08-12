@@ -10,7 +10,7 @@ import LoginModal from "../modal/login/modal";
 
 import Wallet from "../wallet/model";
 
-import app from "../app.js";
+import app from "../app";
 
 let walletChannel = Radio.channel("wallet");
 let appChannel = Radio.channel("global");

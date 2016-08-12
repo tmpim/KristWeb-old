@@ -3,7 +3,7 @@ import TestModalButtons from "./buttons.hbs";
 
 import Modal from "./../modal";
 
-import app from "../../app.js";
+import app from "../../app";
 
 export default Modal.extend({
 	dialog: TestModalTemplate,

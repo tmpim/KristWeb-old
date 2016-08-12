@@ -3,7 +3,7 @@ import WalletIconButtons from "./buttons.hbs";
 
 import Modal from "./../modal";
 
-import app from "../../app.js";
+import app from "../../app";
 import NProgress from "nprogress";
 
 export default Modal.extend({

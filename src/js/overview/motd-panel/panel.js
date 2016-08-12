@@ -3,7 +3,7 @@ import $ from "jquery";
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
-import app from "../../app.js";
+import app from "../../app";
 
 import Radio from "backbone.radio";
 

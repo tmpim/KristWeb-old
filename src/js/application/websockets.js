@@ -4,7 +4,7 @@ import Radio from "backbone.radio";
 import _ from "lodash";
 import $ from "jquery";
 
-import app from "../app.js";
+import app from "../app";
 
 const WEBSOCKET_DISCONNECTED = 0;
 const WEBSOCKET_CONNECTING = 1;

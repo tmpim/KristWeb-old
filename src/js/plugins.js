@@ -15,7 +15,7 @@ import "babel-polyfill";
 import MalihuCustomScrollbarPlugin from "malihu-custom-scrollbar-plugin";
 MalihuCustomScrollbarPlugin(window.$);
 
-import "./libs/dense.min.js";
+import "./libs/dense.min";
 import "prefixfree";
 import "select2";
 import "cropper";
