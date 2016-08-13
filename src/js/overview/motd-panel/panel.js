@@ -15,9 +15,7 @@ export default LayoutView.extend({
 
 	initialize() {
 		appChannel.on("motd:changed", () => {
-			if (this.isDestroyed) return;
-
-			this.render();
+			if (!this.isDestroyed) this.render();
 		});
 
 		$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/blocks/value`).done(data => {

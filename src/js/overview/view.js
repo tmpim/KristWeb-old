@@ -9,6 +9,10 @@ import NetworkPanel from "./network-panel/panel";
 
 import NProgress from "nprogress";
 
+import Radio from "backbone.radio";
+
+let walletChannel = Radio.channel("wallet");
+
 export default LayoutView.extend({
 	template: template,
 	className: "overview",
@@ -21,6 +25,9 @@ export default LayoutView.extend({
 	},
 
 	initialize() {
+		walletChannel.on("wallet:activeChanged", () => {
+			if (!this.isDestroyed) this.render();
+		});
 	},
 
 	templateHelpers: {
@@ -33,10 +40,16 @@ export default LayoutView.extend({
 		}
 	},
 
-	onShow() {
-		this.overview.show(new WalletOverview());
+	onRender() {
+		if (app.activeWallet && app.activeWallet.boundAddress) {
+			this.overview.show(new WalletOverview({
+				model: app.activeWallet.boundAddress
+			}));
+
+			this.activityPanel.show(new ActivityPanel());
+		}
+
 		this.motdPanel.show(new MOTDPanel());
-		this.activityPanel.show(new ActivityPanel());
 		this.networkPanel.show(new NetworkPanel());
 	}
 });

@@ -50,8 +50,6 @@
 	</div>
 
 	<script>
-		var sr = new XMLHttpRequest();
-
 		var progressBar = document.getElementById("loader-progress-bar");
 		var progress = document.getElementById("loader-progress");
 
@@ -61,7 +59,9 @@
 
 		loaderText.innerText = "Loading required files";
 
-		sr.addEventListener("progress", function (e) {
+		var vendor = new XMLHttpRequest();
+
+		vendor.addEventListener("progress", function (e) {
 			if (e.lengthComputable) {
 				loaderText.innerText = "Loading required files (" + Math.floor(e.loaded / e.total * 100) + "%)";
 				progress.style.width = (Math.floor(e.loaded / e.total * progressBar.offsetWidth)) + "px";
@@ -70,15 +70,36 @@
 			}
 		});
 
-		sr.addEventListener("load", function () {
+		vendor.addEventListener("load", function () {
 			progressBar.style.opacity = 0;
 			loaderText.innerText = "Loading...";
 
 			eval(this.responseText);
+
+			var app = new XMLHttpRequest();
+
+			app.addEventListener("progress", function (e) {
+				if (e.lengthComputable) {
+					loaderText.innerText = "Loading Kristweb (" + Math.floor(e.loaded / e.total * 100) + "%)";
+					progress.style.width = (Math.floor(e.loaded / e.total * progressBar.offsetWidth)) + "px";
+				} else {
+					loaderText.innerText = "Loading Kristweb";
+				}
+			});
+
+			app.addEventListener("load", function () {
+				progressBar.style.opacity = 0;
+				loaderText.innerText = "Loading...";
+
+				eval(this.responseText);
+			});
+
+			app.open("GET", "/js/app.js");
+			app.send();
 		});
 
-		sr.open("GET", "/js/bundle.js");
-		sr.send();
+		vendor.open("GET", "/js/vendor.js");
+		vendor.send();
 	</script>
 </body>
 </html>

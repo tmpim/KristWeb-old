@@ -17,20 +17,19 @@ export default ItemView.extend({
 
 	initialize() {
 		walletChannel.on("wallet:activeChanged", () => {
-			if (this.isDestroyed) {
-				return;
-			}
-
-			this.render();
+			if (!this.isDestroyed) this.render();
 		});
 
 		walletChannel.on("names:count", () => {
-			if (this.isDestroyed) {
-				return;
-			}
-
-			this.render();
+			if (!this.isDestroyed) this.render();
 		});
+	},
+
+	serializeData() {
+		return {
+			address: this.model.get("address"),
+			balance: this.model.get("balance")
+		};
 	},
 
 	templateHelpers: {
@@ -38,12 +37,8 @@ export default ItemView.extend({
 			return typeof app.activeWallet !== "undefined" && app.activeWallet !== null;
 		},
 
-		address() {
-			return app.activeWallet.boundAddress.get("address");
-		},
-
-		balance() {
-			return app.activeWallet.boundAddress.get("balance").toLocaleString() + " KST";
+		krist(balance) {
+			return balance.toLocaleString() + " KST";
 		},
 
 		names() {

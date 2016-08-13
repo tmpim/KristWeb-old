@@ -41,11 +41,7 @@ export default LayoutView.extend({
 
 	initialize() {
 		walletChannel.on("wallet:activeChanged", () => {
-			if (this.isDestroyed) {
-				return;
-			}
-
-			this.render();
+			if (!this.isDestroyed) this.render();
 		});
 
 		appChannel.on("syncNode:changed", () => {

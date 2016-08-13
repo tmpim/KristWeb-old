@@ -4,6 +4,7 @@ var browserify = require("browserify");
 var watchify = require("watchify");
 var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
+var nodeResolve = require('resolve');
 var _ = require("lodash");
 
 gulp.task("html", function() {
@@ -59,14 +60,28 @@ gulp.task("lint", function() {
 		.pipe($.eslint.formatEach("compact", process.stderr));
 });
 
-var bundler = _.memoize(function(watch) {
-	var options = { debug: true };
+var vendorBundler = _.memoize(function() {
+	var b = browserify({});
+
+	getNPMPackageIds().forEach(function (id) {
+		b.require(nodeResolve.sync(id), { expose: id });
+	});
+
+	return b;
+});
+
+var appBundler = _.memoize(function(watch) {
+	var options = { };
 
 	if (watch) {
 		_.extend(options, watchify.args);
 	}
 
 	var b = browserify("./src/js/app.js", options);
+
+	getNPMPackageIds().forEach(function (id) {
+		b.external(id);
+	});
 
 	if (watch) {
 		b = watchify(b);
@@ -82,39 +97,66 @@ function handleErrors() {
 	this.emit("end");
 }
 
-function bundle(cb, watch) {
-	return bundler(watch).bundle()
+function vendorBundle(cb) {
+	return vendorBundler().bundle()
 		.on("error", handleErrors)
-		.pipe(source("bundle.js"))
+		.pipe(source("vendor.js"))
 		.pipe(buffer())
-		.pipe($.sourcemaps.init({ loadMaps: true }))
-		// .pipe($.uglify())
-		.pipe($.sourcemaps.write("./"))
+		.pipe($.uglify())
 		.pipe(gulp.dest("./dist/js"))
 		.on("end", cb);
 }
 
-gulp.task("js", function(cb) {
-	bundle(cb, true);
+function appBundle(cb, watch) {
+	return appBundler(watch).bundle()
+		.on("error", handleErrors)
+		.pipe(source("app.js"))
+		.pipe(buffer())
+		.pipe($.uglify())
+		.pipe(gulp.dest("./dist/js"))
+		.on("end", cb);
+}
+
+function getNPMPackageIds() {
+	var packageManifest = {};
+
+	try {
+		packageManifest = require('./package.json');
+	} catch (e) {
+	}
+
+	return _.union(_.keys(packageManifest.dependencies) || [], [
+		"browserify-cryptojs/components/enc-base64",
+		"browserify-cryptojs/components/md5",
+		"browserify-cryptojs/components/evpkdf",
+		"browserify-cryptojs/components/cipher-core",
+		"browserify-cryptojs/components/aes",
+		"browserify-cryptojs/components/sha256"
+	]);
+}
+
+gulp.task("vendor", function(cb) {
+	vendorBundle(cb);
+});
+
+gulp.task("app", function(cb) {
+	appBundle(cb, true);
 });
 
 gulp.task("build", [
 	"html",
 	"sass",
 	"lint",
-	"js",
+	"vendor",
+	"app",
 	"files"
 ]);
 
 gulp.task("watch", ["build"], function() {
-	bundler(true).on("update", function() {
-		gulp.start("lint");
-		gulp.start("js");
-	});
-
 	gulp.watch("./src/scss/**/*.scss", ["sass"]);
 	gulp.watch("./src/**/*.html", ["html"]);
-	gulp.watch("./src/**/*.hbs", ["js"]);
+	gulp.watch("./src/**/*.hbs", ["app"]);
+	gulp.watch("./src/**/*.js", ["app"]);
 	gulp.watch(["./src/img/**/*.*", "./src/font/**/*.*"], ["files"]);
 });
 

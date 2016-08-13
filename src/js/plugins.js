@@ -1,4 +1,7 @@
+import "babel-polyfill";
+
 window.CryptoJS = require("browserify-cryptojs");
+
 require("browserify-cryptojs/components/enc-base64");
 require("browserify-cryptojs/components/md5");
 require("browserify-cryptojs/components/evpkdf");
@@ -8,9 +11,9 @@ require("browserify-cryptojs/components/sha256");
 
 import Backbone from "backbone";
 
-Backbone.$ = window.jQuery = window.$ = require("jquery");
+import $ from "jquery";
 
-import "babel-polyfill";
+Backbone.$ = window.jQuery = window.$ = $;
 
 import MalihuCustomScrollbarPlugin from "malihu-custom-scrollbar-plugin";
 MalihuCustomScrollbarPlugin(window.$);

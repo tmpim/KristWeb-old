@@ -92,6 +92,37 @@ const WebsocketService = Service.extend({
 				appChannel.trigger("websocket:keepalive");
 				break;
 
+			case "event":
+				switch (message.event) {
+					case "transaction":
+						walletChannel.trigger("wallet:transaction", message.transaction);
+
+						this.send("me").then(data => {
+							if (data.address.balance !== app.activeWallet.boundAddress.get("balance")) {
+								app.activeWallet.boundAddress.set("balance", data.address.balance);
+
+								walletChannel.trigger("wallet:balanceChanged", data.address.balance);
+							}
+						});
+
+						break;
+
+					case "block":
+						appChannel.trigger("krist:block", message.block);
+
+						this.send("me").then(data => {
+							if (data.address.balance !== app.activeWallet.boundAddress.get("balance")) {
+								app.activeWallet.boundAddress.set("balance", data.address.balance);
+
+								walletChannel.trigger("wallet:balanceChanged", data.address.balance);
+							}
+						});
+
+						break;
+				}
+
+				break;
+
 			default:
 				if (message.id) {
 					let handler = _.find(this.handlers, { id: message.id });

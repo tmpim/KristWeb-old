@@ -14,9 +14,7 @@ export default CollectionView.extend({
 		this.container = options.container;
 
 		friendChannel.on("friendsList:activeChanged", () => {
-			if (this.isDestroyed) return;
-
-			this.render();
+			if (!this.isDestroyed) this.render();
 		});
 	},
 
