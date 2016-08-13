@@ -1,7 +1,16 @@
-import {LayoutView} from "backbone.marionette";
+import {CompositeView} from "backbone.marionette";
 import template from "./template.hbs";
 
-export default LayoutView.extend({
+import ActivityItemView from "./activity-view";
+
+export default CompositeView.extend({
 	template: template,
-	className: "panel"
+	className: "panel",
+
+	childView: ActivityItemView,
+	childViewContainer: "#activity-list",
+
+	collectionEvents: {
+		sort: "render"
+	}
 });

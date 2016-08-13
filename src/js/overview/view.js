@@ -1,11 +1,16 @@
+import $ from "jquery";
+
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
 import app from "../app";
+
 import WalletOverview from "./wallet-overview/view";
 import MOTDPanel from "./motd-panel/panel";
 import ActivityPanel from "./activity-panel/panel";
 import NetworkPanel from "./network-panel/panel";
+
+import ActivityCollection from "./activity-panel/activity-collection";
 
 import NProgress from "nprogress";
 
@@ -27,6 +32,17 @@ export default LayoutView.extend({
 	initialize() {
 		walletChannel.on("wallet:activeChanged", () => {
 			if (!this.isDestroyed) this.render();
+
+			let self = this;
+
+			this.activityCollection = new ActivityCollection();
+			this.activityCollection.fetch({
+				success() {
+					if (!self.isDestroyed) self.render();
+
+					console.log(self.activityCollection);
+				}
+			});
 		});
 	},
 
@@ -46,7 +62,11 @@ export default LayoutView.extend({
 				model: app.activeWallet.boundAddress
 			}));
 
-			this.activityPanel.show(new ActivityPanel());
+			if (this.activityCollection) {
+				this.activityPanel.show(new ActivityPanel({
+					collection: this.activityCollection
+				}));
+			}
 		}
 
 		this.motdPanel.show(new MOTDPanel());

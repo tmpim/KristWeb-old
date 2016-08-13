@@ -1,0 +1,25 @@
+<div class="top">
+	{{#if in}}
+		{{#if from}}
+			<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
+			<span class="to"><a href="/address/{{to}}">You</a></span>
+		{{else}}
+			<span class="to"><a href="/address/{{to}}">You</a></span>
+			<span class="action">mined</span>
+			<span class="value">{{krist value}}</span>
+		{{/if}}
+	{{else}}
+		<span class="from"><a href="/address/{{from}}">You</a></span>
+		<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
+		<span class="to"><a href="/address/{{to}}">{{to}}</a></span>
+	{{/if}}
+</div>
+{{#if metadata}}
+	<div class="meta">
+		<i class="icon-quote-left"></i>
+		<p>
+			{{metadata}}
+		</p>
+	</div>
+{{/if}}
