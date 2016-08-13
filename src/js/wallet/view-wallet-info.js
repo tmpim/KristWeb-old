@@ -5,6 +5,10 @@ export default ItemView.extend({
 	template: template,
 	className: "topBar-addressInfo",
 
+	modelEvents: {
+		"all": "render"
+	},
+
 	templateHelpers: {
 		krist(krist) {
 			return Number(krist).toLocaleString() + " KST";
