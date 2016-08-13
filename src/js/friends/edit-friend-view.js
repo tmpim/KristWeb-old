@@ -105,7 +105,7 @@ export default ItemView.extend({
 
 		NProgress.start();
 
-		let label = this.$("#friend-label").val();
+		let label = this.$("#friend-label").val().substring(0, 30);
 		let address = this.$("#friend-address").val();
 		let icon = this.icon;
 

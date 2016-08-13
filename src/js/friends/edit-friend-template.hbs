@@ -3,7 +3,7 @@
 
 	<div class="wallet-label-group">
 		<div class="wallet-icon" id="friend-icon" {{#if icon}}style="background-image: url('{{icon}}');"{{/if}}>{{#unless icon}}Icon{{/unless}}</div>
-		<input type="text" class="text-input" placeholder="Label (optional)" id="friend-label" {{#if label}}value="{{label}}"{{/if}} />
+		<input type="text" class="text-input" placeholder="Label (optional)" id="friend-label" maxlength="30" {{#if label}}value="{{label}}"{{/if}} />
 	</div>
 
 	<label for="friend-label" class="label-hint label-hidden" id="friend-label-label">&nbsp;</label>

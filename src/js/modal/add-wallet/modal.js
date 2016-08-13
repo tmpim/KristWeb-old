@@ -139,7 +139,7 @@ export default Modal.extend({
 			return window.CryptoJS.SHA256(a).toString();
 		}
 
-		let label = this.$("#wallet-label").val();
+		let label = this.$("#wallet-label").val().substring(0, 30);
 		let password = this.$("#wallet-password").val();
 		let username = this.$("#wallet-username").val();
 		let format = this.$("#wallet-format").val();
