@@ -35,8 +35,8 @@ export default LayoutView.extend({
 
 			let self = this;
 
-			this.activityCollection = new ActivityCollection();
-			this.activityCollection.fetch({
+			app.activeWallet.activityCollection = new ActivityCollection();
+			app.activeWallet.activityCollection.fetch({
 				success() {
 					if (!self.isDestroyed) self.render();
 
@@ -62,9 +62,9 @@ export default LayoutView.extend({
 				model: app.activeWallet.boundAddress
 			}));
 
-			if (this.activityCollection) {
+			if (app.activeWallet.activityCollection) {
 				this.activityPanel.show(new ActivityPanel({
-					collection: this.activityCollection
+					collection: app.activeWallet.activityCollection
 				}));
 			}
 		}
