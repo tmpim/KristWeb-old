@@ -20,7 +20,7 @@ MalihuCustomScrollbarPlugin(window.$);
 
 import "./libs/dense.min";
 import "prefixfree";
-import "select2";
+import "selectize";
 import "cropper";
 import "timeago";
 

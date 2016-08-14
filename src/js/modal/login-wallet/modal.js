@@ -67,19 +67,21 @@ export default Modal.extend({
 			this.$("#wallet-format").val("jwalelset");
 		}
 
-		this.$("#wallet-format").select2({
-			minimumResultsForSearch: Infinity
-		});
+		let self = this;
 
-		this.$("#wallet-format").on("select2:select", () => {
-			let val = this.$("#wallet-format").val();
+		this.$("#wallet-format").selectize({
+			create: true,
 
-			if (val === "kristwallet_username_appendhashes" || val === "kristwallet_username") {
-				this.$("#wallet-username").removeClass("u-hidden");
-				this.$("#wallet-username-label").removeClass("u-hidden");
-			} else {
-				this.$("#wallet-username").addClass("u-hidden");
-				this.$("#wallet-username-label").addClass("u-hidden");
+			onChange() {
+				let val = self.$("#wallet-format").val();
+
+				if (val === "kristwallet_username_appendhashes" || val === "kristwallet_username") {
+					self.$("#wallet-username").removeClass("u-hidden");
+					self.$("#wallet-username-label").removeClass("u-hidden");
+				} else {
+					self.$("#wallet-username").addClass("u-hidden");
+					self.$("#wallet-username-label").addClass("u-hidden");
+				}
 			}
 		});
 	},

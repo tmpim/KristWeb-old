@@ -1,0 +1,260 @@
+
+// base styles
+
+$selectize-font-family: inherit !default;
+$selectize-font-smoothing: inherit !default;
+$selectize-font-size: 20px !default;
+$selectize-line-height: inherit !default;
+
+$selectize-color-text: #666 !default;
+$selectize-color-border: $primary-darker-grey !default;
+$selectize-color-highlight: #666 !default;
+$selectize-color-input: #fff !default;
+$selectize-color-input-full: $selectize-color-input !default;
+$selectize-color-disabled: #fafafa !default;
+$selectize-color-item: #fff !default;
+$selectize-color-item-text: $selectize-color-text !default;
+$selectize-color-item-border: $primary-darker-grey !default;
+$selectize-color-item-active: $primary-blue !default;
+$selectize-color-item-active-text: $selectize-color-text !default;
+$selectize-color-item-active-border: $primary-darker-grey !default;
+$selectize-color-dropdown: white !default;
+$selectize-color-dropdown-border: $selectize-color-border !default;
+$selectize-color-dropdown-border-top: #f0f0f0 !default;
+$selectize-color-dropdown-item-active: $primary-blue !default;
+$selectize-color-dropdown-item-active-text: #fff !default;
+$selectize-color-dropdown-item-create-text: rgba($selectize-color-text, 0.5) !default;
+$selectize-color-dropdown-item-create-active-text: $selectize-color-dropdown-item-active-text !default;
+$selectize-color-optgroup: $selectize-color-dropdown !default;
+$selectize-color-optgroup-text: $selectize-color-text !default;
+$selectize-lighten-disabled-item: 30% !default;
+$selectize-lighten-disabled-item-text: 30% !default;
+$selectize-lighten-disabled-item-border: 30% !default;
+$selectize-opacity-disabled: 0.5 !default;
+
+$selectize-shadow-input: none !default;
+$selectize-shadow-input-focus: none !default;
+$selectize-border: 1px solid $selectize-color-border !default;
+$selectize-dropdown-border: 1px solid $selectize-color-dropdown-border !default;
+$selectize-border-radius: 3px !default;
+
+$selectize-width-item-border: 0 !default;
+$selectize-max-height-dropdown: 200px !default;
+
+$selectize-padding-x: 0.5rem !default;
+$selectize-padding-y: 0.375rem !default;
+$selectize-padding-item-x: 0 !default;
+$selectize-padding-item-y: 0 !default;
+$selectize-padding-dropdown-item-x: $selectize-padding-x !default;
+$selectize-padding-dropdown-item-y: $selectize-padding-y !default;
+$selectize-margin-item-x: 0 !default;
+$selectize-margin-item-y: 0 !default;
+
+$selectize-arrow-size: 5px !default;
+$selectize-arrow-color: #808080 !default;
+$selectize-arrow-offset: 15px !default;
+
+$selectize-caret-margin: 0 2px 0 0 !default;
+$selectize-caret-margin-rtl: 0 4px 0 -2px !default;
+
+.selectize-control {
+	position: relative;
+}
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+	color: $selectize-color-text;
+	font-family: $selectize-font-family;
+	font-size: $selectize-font-size;
+	line-height: $selectize-line-height;
+	-webkit-font-smoothing: $selectize-font-smoothing;
+}
+
+.selectize-input, .selectize-control.single .selectize-input.input-active {
+	background: $selectize-color-input;
+	cursor: text;
+	display: inline-block;
+}
+
+.selectize-input {
+	border: $selectize-border;
+	padding: $selectize-padding-y $selectize-padding-x;
+	display: inline-block;
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	box-shadow: $selectize-shadow-input;
+	border-radius: $selectize-border-radius;
+
+	.selectize-control.multi &.has-items {
+		$padding-x: $selectize-padding-x;
+		$padding-top: $selectize-padding-y - $selectize-padding-item-y - $selectize-width-item-border;
+		$padding-bottom: $selectize-padding-y - $selectize-padding-item-y - $selectize-margin-item-y - $selectize-width-item-border;
+		padding: $padding-top $padding-x $padding-bottom;
+	}
+
+	&.full {
+		background-color: $selectize-color-input-full;
+	}
+	&.disabled, &.disabled * {
+		cursor: default !important;
+	}
+	&.focus {
+		box-shadow: $selectize-shadow-input-focus;
+	}
+	&.dropdown-active {
+		border-radius: $selectize-border-radius $selectize-border-radius 0 0;
+	}
+
+	> * {
+		vertical-align: baseline;
+		display: -moz-inline-stack;
+		display: inline-block;
+		zoom: 1;
+		*display: inline;
+	}
+	.selectize-control.multi & > div {
+		cursor: pointer;
+		margin: 0 $selectize-margin-item-x $selectize-margin-item-y 0;
+		padding: $selectize-padding-item-y $selectize-padding-item-x;
+		background: $selectize-color-item;
+		color: $selectize-color-item-text;
+		border: $selectize-width-item-border solid $selectize-color-item-border;
+
+		&.active {
+			background: $selectize-color-item-active;
+			color: $selectize-color-item-active-text;
+			border: $selectize-width-item-border solid $selectize-color-item-active-border;
+		}
+	}
+	.selectize-control.multi &.disabled > div {
+		&, &.active {
+			color: lighten(desaturate($selectize-color-item-text, 100%), $selectize-lighten-disabled-item-text);
+			background: lighten(desaturate($selectize-color-item, 100%), $selectize-lighten-disabled-item);
+			border: $selectize-width-item-border solid lighten(desaturate($selectize-color-item-border, 100%), $selectize-lighten-disabled-item-border);
+		}
+	}
+	> input {
+		&::-ms-clear {
+			display: none;
+		}
+		display: inline-block !important;
+		padding: 0 !important;
+		min-height: 0 !important;
+		max-height: none !important;
+		max-width: 100% !important;
+		margin: $selectize-caret-margin !important;
+		text-indent: 0 !important;
+		border: 0 none !important;
+		background: none !important;
+		line-height: inherit !important;
+		-webkit-user-select: auto !important;
+		box-shadow: none !important;
+		&:focus { outline: none !important; }
+	}
+}
+
+.selectize-input::after {
+	content: ' ';
+	display: block;
+	clear: left;
+}
+
+.selectize-input.dropdown-active::before {
+	content: ' ';
+	display: block;
+	position: absolute;
+	background: $selectize-color-dropdown-border-top;
+	height: 1px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.selectize-dropdown {
+	position: absolute;
+	z-index: 10;
+	border: $selectize-dropdown-border;
+	background: $selectize-color-dropdown;
+	margin: -1px 0 0 0;
+	border-top: 0 none;
+	box-sizing: border-box;
+	box-shadow: 0 1px 3px rgba(black, 0.1);
+	border-radius: 0 0 $selectize-border-radius $selectize-border-radius;
+
+	[data-selectable] {
+		cursor: pointer;
+		overflow: hidden;
+		.highlight {
+			background: $selectize-color-highlight;
+			border-radius: 1px;
+		}
+	}
+	[data-selectable], .optgroup-header {
+		padding: $selectize-padding-dropdown-item-y $selectize-padding-dropdown-item-x;
+	}
+	.optgroup:first-child .optgroup-header {
+		border-top: 0 none;
+	}
+	.optgroup-header {
+		color: $selectize-color-optgroup-text;
+		background: $selectize-color-optgroup;
+		cursor: default;
+	}
+	.active {
+		background-color: $selectize-color-dropdown-item-active;
+		color: $selectize-color-dropdown-item-active-text;
+		&.create {
+			color: $selectize-color-dropdown-item-create-active-text;
+		}
+	}
+	.create {
+		color: $selectize-color-dropdown-item-create-text;
+	}
+}
+
+.selectize-dropdown-content {
+	overflow-y: auto;
+	overflow-x: hidden;
+	max-height: $selectize-max-height-dropdown;
+}
+
+.selectize-control.single .selectize-input {
+	&, input { cursor: pointer; }
+	&.input-active, &.input-active input { cursor: text; }
+
+	&:after {
+		content: ' ';
+		display: block;
+		position: absolute;
+		top: 50%;
+		right: $selectize-arrow-offset;
+		margin-top: round((-1 * $selectize-arrow-size / 2));
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: $selectize-arrow-size $selectize-arrow-size 0 $selectize-arrow-size;
+		border-color: $selectize-arrow-color transparent transparent transparent;
+	}
+	&.dropdown-active:after {
+		margin-top: $selectize-arrow-size * -0.8;
+		border-width: 0 $selectize-arrow-size $selectize-arrow-size $selectize-arrow-size;
+		border-color: transparent transparent $selectize-arrow-color transparent;
+	}
+}
+
+.selectize-control.rtl {
+	&.single .selectize-input:after {
+		left: $selectize-arrow-offset;
+		right: auto;
+	}
+	.selectize-input > input {
+		margin: $selectize-caret-margin-rtl !important;
+	}
+}
+
+.selectize-control .selectize-input.disabled {
+	opacity: $selectize-opacity-disabled;
+	background-color: $selectize-color-disabled;
+}

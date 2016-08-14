@@ -59,7 +59,7 @@
     "prefixfree": "^1.0.0",
     "resolve": "^1.1.7",
     "securerandom": "0.0.2",
-    "select2": "^4.0.3",
+    "selectize": "^0.12.2",
     "sortablejs": "^1.4.2",
     "timeago": "^1.5.3"
   },
