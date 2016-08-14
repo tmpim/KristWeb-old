@@ -81,6 +81,7 @@
 					text-align: center;
 					font-size: 22px;
 					padding: 2rem;
+					word-wrap: break-word;
 
 					@media screen and (max-width: $break-small) {
 						padding: 1rem;

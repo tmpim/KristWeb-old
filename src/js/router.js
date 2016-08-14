@@ -6,6 +6,7 @@ import OverviewView from "./overview/view";
 import TestGroundView from "./testground/view";
 import FriendsView from "./friends/view";
 import AddressView from "./address/view";
+import PayView from "./transaction/pay-view";
 import TransactionView from "./transaction/view";
 import BlockView from "./block/view";
 import StorageView from "./settings/storage/view";
@@ -18,6 +19,7 @@ export default AppRouter.extend({
 		"addressbook": "friends",
 		"friends": "friends",
 		"address/:address": "address",
+		"transaction": "pay",
 		"transaction/:transaction": "transaction",
 		"block/:block": "block",
 		"settings/storage": "storage"
@@ -59,12 +61,22 @@ export default AppRouter.extend({
 		SidebarService.request("deactivate");
 	},
 
+	pay() {
+		this.container.show(new PayView());
+
+		SidebarService.request("activate", {
+			key: "transactions"
+		});
+	},
+
 	transaction(transaction) {
 		this.container.show(new TransactionView({
 			transaction: transaction
 		}));
 
-		SidebarService.request("deactivate");
+		SidebarService.request("activate", {
+			key: "transactions"
+		});
 	},
 
 	block(block) {
