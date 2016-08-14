@@ -118,14 +118,7 @@ function appBundle(cb, watch) {
 }
 
 function getNPMPackageIds() {
-	var packageManifest = {};
-
-	try {
-		packageManifest = require('./package.json');
-	} catch (e) {
-	}
-
-	return _.union(_.keys(packageManifest.dependencies) || [], [
+	return _.union(_.keys(require('./package.json').dependencies) || [], [
 		"browserify-cryptojs/components/enc-base64",
 		"browserify-cryptojs/components/md5",
 		"browserify-cryptojs/components/evpkdf",
@@ -155,8 +148,7 @@ gulp.task("build", [
 gulp.task("watch", ["build"], function() {
 	gulp.watch("./src/scss/**/*.scss", ["sass"]);
 	gulp.watch("./src/**/*.html", ["html"]);
-	gulp.watch("./src/**/*.hbs", ["app"]);
-	gulp.watch("./src/**/*.js", ["app"]);
+	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["app"]);
 	gulp.watch(["./src/img/**/*.*", "./src/font/**/*.*"], ["files"]);
 });
 

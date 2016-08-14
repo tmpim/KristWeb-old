@@ -39,8 +39,6 @@ export default LayoutView.extend({
 			app.activeWallet.activityCollection.fetch({
 				success() {
 					if (!self.isDestroyed) self.render();
-
-					console.log(self.activityCollection);
 				}
 			});
 		});

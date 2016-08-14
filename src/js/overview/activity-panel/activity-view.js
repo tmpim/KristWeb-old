@@ -5,6 +5,7 @@ import app from "../../app";
 
 export default ItemView.extend({
 	template: template,
+	tagName: "li",
 	className: "activity-transaction",
 
 	modelEvents: {
