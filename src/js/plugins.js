@@ -21,6 +21,7 @@ MalihuCustomScrollbarPlugin(window.$);
 import "./libs/dense.min";
 import "prefixfree";
 import "selectize";
+import "./libs/selectize/dropdown-header";
 import "cropper";
 import "timeago";
 

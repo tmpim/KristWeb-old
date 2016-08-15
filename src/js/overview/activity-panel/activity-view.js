@@ -9,7 +9,7 @@ export default ItemView.extend({
 	className: "activity-transaction",
 
 	modelEvents: {
-		"all": "render"
+		"change": "render"
 	},
 
 	serializeData() {

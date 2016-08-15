@@ -8,7 +8,7 @@ $selectize-line-height: inherit !default;
 
 $selectize-color-text: #666 !default;
 $selectize-color-border: $primary-darker-grey !default;
-$selectize-color-highlight: #666 !default;
+$selectize-color-highlight: rgba(#fff, 0.3) !default;
 $selectize-color-input: #fff !default;
 $selectize-color-input-full: $selectize-color-input !default;
 $selectize-color-disabled: #fafafa !default;
@@ -63,6 +63,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px !default;
 
 .selectize-dropdown, .selectize-input, .selectize-input input {
 	color: $selectize-color-text;
+	font-weight: 300;
 	font-family: $selectize-font-family;
 	font-size: $selectize-font-size;
 	line-height: $selectize-line-height;
@@ -86,6 +87,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px !default;
 	box-sizing: border-box;
 	box-shadow: $selectize-shadow-input;
 	border-radius: $selectize-border-radius;
+	margin-right: 2rem;
 
 	.selectize-control.multi &.has-items {
 		$padding-x: $selectize-padding-x;
@@ -188,7 +190,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px !default;
 		overflow: hidden;
 		.highlight {
 			background: $selectize-color-highlight;
-			border-radius: 1px;
+			border-radius: 3px;
 		}
 	}
 	[data-selectable], .optgroup-header {
@@ -198,6 +200,7 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px !default;
 		border-top: 0 none;
 	}
 	.optgroup-header {
+		font-weight: 400;
 		color: $selectize-color-optgroup-text;
 		background: $selectize-color-optgroup;
 		cursor: default;
@@ -257,4 +260,12 @@ $selectize-caret-margin-rtl: 0 4px 0 -2px !default;
 .selectize-control .selectize-input.disabled {
 	opacity: $selectize-opacity-disabled;
 	background-color: $selectize-color-disabled;
+}
+
+.selectize-dropdown-header {
+	position: relative;
+	padding: $selectize-padding-dropdown-item-y $selectize-padding-dropdown-item-x;
+	border-bottom: 1px solid $selectize-color-border;
+	background: mix($selectize-color-dropdown, $selectize-color-border, 85%);
+	border-radius: $selectize-border-radius $selectize-border-radius 0 0;
 }

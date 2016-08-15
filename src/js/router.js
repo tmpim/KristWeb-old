@@ -14,14 +14,14 @@ import StorageView from "./settings/storage/view";
 export default AppRouter.extend({
 	routes: {
 		"": "overview",
-		"testground": "testground",
-		"overview": "overview",
-		"addressbook": "friends",
-		"friends": "friends",
-		"address/:address": "address",
-		"transaction": "pay",
-		"transaction/:transaction": "transaction",
-		"block/:block": "block",
+		"testground(/)": "testground",
+		"overview(/)": "overview",
+		"addressbook(/)": "friends",
+		"friends(/)": "friends",
+		"address(es)/:address": "address",
+		"transaction(s)(/)": "pay",
+		"transaction(s)/:transaction": "transaction",
+		"block(s)/:block": "block",
 		"settings/storage": "storage"
 	},
 

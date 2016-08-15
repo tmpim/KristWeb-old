@@ -29,7 +29,7 @@ gulp.task("sass", function() {
 });
 
 gulp.task("lint", function() {
-	return gulp.src(["src/js/**/*.js", "!src/js/**/*.min.js", "!src/js/**/*.lib.js"])
+	return gulp.src(["src/js/**/*.js", "!src/js/**/*.min.js", "!src/js/libs/**/*.js"])
 		.pipe($.eslint({
 			extends: "eslint:recommended",
 			parser: "babel-eslint",
@@ -112,7 +112,7 @@ function appBundle(cb, watch) {
 		.on("error", handleErrors)
 		.pipe(source("app.js"))
 		.pipe(buffer())
-		.pipe($.uglify())
+		// .pipe($.uglify())
 		.pipe(gulp.dest("./dist/js"))
 		.on("end", cb);
 }

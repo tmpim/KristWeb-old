@@ -51,8 +51,6 @@ export default Application.extend({
 				this.layout.ui.loginFirst.remove();
 			}
 		});
-
-		walletChannel.on("wallet:balanceChanged", console.log);
 	},
 
 	error(title, text) {

@@ -118,8 +118,6 @@ export default Modal.extend({
 		let self = this;
 
 		this.$("#wallet-format").selectize({
-			create: true,
-
 			onChange() {
 				let val = self.$("#wallet-format").val();
 

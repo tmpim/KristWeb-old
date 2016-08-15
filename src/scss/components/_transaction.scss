@@ -171,3 +171,31 @@
 		}
 	}
 }
+
+#make-transaction {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	.top {
+		width: 100%;
+		max-width: 600px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		flex: 1;
+
+		input, #recipient-container {
+			width: 100%;
+		}
+
+		.action {
+			font-size: 26px;
+			padding: 0.5rem 0;
+		}
+	}
+}

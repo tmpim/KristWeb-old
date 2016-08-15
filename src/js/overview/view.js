@@ -10,6 +10,7 @@ import MOTDPanel from "./motd-panel/panel";
 import ActivityPanel from "./activity-panel/panel";
 import NetworkPanel from "./network-panel/panel";
 
+import Transaction from "../transaction/model";
 import ActivityCollection from "./activity-panel/activity-collection";
 
 import NProgress from "nprogress";
@@ -41,6 +42,11 @@ export default LayoutView.extend({
 					if (!self.isDestroyed) self.render();
 				}
 			});
+		});
+
+		walletChannel.on("wallet:transaction", transaction => {
+			app.activeWallet.activityCollection.remove(app.activeWallet.activityCollection.last());
+			app.activeWallet.activityCollection.add(new Transaction(transaction), { at: 0 });
 		});
 	},
 
