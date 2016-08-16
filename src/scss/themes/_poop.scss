@@ -1,4 +1,9 @@
-#app.theme-blue {
+#app.theme-blue-yellow-stripes-with-green-ish-dots {
+	* {
+		border: 3px dashed yellow;
+		color: lime !important;
+	}
+
 	.topBar {
 		background: $primary-blue;
 
