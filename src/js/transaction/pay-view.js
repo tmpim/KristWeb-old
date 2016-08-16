@@ -1,3 +1,5 @@
+import $ from "jquery";
+
 import {LayoutView} from "backbone.marionette";
 import template from "./pay-template.hbs";
 
@@ -24,10 +26,11 @@ export default LayoutView.extend({
 	},
 
 	triggers: {
-		"click @ui.send": "send"
+		"click @ui.send": "click:send"
 	},
 
 	regions: {
+		overview: "#overview",
 		recipientContainer: "#recipient-container"
 	},
 
@@ -43,13 +46,73 @@ export default LayoutView.extend({
 		this.recipientContainer.show(this.recipientView);
 	},
 
-	send() {
-		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(this.$el.find("#friend-address").val())) {
-			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
+	onClickSend() {
+		let recipient = this.$el.find("#recipient").val();
 
-			return false;
+		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(recipient)) {
+			this.$("#recipient-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
+
+			return;
 		} else {
-			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
+			this.$("#recipient-label").addClass("label-hidden").removeClass("text-red");
 		}
+
+		let amount = parseInt(this.$el.find("#amount").val());
+
+		if (!amount || amount <= 0) {
+			this.$("#amount-label").removeClass("label-hidden").addClass("text-red").text("Invalid amount.");
+
+			return;
+		} else {
+			this.$("#amount-label").addClass("label-hidden").removeClass("text-red");
+		}
+
+		let metadata = this.$el.find("#metadata").val().substring(0, 255);
+
+		let self = this;
+
+		NProgress.start();
+
+		$.ajax({
+			method: "post",
+			url: `${app.syncNode}/transactions`,
+			data: {
+				to: recipient,
+				amount: amount,
+				metadata: metadata,
+				privatekey: app.activeWallet.get("masterkey")
+			},
+			dataType: "json"
+		}).done(response => {
+			if (!response || !response.ok) {
+				NProgress.done();
+				console.error(response);
+
+				return self.overview.show(new AlertView({
+					title: "Error",
+					text: GetErrorText(response),
+					style: "red"
+				}));
+			}
+
+			app.activeWallet.boundAddress.fetch();
+
+			NProgress.done();
+
+			self.overview.show(new AlertView({
+				title: "Success",
+				text: `Successfully sent ${amount.toLocaleString()} KST to ${recipient}.`,
+				style: "green"
+			}));
+		}).fail(response => {
+			NProgress.done();
+			console.error(response);
+
+			return self.overview.show(new AlertView({
+				title: "Error",
+				text: GetErrorText(response),
+				style: "red"
+			}));
+		});
 	}
 });

@@ -14,6 +14,7 @@ import Backbone from "backbone";
 import $ from "jquery";
 
 Backbone.$ = window.jQuery = window.$ = $;
+Backbone.emulateHTTP = true;
 
 import MalihuCustomScrollbarPlugin from "malihu-custom-scrollbar-plugin";
 MalihuCustomScrollbarPlugin(window.$);

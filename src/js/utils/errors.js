@@ -3,7 +3,8 @@ import app from "../app";
 let errorMap = {
 	"address_not_found": "Address not found.",
 	"transaction_not_found": "Transaction not found.",
-	"block_not_found": "Block not found."
+	"block_not_found": "Block not found.",
+	"insufficient_funds": "You don't have enough Krist in your wallet."
 };
 
 let missingParameterMap = {

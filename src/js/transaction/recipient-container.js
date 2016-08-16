@@ -8,6 +8,7 @@ import app from "../app";
 export default LayoutView.extend({
 	template: template,
 	tagName: "select",
+	id: "recipient",
 
 	templateHelpers() {
 		return {

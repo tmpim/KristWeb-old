@@ -21,10 +21,21 @@
 		display: inline;
 	}
 
+	.alert-close {
+		cursor: pointer;
+	}
+
 	&.red {
-		background: desaturate(lighten($primary-red, 20%), 20%);
+		background: desaturate(lighten($primary-red, 25%), 20%);
 		border-color: $primary-red;
 
 		color: darken($primary-red, 25%);
+	}
+
+	&.green {
+		background: desaturate(lighten($primary-green, 30%), 10%);
+		border-color: $primary-green;
+
+		color: darken($primary-green, 25%);
 	}
 }

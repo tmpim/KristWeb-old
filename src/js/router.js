@@ -24,6 +24,7 @@ export default AppRouter.extend({
 		"transaction(s)(/)": "pay",
 		"transaction(s)/:transaction": "transaction",
 		"block(s)/:block": "block",
+		"name(s)/:name(.kst)": "pay",
 		"settings/storage": "settingsStorage",
 		"settings/notifications": "settingsNotifications"
 	},
