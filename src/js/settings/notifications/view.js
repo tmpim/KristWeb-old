@@ -1,0 +1,29 @@
+import {LayoutView} from "backbone.marionette";
+import template from "./template.hbs";
+
+export default LayoutView.extend({
+	template: template,
+	className: "settings-notifications",
+
+	ui: {
+		notificationsEnabledCheckbox: "#notifications-enabled",
+		notificationSettingsRow: "#all-settings"
+	},
+
+	events: {
+		"click #notifications-enabled": "toggleNotifications"
+	},
+
+	initialize() {
+	},
+
+	toggleNotifications() {
+		let enabled = this.ui.notificationsEnabledCheckbox.find("input").is(":checked");
+
+		if (enabled) {
+			this.ui.notificationSettingsRow.removeClass("row-disabled");
+		} else {
+			this.ui.notificationSettingsRow.addClass("row-disabled");
+		}
+	}
+});

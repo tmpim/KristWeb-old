@@ -107,6 +107,59 @@ input {
     z-index: -1;
 }
 
+.switch {
+    display: inline-block;
+    position: relative;
+
+    width: 4.5rem;
+    height: 2rem;
+
+    .switch-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        background: $primary-dark-grey;
+        border: 1px solid $primary-darker-grey;
+        border-radius: 1rem;
+
+        cursor: pointer;
+
+        transition: all 250ms ease;
+
+        &:before {
+            content: "";
+
+            position: absolute;
+            left: 6px;
+            top: 6px;
+
+            width: calc(2rem - 14px);
+            height: calc(2rem - 14px);
+            border-radius: 50%;
+
+            background: white;
+
+            transition: all 250ms ease;
+        }
+    }
+
+    input {
+        display: none;
+
+        &:checked + .switch-inner {
+            background: $primary-blue;
+            border: 1px solid $primary-blue-darker;
+
+            &:before {
+                left: calc(3rem - 2px);
+            }
+        }
+    }
+}
+
 .input-addon {
     font-size: 20px;
     border: 1px solid $primary-darker-grey;

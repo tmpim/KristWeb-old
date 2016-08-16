@@ -9,7 +9,9 @@ import AddressView from "./address/view";
 import PayView from "./transaction/pay-view";
 import TransactionView from "./transaction/view";
 import BlockView from "./block/view";
-import StorageView from "./settings/storage/view";
+
+import SettingsStorageView from "./settings/storage/view";
+import SettingsNotificationView from "./settings/notifications/view";
 
 export default AppRouter.extend({
 	routes: {
@@ -22,7 +24,8 @@ export default AppRouter.extend({
 		"transaction(s)(/)": "pay",
 		"transaction(s)/:transaction": "transaction",
 		"block(s)/:block": "block",
-		"settings/storage": "storage"
+		"settings/storage": "settingsStorage",
+		"settings/notifications": "settingsNotifications"
 	},
 
 	initialize(options = {}) {
@@ -87,8 +90,16 @@ export default AppRouter.extend({
 		SidebarService.request("deactivate");
 	},
 
-	storage() {
-		this.container.show(new StorageView());
+	settingsStorage() {
+		this.container.show(new SettingsStorageView());
+
+		SidebarService.request("activate", {
+			key: "settings"
+		});
+	},
+
+	settingsNotifications() {
+		this.container.show(new SettingsNotificationView());
 
 		SidebarService.request("activate", {
 			key: "settings"

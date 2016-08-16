@@ -70,6 +70,15 @@ export default LayoutView.extend({
 				this.activityPanel.show(new ActivityPanel({
 					collection: app.activeWallet.activityCollection
 				}));
+			} else {
+				let self = this;
+
+				app.activeWallet.activityCollection = new ActivityCollection();
+				app.activeWallet.activityCollection.fetch({
+					success() {
+						if (!self.isDestroyed) self.render();
+					}
+				});
 			}
 		}
 
