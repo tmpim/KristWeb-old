@@ -6,7 +6,7 @@ import template from "./template.hbs";
 
 export default LayoutView.extend({
 	template: template,
-	className: "settings-storage",
+	id: "settings-storage",
 
 	initialize() {
 		this.total = 0;

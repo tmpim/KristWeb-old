@@ -55,6 +55,7 @@
 	max-width: 620px;
 	max-height: calc(100vh - 2rem);
 
+	overflow-x: hidden;
 	overflow-y: auto;
 
 	@media screen and (max-width: $break-small) {

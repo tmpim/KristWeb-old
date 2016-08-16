@@ -1,0 +1,19 @@
+#settings-notifications {
+	@media screen and (max-width: $break-small) {
+		ul {
+			padding-left: 0;
+		}
+
+		.row-list {
+			li {
+				padding-top: 0.5rem;
+				padding-bottom: 0.5rem;
+			}
+		}
+
+		.switch {
+			display: block;
+			float: none !important;
+		}
+	}
+}

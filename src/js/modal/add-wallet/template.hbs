@@ -8,23 +8,23 @@
 {{/unless}}
 
 <div class="wallet-label-group">
-	<div class="wallet-icon" id="wallet-icon">Icon</div>
-	<input type="text" class="text-input" placeholder="Wallet label (optional)" maxlength="30" id="wallet-label" />
+	<div class="wallet-icon focusable focusable-border" id="wallet-icon" tabindex="1">Icon</div>
+	<input type="text" class="text-input" placeholder="Wallet label (optional)" maxlength="30" id="wallet-label" tabindex="2" />
 </div>
 
 <label for="wallet-label" class="label-hint label-hidden" id="wallet-label-label">&nbsp;</label>
 
-<input type="text" class="text-input u-hidden" placeholder="Wallet username" id="wallet-username" />
+<input type="text" class="text-input u-hidden" placeholder="Wallet username" id="wallet-username" tabindex="3" />
 <label for="wallet-username" class="label-hint label-hidden u-hidden" id="wallet-username-label">&nbsp;</label>
 
-<input type="password" class="text-input" placeholder="Wallet password" id="wallet-password" />
+<input type="password" class="text-input" placeholder="Wallet password" id="wallet-password" tabindex="4" />
 <label for="wallet-password" class="label-hint label-hidden" id="wallet-password-label">&nbsp;</label>
 
 <label for="wallet-format" style="display: inline-block; padding-bottom: 0.5rem;">
 	Wallet Format (<a class="wallet-format-help" data-bypass>learn more</a>)
 </label>
 
-<select class="dropdown-input" id="wallet-format" style="width: 100%;">
+<select class="dropdown-input" id="wallet-format" tabindex="5" style="width: 100%;">
 	<option value="kristwallet">KristWallet, KWallet (recommended)</option>
 	<option value="krist">Local Vault, krist.dia, Krist API</option>
 	<option value="kristwallet_username_appendhashes">KW-Username (appendhashes)</option>
@@ -35,5 +35,5 @@
 	Sync Node (<a class="sync-node-help" data-bypass>learn more</a>)
 </p>
 
-<input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" />
+<input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" tabindex="6" />
 <label for="wallet-syncnode" class="label-hint label-hidden" id="wallet-syncnode-label">&nbsp;</label>

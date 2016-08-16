@@ -210,3 +210,21 @@ $name: xs;
     opacity: 0.5;
     pointer-events: none;
 }
+
+.row-list {
+    li {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+
+        border-bottom: 1px solid $primary-darker-grey;
+
+        &:last-child {
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+    }
+
+    ul ul {
+        padding-left: 2rem;
+    }
+}

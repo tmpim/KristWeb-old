@@ -28,16 +28,20 @@
         &:not(.sidebar-search) {
             cursor: pointer;
 
-            &:hover {
-                background: #777;
-            }
-
             &.active {
                 background: #343434;
 
                 &:hover {
                     background: darken(#343434, 5%);
                 }
+            }
+
+            &:focus {
+                background: #5a5a5a;
+            }
+
+            &:hover {
+                background: #777;
             }
         }
     }

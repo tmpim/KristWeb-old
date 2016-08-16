@@ -27,6 +27,12 @@
 				flex-direction: row;
 				align-items: center;
 
+				&.large {
+					font-family: "Roboto", sans-serif;
+					font-weight: 100;
+					font-size: 34px;
+				}
+
 				.icon-right {
 					margin: 0 0.5rem;
 				}
@@ -174,28 +180,32 @@
 
 #make-transaction {
 	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 
-	.top {
-		width: 100%;
-		max-width: 600px;
+	.row {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		flex-wrap: wrap;
-		flex: 1;
+		width: 100%;
 
-		input, #recipient-container {
+		.top {
 			width: 100%;
-		}
+			max-width: 600px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			flex: 1;
 
-		.action {
-			font-size: 26px;
-			padding: 0.5rem 0;
+			input, #recipient-container {
+				width: 100%;
+			}
+
+			.action {
+				font-size: 26px;
+				padding: 0.5rem 0;
+			}
 		}
 	}
 }

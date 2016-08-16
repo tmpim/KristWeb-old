@@ -3,9 +3,15 @@
 		<p class="text-mini u-textCenter">Transaction #{{localise id}}</p>
 	</div>
 	<div class="top">
-		<span class="from">{{#if from}}<a href="/address/{{from}}">{{from}}</a>{{else}}Mined{{/if}}</span>
-		<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
-		<span class="to"><a href="/address/{{to}}">{{to}}</a></span>
+		{{#if name}}
+			<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+			<span class="action large">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
+			<span class="to"><a href="/name/{{to}}">{{name}}.kst</a></span>
+		{{else}}
+			<span class="from">{{#if from}}<a href="/address/{{from}}">{{from}}</a>{{else}}Mined{{/if}}</span>
+			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
+			<span class="to"><a href="/address/{{to}}">{{to}}</a></span>
+		{{/if}}
 	</div>
 	<div class="info">
 		<time id="transaction-time" datetime="{{time}}"></time>

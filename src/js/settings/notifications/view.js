@@ -3,7 +3,7 @@ import template from "./template.hbs";
 
 export default LayoutView.extend({
 	template: template,
-	className: "settings-notifications",
+	id: "settings-notifications",
 
 	ui: {
 		notificationsEnabledCheckbox: "#notifications-enabled",

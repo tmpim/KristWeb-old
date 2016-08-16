@@ -29,6 +29,11 @@ h1 {
 	display: block;
 	font-weight: 400;
 	font-size: 32px;
+
+	@media screen and (max-width: $break-small) {
+		font-size: 30px;
+		text-align: center;
+	}
 }
 
 h2 {

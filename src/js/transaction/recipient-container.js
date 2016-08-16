@@ -17,6 +17,8 @@ export default LayoutView.extend({
 	},
 
 	onAttach() {
+		this.$el.attr("tabindex", "2");
+
 		this.$el.selectize({
 			plugins: {
 				"dropdown_header": {
