@@ -70,6 +70,10 @@ export default LayoutView.extend({
 		});
 	},
 
+	onShow() {
+		this.ui.gotoBlock.val(this.block);
+	},
+
 	onGotoBlock() {
 		app.router.navigate(`block/${this.ui.gotoBlock.val()}`, { trigger: true });
 	}

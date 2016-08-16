@@ -70,6 +70,10 @@ export default LayoutView.extend({
 		});
 	},
 
+	onShow() {
+		this.ui.gotoTransaction.val(this.transaction);
+	},
+
 	onGotoTransaction() {
 		app.router.navigate(`transaction/${this.ui.gotoTransaction.val()}`, { trigger: true });
 	}
