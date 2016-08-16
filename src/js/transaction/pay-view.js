@@ -35,13 +35,20 @@ export default LayoutView.extend({
 	},
 
 	initialize() {
+		if (app.sendKristTo) {
+			this.sendKristTo = app.sendKristTo;
+			app.sendKristTo = null;
+		}
+
 		appChannel.on("syncNode:changed", () => {
 			if (!this.isDestroyed) this.render();
 		});
 	},
 
 	onRender() {
-		this.recipientView = new RecipientContainer();
+		this.recipientView = new RecipientContainer({
+			sendKristTo: this.sendKristTo
+		});
 
 		this.recipientContainer.show(this.recipientView);
 	},
@@ -49,7 +56,7 @@ export default LayoutView.extend({
 	onClickSend() {
 		let recipient = this.$el.find("#recipient").val();
 
-		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(recipient)) {
+		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/.test(recipient)) {
 			this.$("#recipient-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
 
 			return;
@@ -67,7 +74,7 @@ export default LayoutView.extend({
 			this.$("#amount-label").addClass("label-hidden").removeClass("text-red");
 		}
 
-		let metadata = this.$el.find("#metadata").val().substring(0, 255);
+		let metadata = this.$el.find("#metadata").val().substring(0, 255) || null;
 
 		let self = this;
 

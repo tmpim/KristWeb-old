@@ -1,23 +1,23 @@
 <div class="top">
 	{{#if in}}
 		{{#if from}}
-			<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+			<span class="from"><a href="/address/{{from}}"{{#if label}} title="{{from}}"{{/if}}>{{#if label}}{{label}}{{else}}{{from}}{{/if}}</a></span>
 			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
-			<span class="to"><a href="/address/{{to}}">You</a></span>
+			<span class="to"><a href="/address/{{to}}" title="{{to}}">You</a></span>
 		{{else}}
-			<span class="to"><a href="/address/{{to}}">You</a></span>
+			<span class="to"><a href="/address/{{to}}" title="{{to}}">You</a></span>
 			<span class="action">&nbsp;mined&nbsp;</span>
 			<span class="value">{{krist value}}</span>
 		{{/if}}
 	{{else}}
 		{{#if name}}
-			<span class="from"><a href="/address/{{from}}">You</a></span>
+			<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
 			<span class="action">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
 			<span class="to"><a href="/name/{{name}}">{{name}}.kst</a></span>
 		{{else}}
-			<span class="from"><a href="/address/{{from}}">You</a></span>
+			<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
 			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
-			<span class="to"><a href="/address/{{to}}">{{to}}</a></span>
+			<span class="to"><a href="/address/{{to}}"{{#if label}} title="{{to}}"{{/if}}>{{#if label}}{{label}}{{else}}{{to}}{{/if}}</a></span>
 		{{/if}}
 	{{/if}}
 </div>

@@ -10,6 +10,10 @@ export default LayoutView.extend({
 	tagName: "select",
 	id: "recipient",
 
+	initialize(options) {
+		this.sendKristTo = options.sendKristTo;
+	},
+
 	templateHelpers() {
 		return {
 			wallets: app.wallets ? _.sortBy(app.wallets.toJSON(), "position") : null,
@@ -30,7 +34,11 @@ export default LayoutView.extend({
 			persist: false,
 			closeAfterSelect: true,
 			placeholder: "Recipient",
-			createFilter: /^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/
+			createFilter: /^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/
 		});
+
+		if (this.sendKristTo) {
+			this.$el[0].selectize.createItem(this.sendKristTo);
+		}
 	}
 });
