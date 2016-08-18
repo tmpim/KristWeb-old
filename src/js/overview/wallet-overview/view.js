@@ -11,11 +11,21 @@ export default ItemView.extend({
 	template: template,
 	id: "wallet-overview",
 
+	ui: {
+		sendKrist: "#send-krist"
+	},
+
+	triggers: {
+		"click @ui.sendKrist": "click:sendKrist"
+	},
+
 	modelEvents: {
 		"all": "render"
 	},
 
-	initialize() {
+	initialize(options) {
+		this.hideNames = options.hideNames;
+
 		walletChannel.on("wallet:activeChanged", () => {
 			if (!this.isDestroyed) this.render();
 		});
@@ -28,7 +38,9 @@ export default ItemView.extend({
 	serializeData() {
 		return {
 			address: this.model.get("address"),
-			balance: this.model.get("balance")
+			balance: this.model.get("balance"),
+			hideNames: this.hideNames,
+			isOwn: app.activeWallet && this.model.get("address") === app.activeWallet.boundAddress.get("address")
 		};
 	},
 
@@ -42,6 +54,8 @@ export default ItemView.extend({
 		},
 
 		names() {
+			if (this.hideNames) return;
+
 			if (app.activeWallet && app.activeWallet.nameCount) {
 				return app.activeWallet.nameCount;
 			} else {
@@ -52,5 +66,10 @@ export default ItemView.extend({
 		pluralize(number, single, plural) {
 			return Number(number) == 1 ? single : plural;
 		}
+	},
+
+	onClickSendKrist() {
+		app.sendKristTo = this.model.get("address");
+		app.router.navigate("/transactions", true);
 	}
 });

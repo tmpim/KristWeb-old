@@ -5,8 +5,12 @@
 			<span class="balance">{{krist balance}}</span>
 		</div>
 		<div class="right-col">
-			<a class="button button-green" href="/transactions"><i class="icon-send"></i>Send Krist</a>
-			<span class="badge badge-green-light">{{#if names}}{{names}}{{else}}0{{/if}} {{pluralize (names) "name" "names"}}</span>
+			{{#if isOwn}}
+				<a class="button button-green" href="/transactions/make"><i class="icon-send"></i>Send Krist</a>
+			{{else}}
+				<a class="button button-green" id="send-krist"><i class="icon-send"></i>Send Krist to {{address}}</a>
+			{{/if}}
+			{{#unless hideNames}}<span class="badge badge-green-light">{{#if names}}{{names}}{{else}}0{{/if}} {{pluralize (names) "name" "names"}}</span>{{/unless}}
 		</div>
 	</div>
 {{/if}}

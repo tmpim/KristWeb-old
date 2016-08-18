@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
@@ -45,7 +43,7 @@ export default LayoutView.extend({
 		});
 
 		walletChannel.on("wallet:transaction", transaction => {
-			app.activeWallet.activityCollection.remove(app.activeWallet.activityCollection.last());
+			app.activeWallet.activityCollection.pop();
 			app.activeWallet.activityCollection.add(new Transaction(transaction), { at: 0 });
 		});
 	},

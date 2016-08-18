@@ -16,8 +16,8 @@ export default LayoutView.extend({
 
 	templateHelpers() {
 		return {
-			wallets: app.wallets ? _.sortBy(_.map(app.wallets.where({ syncNode: app.syncNode }), m => { return m.toJSON() }), "position") : null,
-			friends: app.friends ? _.sortBy(_.map(app.friends.where({ syncNode: app.syncNode }), m => { return m.toJSON() }), "position") : null
+			wallets: app.wallets ? _.sortBy(_.map(app.wallets.where({ syncNode: app.syncNode }), m => { return m.toJSON(); }), "position") : null,
+			friends: app.friends ? _.sortBy(_.map(app.friends.where({ syncNode: app.syncNode }), m => { return m.toJSON(); }), "position") : null
 		};
 	},
 

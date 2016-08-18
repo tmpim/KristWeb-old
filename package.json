@@ -44,6 +44,7 @@
     "backbone.localstorage": "^1.1.16",
     "backbone.marionette": "^2.4.7",
     "backbone.modal": "^1.1.5",
+    "backbone.paginator": "^2.0.5",
     "backbone.radio": "^1.0.5",
     "backbone.service": "^0.5.2",
     "backbone.storage": "^0.2.1",

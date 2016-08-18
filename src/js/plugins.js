@@ -31,6 +31,13 @@ window.$.timeago.settings.localeTitle = true;
 import Marionette from "backbone.marionette";
 import Modals from "backbone.modal";
 
+import Handlebars from "hbsfy/runtime";
+Handlebars.registerHelper('nl2br', function(text) {
+	text = Handlebars.Utils.escapeExpression(text);
+	let nl2br = (text + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br>' + '$2');
+	return new Handlebars.SafeString(nl2br);
+});
+
 if (window.__agent) {
 	window.__agent.start(Backbone, Marionette);
 }
