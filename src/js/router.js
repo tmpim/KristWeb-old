@@ -85,7 +85,7 @@ export default AppRouter.extend({
 	},
 
 	transaction(transaction) {
-		if (/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/.test(transaction)) {
+		if (/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst|all)$/.test(transaction)) {
 			this.container.show(new TransactionListView({
 				target: transaction
 			}));

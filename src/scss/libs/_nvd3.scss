@@ -6,7 +6,7 @@
 
 .nvd3 .nv-axis path {
 	fill: none;
-	stroke: #000;
+	stroke: #ccc;
 	stroke-opacity: .75;
 	shape-rendering: crispEdges;
 }
@@ -30,8 +30,8 @@
 	stroke-opacity: .75;
 }
 
-.nvd3 .nv-axis .nv-axisMaxMin text {
-	font-weight: bold;
+.nvd3 .nv-axis .nv-axislabel {
+	fill: #aaa;
 }
 
 .nvd3 .x  .nv-axis .nv-axisMaxMin text,
@@ -87,7 +87,7 @@
 
 .nvd3 .nv-discretebar .nv-groups text,
 .nvd3 .nv-multibarHorizontal .nv-groups text {
-	font-weight: bold;
+	font-weight: 400;
 	fill: rgba(0,0,0,1);
 	stroke: rgba(0,0,0,0);
 }
@@ -116,14 +116,14 @@
 .nvd3.nv-bullet { font: 10px sans-serif; }
 .nvd3.nv-bullet .nv-measure { fill-opacity: .8; }
 .nvd3.nv-bullet .nv-measure:hover { fill-opacity: 1; }
-.nvd3.nv-bullet .nv-marker { stroke: #000; stroke-width: 2px; }
-.nvd3.nv-bullet .nv-markerTriangle { stroke: #000; fill: #fff; stroke-width: 1.5px; }
-.nvd3.nv-bullet .nv-markerLine { stroke: #000; stroke-width: 1.5px; }
+.nvd3.nv-bullet .nv-marker { stroke: #333; stroke-width: 2px; }
+.nvd3.nv-bullet .nv-markerTriangle { stroke: #333; fill: #fff; stroke-width: 1.5px; }
+.nvd3.nv-bullet .nv-markerLine { stroke: #333; stroke-width: 1.5px; }
 .nvd3.nv-bullet .nv-tick line { stroke: #666; stroke-width: .5px; }
 .nvd3.nv-bullet .nv-range.nv-s0 { fill: #eee; }
 .nvd3.nv-bullet .nv-range.nv-s1 { fill: #ddd; }
 .nvd3.nv-bullet .nv-range.nv-s2 { fill: #ccc; }
-.nvd3.nv-bullet .nv-title { font-size: 14px; font-weight: bold; }
+.nvd3.nv-bullet .nv-title { font-size: 14px; font-weight: 400; }
 .nvd3.nv-bullet .nv-subtitle { fill: #999; }
 
 
@@ -293,7 +293,7 @@ svg.nvd3-svg {
 }
 
 .nvd3 .title {
-	font: bold 14px Arial;
+	font: 400 14px Arial;
 }
 
 .nvd3 .nv-background {
@@ -303,7 +303,7 @@ svg.nvd3-svg {
 
 .nvd3.nv-noData {
 	font-size: 18px;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 
@@ -340,7 +340,7 @@ svg.nvd3-svg {
 }
 
 .nvd3 .nv-brushBackground rect {
-	stroke: #000;
+	stroke: #333;
 	stroke-width: .4;
 	fill: #fff;
 	fill-opacity: .7;
@@ -421,7 +421,7 @@ svg.nvd3-svg {
 }
 
 .nvd3.nv-pie .nv-slice text {
-	stroke: #000;
+	stroke: #333;
 	stroke-width: 0;
 }
 
@@ -490,7 +490,7 @@ svg.nvd3-svg {
 .nvd3.nv-sparklineplus .nv-yValue {
 	stroke-width: 0;
 	font-size: .9em;
-	font-weight: normal;
+	font-weight: 300;
 }
 
 .nvd3.nv-sparklineplus .nv-yValue {
@@ -508,7 +508,7 @@ svg.nvd3-svg {
 }
 
 .nvd3.nv-sparklineplus .nv-currentValue {
-	font-weight: bold;
+	font-weight: 400;
 	font-size: 1.1em;
 }
 /* stacked area */
@@ -621,11 +621,11 @@ svg.nvd3-svg {
 	font-weight: normal;
 }
 .nvtooltip table td.key.total {
-	font-weight: bold;
+	font-weight: 400;
 }
 .nvtooltip table td.value {
 	text-align: right;
-	font-weight: bold;
+	font-weight: 400;
 }
 
 .nvtooltip table td.percent {
@@ -669,6 +669,7 @@ Interactive Layer
 .nvd3 .nv-interactiveGuideLine {
 	pointer-events:none;
 }
+
 .nvd3 line.nv-guideline {
 	stroke: #ccc;
 }

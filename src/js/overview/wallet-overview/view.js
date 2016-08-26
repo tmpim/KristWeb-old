@@ -25,6 +25,7 @@ export default ItemView.extend({
 
 	initialize(options) {
 		this.hideNames = options.hideNames;
+		this.showAllTransactionsButton = options.showAllTransactionsButton;
 
 		walletChannel.on("wallet:activeChanged", () => {
 			if (!this.isDestroyed) this.render();
@@ -40,6 +41,7 @@ export default ItemView.extend({
 			address: this.model.get("address"),
 			balance: this.model.get("balance"),
 			hideNames: this.hideNames,
+			showAllTransactionsButton: this.showAllTransactionsButton,
 			isOwn: app.activeWallet && this.model.get("address") === app.activeWallet.boundAddress.get("address")
 		};
 	},

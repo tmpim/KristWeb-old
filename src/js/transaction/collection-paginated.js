@@ -13,7 +13,11 @@ export default PageableCollection.extend({
 	},
 
 	url() {
-		return (app.syncNode || "https://krist.ceriat.net") + "/addresses/" + (this.address || app.activeWallet.boundAddress.get("address")) + "/transactions";
+		if (this.address) {
+			return (app.syncNode || "https://krist.ceriat.net") + "/addresses/" + (this.address || app.activeWallet.boundAddress.get("address")) + "/transactions";
+		} else {
+			return (app.syncNode || "https://krist.ceriat.net") + "/transactions/latest";
+		}
 	},
 
 	parseRecords(data) {

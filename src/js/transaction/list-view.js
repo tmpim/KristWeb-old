@@ -38,9 +38,46 @@ export default LayoutView.extend({
 
 			NProgress.start();
 
-			new Address({ address: this.target }).fetch({
-				success(model, response) {
-					if (!response || !response.ok) {
+			if (this.target === "all") {
+				self.transactions = new TransactionCollection();
+
+				self.transactions.fetch({
+					success() {
+						NProgress.done();
+						if (!self.isDestroyed) self.render();
+					}
+				});
+			} else {
+				new Address({address: this.target}).fetch({
+					success(model, response) {
+						if (!response || !response.ok) {
+							NProgress.done();
+							console.error(response);
+
+							return self.overview.show(new AlertView({
+								title: "Error",
+								text: GetErrorText(response),
+								style: "red"
+							}));
+						}
+
+						NProgress.set(0.25);
+
+						self.model = model;
+
+						self.transactions = new TransactionCollection(null, {
+							address: self.model.get("address")
+						});
+
+						self.transactions.fetch({
+							success() {
+								NProgress.done();
+								if (!self.isDestroyed) self.render();
+							}
+						});
+					},
+
+					error(response) {
 						NProgress.done();
 						console.error(response);
 
@@ -50,34 +87,8 @@ export default LayoutView.extend({
 							style: "red"
 						}));
 					}
-
-					NProgress.set(0.25);
-
-					self.model = model;
-
-					self.transactions = new TransactionCollection(null, {
-						address: self.model.get("address")
-					});
-
-					self.transactions.fetch({
-						success() {
-							NProgress.done();
-							if (!self.isDestroyed) self.render();
-						}
-					});
-				},
-
-				error(response) {
-					NProgress.done();
-					console.error(response);
-
-					return self.overview.show(new AlertView({
-						title: "Error",
-						text: GetErrorText(response),
-						style: "red"
-					}));
-				}
-			});
+				});
+			}
 		} else {
 			if (app.activeWallet && app.activeWallet.boundAddress) {
 				let self = this;
@@ -125,9 +136,20 @@ export default LayoutView.extend({
 		if (this.model) {
 			this.walletOverview.show(new WalletOverview({
 				model: this.model,
-				hideNames: true
+				hideNames: true,
+				showAllTransactionsButton: true
 			}));
 
+			if (this.transactions) {
+				this.transactionList.show(new TransactionListView({
+					collection: this.transactions
+				}));
+
+				this.paginationContainer.show(new PaginationView({
+					collection: this.transactions
+				}));
+			}
+		} else if (this.target && this.target === "all") {
 			if (this.transactions) {
 				this.transactionList.show(new TransactionListView({
 					collection: this.transactions
