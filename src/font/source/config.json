@@ -83,6 +83,30 @@
       "css": "right-open",
       "code": 59403,
       "src": "entypo"
+    },
+    {
+      "uid": "c6344a6ed148da12354cc90705287696",
+      "css": "search",
+      "code": 59404,
+      "src": "iconic"
+    },
+    {
+      "uid": "fhpup8jff2yw9kmuwavhyqxogczcbbhj",
+      "css": "dollar",
+      "code": 59405,
+      "src": "modernpics"
+    },
+    {
+      "uid": "598a5f2bcf3521d1615de8e1881ccd17",
+      "css": "clock",
+      "code": 59406,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "da72ab64b02d997ff0521339f2997233",
+      "css": "hash",
+      "code": 61481,
+      "src": "mfglabs"
     }
   ]
 }

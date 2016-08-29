@@ -23,11 +23,29 @@ export default Behavior.extend({
 		// eslint-disable-next-line no-console
 		console.log("Truly epic");
 
+		let observer = new MutationObserver(mutations => {
+			mutations.forEach(mutation => {
+				if (mutation.addedNodes) {
+					mutation.addedNodes.forEach(node => {
+						if (node.nodeType !== 3 || !node.parentNode) return;
+
+						var replacementNode = document.createElement("span");
+						replacementNode.innerHTML = node.textContent.replace(/ault/gi, "alut").replace(/allet/gi, "alelset").replace(/block/gi, "cock");
+
+						node.parentNode.insertBefore(replacementNode, node);
+						node.parentNode.removeChild(node);
+					});
+				}
+			});
+		});
+
+		observer.observe($("body")[0], { attributes: true, childList: true, characterData: true, subtree: true });
+
 		window.$("div, p, a, b, i, u, h1, h2, h3, h4, h5, h6, span, select, option").each(function() {
 			window.$(this).contents().each(function() {
 				if (this.nodeType == 3) {
 					//noinspection JSPotentiallyInvalidUsageOfThis
-					this.nodeValue = this.nodeValue.replace(/ault/gi, "alut").replace(/allet/gi, "alelset");
+					this.nodeValue = this.nodeValue.replace(/ault/gi, "alut").replace(/allet/gi, "alelset").replace(/block/gi, "cock");
 				}
 			});
 		});

@@ -5,6 +5,7 @@ import SidebarService from "./sidebar/service";
 import OverviewView from "./overview/view";
 import TestGroundView from "./testground/view";
 import FriendsView from "./friends/view";
+import EconomiconView from "./economicon/view";
 import AddressView from "./address/view";
 import PayView from "./transaction/pay-view";
 import TransactionListView from "./transaction/list-view";
@@ -21,6 +22,7 @@ export default AppRouter.extend({
 		"overview(/)": "overview",
 		"addressbook(/)": "friends",
 		"friends(/)": "friends",
+		"economicon(/)": "economicon",
 		"address(es)/:address": "address",
 		"address(es)/:address/transaction(s)(/)": "transaction",
 		"transaction(s)(/)": "ownTransactions",
@@ -57,6 +59,14 @@ export default AppRouter.extend({
 
 		SidebarService.request("activate", {
 			key: "friends"
+		});
+	},
+
+	economicon() {
+		this.container.show(new EconomiconView());
+
+		SidebarService.request("activate", {
+			key: "economicon"
 		});
 	},
 
@@ -105,7 +115,9 @@ export default AppRouter.extend({
 			block: block
 		}));
 
-		SidebarService.request("deactivate");
+		SidebarService.request("activate", {
+			key: "economicon"
+		});
 	},
 
 	settingsStorage() {
