@@ -42,7 +42,8 @@ export default ItemView.extend({
 			balance: this.model.get("balance"),
 			hideNames: this.hideNames,
 			showAllTransactionsButton: this.showAllTransactionsButton,
-			isOwn: app.activeWallet && this.model.get("address") === app.activeWallet.boundAddress.get("address")
+			isOwn: app.activeWallet && this.model.get("address") === app.activeWallet.boundAddress.get("address"),
+			fetchedNames: app.activeWallet && typeof app.activeWallet.nameCount !== "undefined" && app.activeWallet.nameCount !== null
 		};
 	},
 

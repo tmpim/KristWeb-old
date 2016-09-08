@@ -22,7 +22,7 @@
 			.tile-inner {
 				display: flex;
 				flex-direction: column;
-				align-items: center;
+				align-items: center;																																																																																																		
 				justify-content: center;
 
 				flex: 1;
@@ -32,6 +32,8 @@
 				transition: all 250ms ease;
 
 				cursor: pointer;
+
+				color: #fff;
 
 				.tile-icon {
 					font-size: 64px;
@@ -81,6 +83,108 @@
 		@media screen and (max-width: $break-small) {
 			flex-wrap: nowrap;
 			height: auto;
+		}
+	}
+}
+
+.economicon-rich-list {
+	.address-list-item {
+		display: flex;
+		flex-direction: row;
+		border-bottom: 1px solid #eee;
+		align-items: center;
+
+		.left, .mid, .right {
+			padding: 1rem;
+		}
+
+		.left {
+			.hash {
+				color: $primary-dark-grey;
+				font-family: "Roboto", sans-serif;
+				font-weight: 100;
+				font-size: 32px;
+			}
+
+			.number {
+				color: $primary-green;
+				font-family: "Roboto", sans-serif;
+				font-weight: 100;
+				font-size: 36px;
+			}
+		}
+
+		.mid {
+			display: flex;
+			flex-direction: column;
+
+			flex: 1;
+			justify-content: center;
+
+			line-height: 1;
+
+			.address {
+				color: $primary-blue;
+				font-family: "Roboto", sans-serif;
+				font-weight: 100;
+				font-size: 30px;
+			}
+
+			.label {
+				color: #999;
+				font-family: "Roboto", sans-serif;
+				font-weight: 100;
+				font-size: 22px;
+			}
+		}
+
+		.right {
+			.balance {
+				color: $primary-green;
+				font-size: 26px;
+			}
+		}
+
+		@media screen and (max-width: $break-medium) {
+			.left, .mid, .right {
+				padding: 0.8rem;
+			}
+
+			.left {
+				.hash {
+					font-size: 28px;
+				}
+
+				.number {
+					font-size: 32px;
+				}
+			}
+
+			.mid .address {
+				font-size: 28px;
+			}
+
+			.right .balance {
+				font-size: 24px;
+			}
+		}
+
+		@media screen and (max-width: $break-small) {
+			padding: 0.5rem;
+			line-height: 1;
+			flex-direction: column;
+
+			.left, .mid, .right {
+				padding: 0;
+			}
+
+			.mid {
+				align-items: center;
+			}
+		}
+
+		&:last-child {
+			border-bottom: 0;
 		}
 	}
 }

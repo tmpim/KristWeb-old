@@ -13,7 +13,7 @@ export default Collection.extend({
 	},
 
 	url() {
-		return (app.syncNode || "https://krist.ceriat.net") + "/addresses/" + (this.address || app.activeWallet.boundAddress.get("address")) + "/transactions?limit=5";
+		return (app.syncNode || "https://krist.ceriat.net") + "/addresses/" + this.address + "/transactions?limit=5";
 	},
 
 	parse(data) {

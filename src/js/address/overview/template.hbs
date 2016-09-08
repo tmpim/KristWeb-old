@@ -5,6 +5,6 @@
 	</div>
 	<div class="right-col">
 		<a class="button button-green" id="send-krist"><i class="icon-send"></i>Send Krist to {{address}}</a>
-		<span class="badge badge-green-light">{{#if names}}{{names}}{{else}}0{{/if}} {{pluralize names "name" "names"}}</span>
+		<span class="badge badge-green-light">{{#if fetchedNames}}{{names}}{{else}}<div class="loading-indicator inline white"></div>{{/if}} {{pluralize names "name" "names"}}</span>
 	</div>
 </div>

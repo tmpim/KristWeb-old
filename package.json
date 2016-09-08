@@ -14,6 +14,7 @@
   ],
   "author": "Lemmmy",
   "license": "ISC",
+  "repository": "github:Lemmmy/KristWeb",
   "devDependencies": {
     "babel": "^6.5.2",
     "babel-eslint": "^6.0.4",
@@ -35,8 +36,7 @@
     "hbsfy": "^2.7.0",
     "lodash": "^4.13.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0"
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.13.0",
@@ -50,7 +50,7 @@
     "backbone.storage": "^0.2.1",
     "browserify-cryptojs": "^0.3.1",
     "browserify-swap": "^0.2.2",
-    "cropper": "^2.3.2",
+    "cropper": "^2.3.4",
     "d3": "^3.5.17",
     "handlebars": "^4.0.5",
     "jquery": "^2.2.4",

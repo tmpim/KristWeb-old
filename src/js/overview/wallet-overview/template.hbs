@@ -13,7 +13,7 @@
 			{{#if showAllTransactionsButton}}
 				<a href="/transactions/all" class="button button-primary" id="show-all-transactions" style="margin-top: 0.25rem;">Show all network transactions</a>
 			{{/if}}
-			{{#unless hideNames}}<span class="badge badge-green-light">{{#if names}}{{names}}{{else}}0{{/if}} {{pluralize (names) "name" "names"}}</span>{{/unless}}
+			{{#unless hideNames}}<span class="badge badge-green-light">{{#if fetchedNames}}{{names}}{{else}}<div class="loading-indicator inline white"></div>{{/if}} {{pluralize (names) "name" "names"}}</span>{{/unless}}
 		</div>
 	</div>
 {{/if}}

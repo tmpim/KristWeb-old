@@ -13,13 +13,14 @@ export default CompositeView.extend({
 
 	childView: ActivityItemView,
 	childViewContainer: "#activity-list",
-	childViewOptions() {
-		return {
-			address: this.address
-		};
-	},
 
 	collectionEvents: {
 		sort: "render"
+	},
+
+	serializeData() {
+		return {
+			address: this.address
+		};
 	}
 });

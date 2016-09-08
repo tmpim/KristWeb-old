@@ -6,6 +6,7 @@ import OverviewView from "./overview/view";
 import TestGroundView from "./testground/view";
 import FriendsView from "./friends/view";
 import EconomiconView from "./economicon/view";
+import RichlistView from "./economicon/richlist/view";
 import AddressView from "./address/view";
 import PayView from "./transaction/pay-view";
 import TransactionListView from "./transaction/list-view";
@@ -23,6 +24,7 @@ export default AppRouter.extend({
 		"addressbook(/)": "friends",
 		"friends(/)": "friends",
 		"economicon(/)": "economicon",
+		"economicon/rich(list)(/)": "richlist",
 		"address(es)/:address": "address",
 		"address(es)/:address/transaction(s)(/)": "transaction",
 		"transaction(s)(/)": "ownTransactions",
@@ -64,6 +66,14 @@ export default AppRouter.extend({
 
 	economicon() {
 		this.container.show(new EconomiconView());
+
+		SidebarService.request("activate", {
+			key: "economicon"
+		});
+	},
+
+	richlist() {
+		this.container.show(new RichlistView());
 
 		SidebarService.request("activate", {
 			key: "economicon"

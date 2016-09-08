@@ -6,6 +6,9 @@ import template from "./template.hbs";
 import Address from "./model";
 import AddressOverview from "./overview/view";
 
+import ActivityPanel from "./activity-panel/panel";
+import ActivityCollection from "./activity-panel/activity-collection";
+
 import AlertView from "../alert/view";
 import GetErrorText from "../utils/errors";
 
@@ -18,7 +21,9 @@ export default LayoutView.extend({
 	className: "address",
 
 	regions: {
-		overview: "#overview"
+		overview: "#overview",
+		activityPanel: "#activity-panel",
+		namesPanel: "#names-panel"
 	},
 
 	initialize(options) {
@@ -41,15 +46,27 @@ export default LayoutView.extend({
 					}));
 				}
 
-				self.overview.show(new AddressOverview({
-					model: model
-				}));
+				self.overviewModel = model;
 
 				$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/addresses/${encodeURIComponent(model.get("address"))}/names`).done(data => {
 					model.set("nameCount", data.total || 0);
 
 					NProgress.done();
 				}).fail(NProgress.done);
+
+				self.activityCollection = new ActivityCollection(null, {
+					address: model.get("address")
+				});
+
+				self.activityCollectionFetched = false;
+
+				self.activityCollection.fetch({
+					success() {
+						self.activityCollectionFetched = true;
+
+						if (!self.isDestroyed) self.render();
+					}
+				});
 
 				NProgress.set(0.75);
 			},
@@ -65,5 +82,20 @@ export default LayoutView.extend({
 				}));
 			}
 		});
+	},
+
+	onRender() {
+		if (this.activityCollection && this.activityCollectionFetched) {
+			this.activityPanel.show(new ActivityPanel({
+				collection: this.activityCollection,
+				address: this.address
+			}));
+		}
+
+		if (this.overviewModel) {
+			this.overview.show(new AddressOverview({
+				model: this.overviewModel
+			}));
+		}
 	}
 });

@@ -39,7 +39,7 @@ export default Behavior.extend({
 			});
 		});
 
-		observer.observe($("body")[0], { attributes: true, childList: true, characterData: true, subtree: true });
+		observer.observe(window.$("body")[0], { attributes: true, childList: true, characterData: true, subtree: true });
 
 		window.$("div, p, a, b, i, u, h1, h2, h3, h4, h5, h6, span, select, option").each(function() {
 			window.$(this).contents().each(function() {

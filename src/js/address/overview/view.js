@@ -23,7 +23,8 @@ export default ItemView.extend({
 		return {
 			address: this.model.get("address"),
 			balance: this.model.get("balance"),
-			names: this.model.get("nameCount") || 0
+			names: this.model.get("nameCount") || 0,
+			fetchedNames: this.model.has("nameCount")
 		};
 	},
 
@@ -39,6 +40,6 @@ export default ItemView.extend({
 
 	onClickSendKrist() {
 		app.sendKristTo = this.model.get("address");
-		app.router.navigate("/transactions", true);
+		app.router.navigate("/transactions/make", true);
 	}
 });

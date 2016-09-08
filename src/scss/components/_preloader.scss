@@ -97,4 +97,22 @@
         transform: translateZ(0);
         animation: loader-spinner 1s infinite linear;
     }
+
+    &.inline {
+        display: inline-flex;
+        width: 1em;
+        height: 1em;
+
+        &:before {
+            width: 1em;
+            height: 1em;
+            border: 2px solid transparent;
+        }
+    }
+
+    &.white {
+        &:before {
+            border-left-color: #fff;
+        }
+    }
 }
