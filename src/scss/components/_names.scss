@@ -1,0 +1,10 @@
+#name-list {
+	.name {
+		line-height: 1.1;
+		border-bottom: 1px solid #eee;
+
+		&:last-child {
+			border-bottom: 0;
+		}
+	}
+}

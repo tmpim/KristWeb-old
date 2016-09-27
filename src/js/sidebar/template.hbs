@@ -1,6 +1,6 @@
 <div class="sidebar-item-container">
 	{{#each sidebarItems}}
-		<a class="sidebar-item{{#if active}} active{{/if}}" href="{{path}}">{{name}}</a>
+		<a class="sidebar-item{{#if active}} active{{/if}}{{#if disabled}} disabled{{/if}}" href="{{path}}">{{name}}</a>
 	{{/each}}
 </div>
 

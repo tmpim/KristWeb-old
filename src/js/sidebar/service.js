@@ -41,13 +41,15 @@ const SidebarService = Service.extend({
 		this.request("add", {
 			name: "Webhook Manager",
 			path: "webhooks",
-			key: "webhooks"
+			key: "webhooks",
+			disabled: true
 		});
 
 		this.request("add", {
 			name: "Double Vault",
 			path: "doublevault",
-			key: "doublevault"
+			key: "doublevault",
+			disabled: true
 		});
 
 		this.request("add", {

@@ -25,7 +25,7 @@
 
         transition: all 200ms ease;
 
-        &:not(.sidebar-search) {
+        &:not(.sidebar-search):not(.disabled) {
             cursor: pointer;
 
             &.active {
@@ -43,6 +43,11 @@
             &:hover {
                 background: #777;
             }
+        }
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: default;
         }
     }
 

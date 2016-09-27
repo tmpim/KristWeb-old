@@ -1,0 +1,11 @@
+<div class="top">
+	{{#if transferred}}
+		<span class="action large">Recieved</span>
+	{{else}}
+		<span class="action large">Purchased</span>
+	{{/if}}
+	<span class="to"><a href="/name/{{to}}">{{name}}.kst</a></span>
+</div>
+<div class="info">
+	<a href="/name/{{name}}"><time class="text-mini" datetime="{{updated}}"></time></a>
+</div>

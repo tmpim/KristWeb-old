@@ -9,7 +9,7 @@ export default Collection.extend({
 	model: Address,
 
 	url() {
-		return (app.syncNode || "https://krist.ceriat.net") + "/addresses/rich";
+		return (app.syncNode || "https://krist.ceriat.net") + "/addresses/rich?limit=15";
 	},
 
 	parse(data) {
