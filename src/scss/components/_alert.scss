@@ -38,4 +38,11 @@
 
 		color: darken($primary-green, 25%);
 	}
+
+	&.orange {
+		background: desaturate(lighten($primary-orange, 30%), 10%);
+		border-color: $primary-orange;
+
+		color: darken($primary-orange, 25%);
+	}
 }
