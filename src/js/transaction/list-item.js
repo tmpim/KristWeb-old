@@ -20,7 +20,9 @@ export default ItemView.extend({
 			value: this.model.get("value") || 0,
 			time: this.model.get("time"),
 			name: this.model.get("name"),
-			metadata: this.model.get("metadata")
+			metadata: this.model.get("metadata"),
+			a: this.model.get("to") === "a",
+			toName: this.model.get("to") === "name"
 		};
 	},
 

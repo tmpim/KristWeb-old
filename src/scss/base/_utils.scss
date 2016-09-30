@@ -326,12 +326,16 @@
   color: $primary-red;
 }
 
+.text-green {
+  color: $primary-green;
+}
+
 .text-mini {
   font-size: 12px;
   font-weight: 400;
   color: #aaa;
   text-transform: uppercase;
-  line-height: 12px;
+  line-height: 1;
 }
 
 .grey-heading {

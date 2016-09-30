@@ -2,10 +2,9 @@ import {LayoutView} from "backbone.marionette";
 import template from "./list-template.hbs";
 
 import Address from "../address/model";
-import Transaction from "../transaction/model";
-import TransactionCollection from "./collection-paginated";
+import NameCollection from "./collection-paginated";
 
-import TransactionListView from "./list-collectionview";
+import NameListView from "./list-collectionview";
 import WalletOverview from "../overview/wallet-overview/view";
 import PaginationView from "../paginator/paginator";
 
@@ -23,12 +22,12 @@ let walletChannel = Radio.channel("wallet");
 
 export default LayoutView.extend({
 	template: template,
-	className: "wallet-transaction-list",
+	className: "wallet-name-list",
 
 	regions: {
 		overview: "#overview",
 		walletOverview: "#wallet-overview",
-		transactionList: "#transaction-list",
+		nameList: "#name-list",
 		paginationContainer: "#pagination-container",
 		networkFooter: "#network-footer"
 	},
@@ -42,9 +41,11 @@ export default LayoutView.extend({
 			NProgress.start();
 
 			if (this.target === "all") {
-				self.transactions = new TransactionCollection();
+				self.names = new NameCollection(null, {
+					address: "all"
+				});
 
-				self.transactions.fetch({
+				self.names.fetch({
 					success() {
 						NProgress.done();
 						if (!self.isDestroyed) self.render();
@@ -68,11 +69,11 @@ export default LayoutView.extend({
 
 						self.model = model;
 
-						self.transactions = new TransactionCollection(null, {
+						self.names = new NameCollection(null, {
 							address: self.model.get("address")
 						});
 
-						self.transactions.fetch({
+						self.names.fetch({
 							success() {
 								NProgress.done();
 								if (!self.isDestroyed) self.render();
@@ -98,11 +99,11 @@ export default LayoutView.extend({
 
 				this.model = app.activeWallet.boundAddress;
 
-				this.transactions = new TransactionCollection(null, {
+				this.names = new NameCollection(null, {
 					address: this.model.get("address")
 				});
 
-				this.transactions.fetch({
+				this.names.fetch({
 					success() {
 						NProgress.done();
 						if (!self.isDestroyed) self.render();
@@ -119,11 +120,11 @@ export default LayoutView.extend({
 
 				this.model = app.activeWallet.boundAddress;
 
-				this.transactions = new TransactionCollection(null, {
+				this.names = new NameCollection(null, {
 					address: this.model.get("address")
 				});
 
-				this.transactions.fetch({
+				this.names.fetch({
 					success() {
 						NProgress.done();
 						if (!self.isDestroyed) self.render();
@@ -137,29 +138,30 @@ export default LayoutView.extend({
 
 	onRender() {
 		if (this.model) {
-			this.walletOverview.show(new WalletOverview({
-				model: this.model,
-				hideNames: true,
-				showAllTransactionsButton: true
-			}));
+			if (this.names) {
+				this.walletOverview.show(new WalletOverview({
+					model: this.model,
+					showAllNamesButton: true,
+					nameCount: this.names.state.totalRecords,
+					buyName: true
+				}));
 
-			if (this.transactions) {
-				this.transactionList.show(new TransactionListView({
-					collection: this.transactions
+				this.nameList.show(new NameListView({
+					collection: this.names
 				}));
 
 				this.paginationContainer.show(new PaginationView({
-					collection: this.transactions
+					collection: this.names
 				}));
 			}
 		} else if (this.target && this.target === "all") {
-			if (this.transactions) {
-				this.transactionList.show(new TransactionListView({
-					collection: this.transactions
+			if (this.names) {
+				this.nameList.show(new NameListView({
+					collection: this.names
 				}));
 
 				this.paginationContainer.show(new PaginationView({
-					collection: this.transactions
+					collection: this.names
 				}));
 			}
 		}

@@ -1,15 +1,31 @@
 <div class="col-xs-12 m-b-1" id="transaction-overview-container">
-	<div class=id">
+	<div class="id">
 		<p class="text-mini u-textCenter">Transaction #{{localise id}}</p>
 	</div>
 	<div class="top">
 		{{#if name}}
-			<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
-			<span class="action large">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
-			<span class="to"><a href="/name/{{to}}">{{name}}.kst</a></span>
+			{{#if toName}}
+				<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+				<span class="action large">&nbsp;purchased&nbsp;</span>
+				<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
+			{{else}}
+				{{#if a}}
+					<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+					<span class="action large">&nbsp;updated&nbsp;</span>
+					<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
+				{{else}}
+					<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+					<span class="action large">
+					<i class="icon-right"></i>
+					<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
+					<i class="icon-right"></i>
+				</span>
+					<span class="from"><a href="/address/{{to}}">{{to}}</a></span>
+				{{/if}}
+			{{/if}}
 		{{else}}
 			<span class="from">{{#if from}}<a href="/address/{{from}}">{{from}}</a>{{else}}Mined{{/if}}</span>
-			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
+			<span class="action large"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
 			<span class="to"><a href="/address/{{to}}">{{to}}</a></span>
 		{{/if}}
 	</div>

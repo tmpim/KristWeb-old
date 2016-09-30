@@ -12,6 +12,8 @@ import ActivityCollection from "./activity-panel/activity-collection";
 import NamesPanel from "./names-panel/panel";
 import NamesCollection from "./names-panel/names-collection";
 
+import NetworkFooter from "../network-footer/view";
+
 import AlertView from "../alert/view";
 import GetErrorText from "../utils/errors";
 
@@ -26,7 +28,8 @@ export default LayoutView.extend({
 	regions: {
 		overview: "#overview",
 		activityPanel: "#activity-panel",
-		namesPanel: "#names-panel"
+		namesPanel: "#names-panel",
+		networkFooter: "#network-footer"
 	},
 
 	initialize(options) {
@@ -121,5 +124,7 @@ export default LayoutView.extend({
 				model: this.overviewModel
 			}));
 		}
+
+		this.networkFooter.show(new NetworkFooter());
 	}
 });

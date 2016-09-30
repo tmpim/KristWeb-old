@@ -8,6 +8,8 @@ import MOTDPanel from "./motd-panel/panel";
 import ActivityPanel from "./activity-panel/panel";
 import NetworkPanel from "./network-panel/panel";
 
+import NetworkFooter from "../network-footer/view";
+
 import Transaction from "../transaction/model";
 import ActivityCollection from "./activity-panel/activity-collection";
 
@@ -25,7 +27,8 @@ export default LayoutView.extend({
 		overview: "#overview",
 		motdPanel: "#motd-panel",
 		activityPanel: "#activity-panel",
-		networkPanel: "#network-panel"
+		networkPanel: "#network-panel",
+		networkFooter: "#network-footer"
 	},
 
 	initialize() {
@@ -82,5 +85,6 @@ export default LayoutView.extend({
 
 		this.motdPanel.show(new MOTDPanel());
 		this.networkPanel.show(new NetworkPanel());
+		this.networkFooter.show(new NetworkFooter());
 	}
 });

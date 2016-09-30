@@ -4,6 +4,7 @@ let errorMap = {
 	"address_not_found": "Address not found.",
 	"transaction_not_found": "Transaction not found.",
 	"block_not_found": "Block not found.",
+	"name_not_found": "Name not found.",
 	"insufficient_funds": "You don't have enough Krist in your wallet."
 };
 
@@ -14,7 +15,8 @@ let missingParameterMap = {
 let invalidParameterMap = {
 	"address": "Invalid address.",
 	"transaction": "Invalid transaction ID.",
-	"height": "Invalid block ID."
+	"height": "Invalid block ID.",
+	"a": "The A record must be a valid URI."
 };
 
 export default error => {

@@ -1,6 +1,8 @@
 import {ItemView} from "backbone.marionette";
 import template from "./template.hbs";
 
+import RegisterNameModal from "../../modal/register-name/modal";
+
 import app from "../../app";
 
 import Radio from "backbone.radio";
@@ -12,11 +14,13 @@ export default ItemView.extend({
 	id: "wallet-overview",
 
 	ui: {
-		sendKrist: "#send-krist"
+		sendKrist: "#send-krist",
+		buyName: "#buy-name"
 	},
 
 	triggers: {
-		"click @ui.sendKrist": "click:sendKrist"
+		"click @ui.sendKrist": "click:sendKrist",
+		"click @ui.buyName": "click:buyName"
 	},
 
 	modelEvents: {
@@ -26,6 +30,9 @@ export default ItemView.extend({
 	initialize(options) {
 		this.hideNames = options.hideNames;
 		this.showAllTransactionsButton = options.showAllTransactionsButton;
+		this.showAllNamesButton = options.showAllNamesButton;
+		this.nameCount = options.nameCount;
+		this.buyName = options.buyName;
 
 		walletChannel.on("wallet:activeChanged", () => {
 			if (!this.isDestroyed) this.render();
@@ -41,7 +48,10 @@ export default ItemView.extend({
 			address: this.model.get("address"),
 			balance: this.model.get("balance"),
 			hideNames: this.hideNames,
+			nameCount: this.nameCount,
+			buyName: this.buyName,
 			showAllTransactionsButton: this.showAllTransactionsButton,
+			showAllNamesButton: this.showAllNamesButton,
 			isOwn: app.activeWallet && this.model.get("address") === app.activeWallet.boundAddress.get("address"),
 			fetchedNames: app.activeWallet && typeof app.activeWallet.nameCount !== "undefined" && app.activeWallet.nameCount !== null
 		};
@@ -59,11 +69,15 @@ export default ItemView.extend({
 		names() {
 			if (this.hideNames) return;
 
+			if (this.nameCount) {
+				return this.nameCount;
+			}
+
 			if (app.activeWallet && app.activeWallet.nameCount) {
 				return app.activeWallet.nameCount;
-			} else {
-				return 0;
 			}
+
+			return 0;
 		},
 
 		pluralize(number, single, plural) {
@@ -74,5 +88,9 @@ export default ItemView.extend({
 	onClickSendKrist() {
 		app.sendKristTo = this.model.get("address");
 		app.router.navigate("/transactions", true);
+	},
+
+	onClickBuyName() {
+		app.layout.modals.show(new RegisterNameModal());
 	}
 });

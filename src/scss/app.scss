@@ -1,51 +1,53 @@
-@import "base/_variables";
-@import "base/_functions";
-@import "base/_mixins";
-@import "base/_utils";
+@import "base/variables";
+@import "base/functions";
+@import "base/mixins";
+@import "base/utils";
 
-@import "base/_reset";
-@import "base/_responsive";
-@import "base/_icons";
-@import "base/_typography";
-@import "base/_base";
+@import "base/reset";
+@import "base/responsive";
+@import "base/icons";
+@import "base/typography";
+@import "base/base";
 
-@import "components/_layout";
-@import "components/_print";
+@import "components/layout";
+@import "components/print";
 
-@import "components/_dialogs";
-@import "components/_panel";
-@import "components/_alert";
-@import "components/_badge";
+@import "components/dialogs";
+@import "components/panel";
+@import "components/alert";
+@import "components/badge";
 
-@import "components/_browserchoice";
-@import "components/_addwallet";
+@import "components/browserchoice";
+@import "components/addwallet";
 
-@import "components/_scroller";
-@import "components/_topbar";
-@import "components/_page";
-@import "components/_sidebar";
-@import "components/_walletchooser";
+@import "components/scroller";
+@import "components/topbar";
+@import "components/page";
+@import "components/sidebar";
+@import "components/walletchooser";
 
-@import "components/_button";
-@import "components/_input";
-@import "components/_progress";
+@import "components/button";
+@import "components/input";
+@import "components/progress";
 
-@import "components/_preloader";
-@import "components/_searchbox";
-@import "components/_pagination";
+@import "components/preloader";
+@import "components/searchbox";
+@import "components/pagination";
 
-@import "components/_overview";
-@import "components/_friends";
-@import "components/_transaction";
-@import "components/_block";
-@import "components/_economicon";
-@import "components/_settings";
-@import "components/_names";
+@import "components/overview";
+@import "components/friends";
+@import "components/transaction";
+@import "components/block";
+@import "components/economicon";
+@import "components/settings";
+@import "components/names";
 
-@import "libs/_nprogress";
-@import "libs/_selectize";
-@import "libs/_cropper";
-@import "libs/_nvd3";
+@import "components/network-footer";
 
-@import "themes/_blue";
-@import "themes/_poop";
+@import "libs/nprogress";
+@import "libs/selectize";
+@import "libs/cropper";
+@import "libs/nvd3";
+
+@import "themes/blue";
+@import "themes/poop";

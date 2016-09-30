@@ -10,51 +10,51 @@ const SidebarService = Service.extend({
 
 		this.request("add", {
 			name: "Overview",
-			path: "overview",
+			path: "/overview",
 			key: "overview"
 		});
 
 		this.request("add", {
 			name: "Address Book",
-			path: "addressbook",
+			path: "/addressbook",
 			key: "friends"
 		});
 
 		this.request("add", {
 			name: "Transactions",
-			path: "transactions",
+			path: "/transactions",
 			key: "transactions"
 		});
 
 		this.request("add", {
 			name: "Economicon",
-			path: "economicon",
+			path: "/economicon",
 			key: "economicon"
 		});
 
 		this.request("add", {
 			name: "Name Manager",
-			path: "names",
+			path: "/names",
 			key: "names"
 		});
 
 		this.request("add", {
 			name: "Webhook Manager",
-			path: "webhooks",
+			path: "/webhooks",
 			key: "webhooks",
 			disabled: true
 		});
 
 		this.request("add", {
 			name: "Double Vault",
-			path: "doublevault",
+			path: "/doublevault",
 			key: "doublevault",
 			disabled: true
 		});
 
 		this.request("add", {
 			name: "Settings",
-			path: "settings",
+			path: "/settings",
 			key: "settings"
 		});
 	},

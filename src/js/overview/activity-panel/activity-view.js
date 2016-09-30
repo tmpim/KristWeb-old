@@ -22,6 +22,8 @@ export default ItemView.extend({
 			name: this.model.get("name"),
 			metadata: this.model.get("metadata"),
 			in: app.activeWallet ? this.model.get("to") === app.activeWallet.boundAddress.get("address") : null,
+			a: this.model.get("to") === "a",
+			toName: this.model.get("to") === "name",
 			label: (this.model.get("to") === app.activeWallet.boundAddress.get("address") ?
 			((app.friends.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }) && app.friends.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }).get("label")) ||
 			(app.wallets.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }) && app.wallets.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }).get("label"))) :

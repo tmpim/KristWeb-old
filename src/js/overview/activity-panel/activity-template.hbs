@@ -2,7 +2,15 @@
 	{{#if in}}
 		{{#if from}}
 			<span class="from"><a href="/address/{{from}}"{{#if label}} title="{{from}}"{{/if}}>{{#if label}}{{label}}{{else}}{{from}}{{/if}}</a></span>
-			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
+			<span class="action">
+				<i class="icon-right"></i>
+				{{#if name}}
+					<a href="/name/{{name}}" class="value">{{name}}</a>.kst
+				{{else}}
+					<span class="value">{{krist value}}</span>
+				{{/if}}
+				<i class="icon-right"></i>
+			</span>
 			<span class="to"><a href="/address/{{to}}" title="{{to}}">You</a></span>
 		{{else}}
 			<span class="to"><a href="/address/{{to}}" title="{{to}}">You</a></span>
@@ -11,9 +19,25 @@
 		{{/if}}
 	{{else}}
 		{{#if name}}
-			<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
-			<span class="action">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
-			<span class="to"><a href="/name/{{name}}">{{name}}.kst</a></span>
+			{{#if toName}}
+				<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
+				<span class="action">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
+				<span class="to"><a href="/name/{{name}}">{{name}}.kst</a></span>
+			{{else}}
+				{{#if a}}
+					<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
+					<span class="action">&nbsp;updated&nbsp;</span>
+					<a href="/name/{{name}}" class="value">{{name}}</a>.kst
+				{{else}}
+					<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
+					<span class="action">
+						<i class="icon-right"></i>
+						<a href="/name/{{name}}" class="value">{{name}}</a>.kst
+						<i class="icon-right"></i>
+					</span>
+					<span class="to"><a href="/address/{{to}}"{{#if label}} title="{{to}}"{{/if}}>{{#if label}}{{label}}{{else}}{{to}}{{/if}}</a></span>
+				{{/if}}
+			{{/if}}
 		{{else}}
 			<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
 			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>

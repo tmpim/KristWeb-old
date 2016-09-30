@@ -21,7 +21,9 @@ export default ItemView.extend({
 			name: this.model.get("name"),
 			metadata: this.model.get("metadata"),
 			lastTransaction: this.model.get("id") - 1,
-			nextTransaction: this.model.get("id") + 1
+			nextTransaction: this.model.get("id") + 1,
+			a: this.model.get("to") === "a",
+			toName: this.model.get("to") === "name"
 		};
 	},
 

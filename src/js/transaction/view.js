@@ -6,6 +6,8 @@ import template from "./template.hbs";
 import Transaction from "./model";
 import TransactionOverview from "./overview/view";
 
+import NetworkFooter from "../network-footer/view";
+
 import AlertView from "../alert/view";
 import GetErrorText from "../utils/errors";
 
@@ -18,7 +20,8 @@ export default LayoutView.extend({
 	className: "transaction",
 
 	regions: {
-		overview: "#overview"
+		overview: "#overview",
+		networkFooter: "#network-footer"
 	},
 
 	ui: {
@@ -72,6 +75,10 @@ export default LayoutView.extend({
 
 	onShow() {
 		this.ui.gotoTransaction.val(this.transaction);
+	},
+
+	onRender() {
+		this.networkFooter.show(new NetworkFooter());
 	},
 
 	onGotoTransaction() {

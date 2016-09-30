@@ -10,6 +10,8 @@ import RichlistView from "./economicon/richlist/view";
 import AddressView from "./address/view";
 import PayView from "./transaction/pay-view";
 import TransactionListView from "./transaction/list-view";
+import NameListView from "./name/list-view";
+import NameView from "./name/view";
 import TransactionView from "./transaction/view";
 import BlockView from "./block/view";
 
@@ -27,11 +29,13 @@ export default AppRouter.extend({
 		"economicon/rich(list)(/)": "richlist",
 		"address(es)/:address": "address",
 		"address(es)/:address/transaction(s)(/)": "transaction",
+		"address(es)/:address/name(s)(/)": "names",
 		"transaction(s)(/)": "ownTransactions",
 		"transaction(s)/make": "pay",
 		"transaction(s)/:transaction": "transaction",
 		"block(s)/:block": "block",
-		"name(s)/:name(.kst)": "name",
+		"name(s)(/)": "ownNames",
+		"name(s)/:name": "name",
 		"settings/storage": "settingsStorage",
 		"settings/notifications": "settingsNotifications"
 	},
@@ -117,6 +121,40 @@ export default AppRouter.extend({
 
 		SidebarService.request("activate", {
 			key: "transactions"
+		});
+	},
+
+	ownNames() {
+		this.container.show(new NameListView());
+
+		SidebarService.request("activate", {
+			key: "names"
+		});
+	},
+
+	names(address) {
+		this.container.show(new NameListView({
+			target: address
+		}));
+
+		SidebarService.request("activate", {
+			key: "names"
+		});
+	},
+
+	name(name) {
+		if (/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst|all)$/.test(name)) {
+			this.container.show(new NameListView({
+				target: name
+			}));
+		} else {
+			this.container.show(new NameView({
+				name: name
+			}));
+		}
+
+		SidebarService.request("activate", {
+			key: "names"
 		});
 	},
 

@@ -5,6 +5,8 @@ import RichlistCollection from "./collection";
 
 import RichlistView from "./list-view";
 
+import NetworkFooter from "../../network-footer/view";
+
 import NProgress from "nprogress";
 import Radio from "backbone.radio";
 
@@ -15,7 +17,8 @@ export default LayoutView.extend({
 	className: "economicon-rich-list",
 
 	regions: {
-		richList: "#rich-list"
+		richList: "#rich-list",
+		networkFooter: "#network-footer"
 	},
 
 	initialize() {
@@ -54,5 +57,7 @@ export default LayoutView.extend({
 				collection: this.collection
 			}));
 		}
+
+		this.networkFooter.show(new NetworkFooter());
 	}
 });

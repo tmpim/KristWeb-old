@@ -3,8 +3,8 @@ import $ from "jquery";
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
-import Block from "./model";
-import BlockOverview from "./overview/view";
+import Name from "./model";
+import NameOverview from "./overview/view";
 
 import NetworkFooter from "../network-footer/view";
 
@@ -17,7 +17,7 @@ import app from "../app";
 
 export default LayoutView.extend({
 	template: template,
-	className: "block",
+	className: "name",
 
 	regions: {
 		overview: "#overview",
@@ -25,22 +25,22 @@ export default LayoutView.extend({
 	},
 
 	ui: {
-		gotoBlock: "#goto-block",
-		gotoBlockGo: "#goto-block-go"
+		gotoName: "#goto-name",
+		gotoNameGo: "#goto-name-go"
 	},
 
 	triggers: {
-		"click @ui.gotoBlockGo": "goto:block"
+		"click @ui.gotoNameGo": "goto:name"
 	},
 
 	initialize(options) {
-		this.block = options.block;
+		this.name = options.name;
 
 		NProgress.start();
 
 		let self = this;
 
-		new Block({ height: this.block }).fetch({
+		new Name({ name: this.name }).fetch({
 			success(model, response) {
 				if (!response || !response.ok) {
 					NProgress.done();
@@ -53,7 +53,7 @@ export default LayoutView.extend({
 					}));
 				}
 
-				self.overview.show(new BlockOverview({
+				self.overview.show(new NameOverview({
 					model: model
 				}));
 
@@ -74,14 +74,14 @@ export default LayoutView.extend({
 	},
 
 	onShow() {
-		this.ui.gotoBlock.val(this.block);
+		this.ui.gotoName.val(this.name);
 	},
 
 	onRender() {
 		this.networkFooter.show(new NetworkFooter());
 	},
 
-	onGotoBlock() {
-		app.router.navigate(`block/${this.ui.gotoBlock.val()}`, { trigger: true });
+	onGotoName() {
+		app.router.navigate(`name/${this.ui.gotoName.val()}`, { trigger: true });
 	}
 });
