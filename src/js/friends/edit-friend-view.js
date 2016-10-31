@@ -34,6 +34,14 @@ export default ItemView.extend({
 
 	onShow() {
 		this.$el.attr("data-id", this.model.get("id"));
+
+		this.icon = this.model.get("icon");
+
+		if (this.icon) {
+			this.$("#friend-icon").text("").css("background-image", `url(${this.icon})`);
+		} else {
+			this.$("#friend-icon").text("Icon").css("background-image", "");
+		}
 	},
 
 	onAttach() {
