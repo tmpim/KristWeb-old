@@ -34,7 +34,7 @@ export default LayoutView.extend({
 			persist: false,
 			closeAfterSelect: true,
 			placeholder: "Recipient",
-			createFilter: /^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/
+			createFilter: /^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/
 		});
 
 		if (this.sendKristTo) {

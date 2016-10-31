@@ -56,7 +56,7 @@ export default LayoutView.extend({
 	onClickSend() {
 		let recipient = this.$el.find("#recipient").val();
 
-		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/.test(recipient)) {
+		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/.test(recipient)) {
 			this.$("#recipient-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
 
 			return;
