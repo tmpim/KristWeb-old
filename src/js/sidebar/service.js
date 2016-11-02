@@ -55,7 +55,8 @@ const SidebarService = Service.extend({
 		this.request("add", {
 			name: "Settings",
 			path: "/settings",
-			key: "settings"
+			key: "settings",
+			disabled: true
 		});
 	},
 

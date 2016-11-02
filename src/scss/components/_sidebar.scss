@@ -52,8 +52,15 @@
     }
 
     .credit {
-        margin-top: 0.5rem;
         font-size: 15px;
-        opacity: 0.5;
+        color: rgba(#fff, 0.5);
+
+        &:first-of-type {
+            margin-top: 0.5rem;
+        }
+
+        a {
+            color: rgba(#fff, 0.8);
+        }
     }
 }

@@ -64,7 +64,7 @@ export default LayoutView.extend({
 			this.$("#recipient-label").addClass("label-hidden").removeClass("text-red");
 		}
 
-		let amount = parseInt(this.$el.find("#amount").val());
+		let amount = Number(this.$el.find("#amount").val());
 
 		if (!amount || amount <= 0) {
 			this.$("#amount-label").removeClass("label-hidden").addClass("text-red").text("Invalid amount.");

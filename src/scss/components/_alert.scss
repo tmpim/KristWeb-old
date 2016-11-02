@@ -45,4 +45,11 @@
 
 		color: darken($primary-orange, 25%);
 	}
+
+	&.blue {
+		background: desaturate(lighten($primary-blue, 30%), 10%);
+		border-color: $primary-blue;
+
+		color: darken($primary-blue, 25%);
+	}
 }
