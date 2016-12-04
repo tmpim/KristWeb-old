@@ -99,7 +99,7 @@ function appBundle(cb, watch) {
 		.on("error", handleErrors)
 		.pipe(source("app.js"))
 		.pipe(buffer())
-		// .pipe($.uglify())
+		.pipe($.uglify())
 		.pipe(gulp.dest("./dist/js"))
 		.on("end", cb);
 }
