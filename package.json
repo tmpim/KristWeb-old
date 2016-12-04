@@ -1,6 +1,6 @@
 {
   "name": "kristweb",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Krist Web Wallet",
   "main": "index.html",
   "scripts": {
@@ -64,7 +64,8 @@
     "securerandom": "0.0.2",
     "selectize": "^0.12.2",
     "sortablejs": "^1.4.2",
-    "timeago": "^1.5.3"
+    "timeago": "^1.5.3",
+    "zxcvbn": "^4.4.1"
   },
   "browserify-swap": {
     "@packages": [

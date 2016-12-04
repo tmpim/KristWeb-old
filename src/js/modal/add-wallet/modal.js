@@ -11,6 +11,7 @@ import app from "../../app";
 import Krist from "../../utils/krist.js";
 import Wallet from "../../wallet/model.js";
 import NProgress from "nprogress";
+import zxcvbn from "zxcvbn";
 
 export default Modal.extend({
 	dialog: AddWalletModalTemplate,
@@ -129,6 +130,27 @@ export default Modal.extend({
 					self.$("#wallet-username-label").addClass("u-hidden");
 				}
 			}
+		});
+
+		this.$("#wallet-password").on("keyup change click", () => {
+			let password = this.$("#wallet-password").val();
+			let strength = zxcvbn(password);
+
+			for (let i = 0; i <= 4; i++) {
+				this.$("#password-strength").removeClass(`s${i}`);
+			}
+
+			this.$("#password-strength .strength-segment").each((i, segment) => {
+				for (let i = 0; i <= 4; i++) {
+					this.$(segment).removeClass(`s${i}`);
+				}
+
+				if (i <= strength.score) {
+					this.$(segment).addClass(`s${strength.score}`);
+				}
+			});
+
+			this.$("#password-strength").addClass(`s${strength.score}`);
 		});
 	},
 

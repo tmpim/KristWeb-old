@@ -92,6 +92,68 @@ input {
         font-weight: 300;
         color: $primary-darker-grey;
     }
+
+    &.no-bottom {
+        border-radius: 3px 3px 0 0;
+		border-bottom: 0;
+    }
+}
+
+.strength-indicator {
+    display: flex;
+    width: 100%;
+    border-radius: 0 0 3px 3px;
+    border: 1px solid $primary-darker-grey;
+
+    .strength-segment {
+		flex: 1;
+        border-right: 1px solid $primary-darker-grey;
+        height: 6px;
+
+        &:last-of-type {
+            border-right: 0;
+        }
+
+		&.s0, &.s1, &.s2, &.s3, &.s4 {
+			border-right: 1px solid #fff;
+
+			&:last-of-type {
+				border-right: 1px solid $primary-darker-grey;
+			}
+		}
+
+		&.s0, &.s1 {
+			background: $primary-red;
+		}
+
+		&.s2 {
+			background: $primary-orange;
+		}
+
+		&.s3 {
+			background: $primary-yellow-green;
+		}
+
+		&.s4 {
+			background: $primary-green;
+		}
+    }
+
+	&.s0, &.s1 {
+		border-color: $primary-red;
+	}
+
+	&.s2 {
+		border-color: $primary-orange;
+	}
+
+	&.s3 {
+		border-color: $primary-yellow-green;
+	}
+
+	&.s4 {
+		border-color: $primary-green;
+	}
 }
 
 .label-hint {
