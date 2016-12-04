@@ -20,10 +20,8 @@ gulp.task("files", function() {
 gulp.task("sass", function() {
 	return gulp
 		.src("./src/scss/**/*.scss")
-		.pipe($.sourcemaps.init())
 		.pipe($.sass({ errLogToConsole: true, outputStyle: "compressed"	})
 		.on("error", $.sass.logError))
-		.pipe($.sourcemaps.write())
 		.pipe(gulp.dest("./dist/css"));
 });
 

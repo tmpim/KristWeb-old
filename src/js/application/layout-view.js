@@ -35,6 +35,7 @@ export default LayoutView.extend({
 	},
 
 	ui: {
+		alert: "#alert-bar",
 		pageContainer: "#page-container",
 		pageMain: "#page-main",
 		sidebarOpener: "#sidebar-opener",

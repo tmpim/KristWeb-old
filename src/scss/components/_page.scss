@@ -1,5 +1,12 @@
+#app {
+    display: flex;
+    flex-direction: column;
+}
+
 .pageContainer {
     width: 100%;
+    display: flex;
+    flex-direction: row;
     flex: 1;
     position: relative;
 
@@ -8,18 +15,18 @@
     .sidebar {
         position: absolute;
         width: 240px;
-        height: 100%;
         left: -240px;
+        flex: 1;
         // overflow: auto;
         transition: all 250ms ease;
         z-index: 151;
     }
 
     .pageMain {
-        height: calc(100vh - 48px);
-        overflow: auto;
+        overflow-y: auto;
         padding: 1.5rem 2rem;
         transition: margin-left 250ms ease;
+        flex: 1;
 
         @media screen and (max-width: $break-small) {
             padding: 1rem 1.5rem;

@@ -8,6 +8,8 @@ import WebsocketService from "./websockets";
 
 import Address from "../address/model";
 
+import Alert from "../alert/view";
+
 import WalletCollection from "../wallet/collection";
 import WalletChooserView from "../wallet/chooser-view";
 import WalletInfoView from "../wallet/view-wallet-info";
@@ -125,50 +127,71 @@ export default Application.extend({
 				return this.error("Authentication Failed", "You are not the owner of this wallet.");
 			}
 
-			NProgress.set(0.5);
+			$.ajax(syncNode + "/addresses/alert", {
+				method: "POST",
+				data: {
+					privatekey: wallet.get("masterkey")
+				}
+			}).done(alertData => {
+				if (alertData.ok && alertData.alert && alertData.alert.length >= 1) {
+					self.error("Server Alert", alertData.alert);
 
-			let address = new Address({
-				address: data.address
-			});
+					let span = $("<span class=\"alert-test\"></span>");
+					span.text(alertData.alert);
 
-			address.fetch({
-				success(model, response) {
-					if (!response || !response.ok) {
+					self.layout.ui.alert.hide().empty().append(span);
+					self.layout.ui.alert.slideDown();
+				} else {
+					self.layout.ui.alert.slideUp(() => {
+						self.layout.ui.alert.empty();
+					});
+				}
+
+				NProgress.set(0.5);
+
+				let address = new Address({
+					address: data.address
+				});
+
+				address.fetch({
+					success(model, response) {
+						if (!response || !response.ok) {
+							NProgress.done();
+							console.error(response);
+							self.activeWallet = null;
+							walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
+							return self.error("Error", `Server returned an error: ${GetErrorText(response)}`);
+						}
+
+						self.activeWallet.boundAddress = model;
+
+						walletChannel.trigger("wallet:activeChanged", wallet, didSyncNodeChange);
+						self.layout.topBarAddressInfo.show(new WalletInfoView({
+							model: model
+						}));
+
+						$.ajax(`${syncNode}/addresses/${encodeURIComponent(model.get("address"))}/names`).done(data => {
+							self.activeWallet.nameCount = data.total || 0;
+
+							walletChannel.trigger("names:count", data.total || 0);
+
+							NProgress.done();
+						}).fail(NProgress.done);
+
+						NProgress.set(0.75);
+					},
+
+					error(model, response) {
 						NProgress.done();
+
 						console.error(response);
+
 						self.activeWallet = null;
 						walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
+
 						return self.error("Error", `Server returned an error: ${GetErrorText(response)}`);
 					}
-
-					self.activeWallet.boundAddress = model;
-
-					walletChannel.trigger("wallet:activeChanged", wallet, didSyncNodeChange);
-					self.layout.topBarAddressInfo.show(new WalletInfoView({
-						model: model
-					}));
-
-					$.ajax(`${syncNode}/addresses/${encodeURIComponent(model.get("address"))}/names`).done(data => {
-						self.activeWallet.nameCount = data.total || 0;
-
-						walletChannel.trigger("names:count", data.total || 0);
-
-						NProgress.done();
-					}).fail(NProgress.done);
-
-					NProgress.set(0.75);
-				},
-
-				error(model, response) {
-					NProgress.done();
-
-					console.error(response);
-
-					self.activeWallet = null;
-					walletChannel.trigger("wallet:changeFailed", wallet, didSyncNodeChange);
-
-					return self.error("Error", `Server returned an error: ${GetErrorText(response)}`);
-				}
+				});
 			});
 		}).fail((jqXHR, textStatus, error) => {
 			NProgress.done();
