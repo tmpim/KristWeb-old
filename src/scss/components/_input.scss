@@ -120,6 +120,10 @@ input {
 			&:last-of-type {
 				border-right: 1px solid $primary-darker-grey;
 			}
+
+			&:last-child {
+				border-right: 0;
+			}
 		}
 
 		&.s0, &.s1 {
