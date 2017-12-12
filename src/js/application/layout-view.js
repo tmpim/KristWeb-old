@@ -122,12 +122,6 @@ export default LayoutView.extend({
 		this.ui.walletChooser.mCustomScrollbar({
 			scrollInertia: 500
 		});
-
-		setTimeout((() => {
-			this.ui.pageMain.mCustomScrollbar({
-				scrollInertia: 500
-			});
-		}).bind(this), 500);
 	},
 
 	onAddWallet() {
