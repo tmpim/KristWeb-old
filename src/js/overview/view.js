@@ -13,8 +13,6 @@ import NetworkFooter from "../network-footer/view";
 import Transaction from "../transaction/model";
 import ActivityCollection from "./activity-panel/activity-collection";
 
-import NProgress from "nprogress";
-
 import Radio from "backbone.radio";
 
 let walletChannel = Radio.channel("wallet");
@@ -29,6 +27,10 @@ export default LayoutView.extend({
 		activityPanel: "#activity-panel",
 		networkPanel: "#network-panel",
 		networkFooter: "#network-footer"
+	},
+
+	ui: {
+		httpsAlert: "#https-alert"
 	},
 
 	initialize() {

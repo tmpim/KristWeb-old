@@ -29,6 +29,10 @@ let appChannel = Radio.channel("global");
 
 export default Application.extend({
 	initialize() {
+		if (location.protocol !== "https:") {
+			$("body").addClass("http");
+		}
+
 		_.extend(NProgress.settings, {
 			showSpinner: false
 		});
