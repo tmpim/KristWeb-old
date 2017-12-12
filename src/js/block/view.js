@@ -82,6 +82,6 @@ export default LayoutView.extend({
 	},
 
 	onGotoBlock() {
-		app.router.navigate(`block/${this.ui.gotoBlock.val()}`, { trigger: true });
+		app.router.navigate(`block/${encodeURIComponent(this.ui.gotoBlock.val())}`, { trigger: true });
 	}
 });

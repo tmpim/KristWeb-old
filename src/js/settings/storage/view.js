@@ -1,4 +1,3 @@
-import $ from "jquery";
 import _ from "lodash";
 
 import {LayoutView} from "backbone.marionette";
@@ -39,9 +38,9 @@ export default LayoutView.extend({
 	},
 
 	onBeforeRender() {
-		for (var x in localStorage) {
+		for (let x in localStorage) {
 			//noinspection JSUnfilteredForInLoop
-			this.total += (localStorage[x].length * 2) / 1024;
+			this.total += ((localStorage[x].length * 2) / 1024) || 0;
 			this.objects.push({
 				//noinspection JSUnfilteredForInLoop
 				name: x.substr(0, 50),

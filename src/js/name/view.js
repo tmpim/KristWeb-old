@@ -82,6 +82,6 @@ export default LayoutView.extend({
 	},
 
 	onGotoName() {
-		app.router.navigate(`name/${this.ui.gotoName.val()}`, { trigger: true });
+		app.router.navigate(`name/${encodeURIComponent(this.ui.gotoName.val())}`, { trigger: true });
 	}
 });

@@ -7,6 +7,7 @@ import TestGroundView from "./testground/view";
 import FriendsView from "./friends/view";
 import EconomiconView from "./economicon/view";
 import RichlistView from "./economicon/richlist/view";
+import AddressLookupView from "./address-lookup/view";
 import AddressView from "./address/view";
 import PayView from "./transaction/pay-view";
 import TransactionListView from "./transaction/list-view";
@@ -27,6 +28,7 @@ export default AppRouter.extend({
 		"friends(/)": "friends",
 		"economicon(/)": "economicon",
 		"economicon/rich(list)(/)": "richlist",
+		"address(es)/lookup": "addressLookup",
 		"address(es)/:address": "address",
 		"address(es)/:address/transaction(s)(/)": "transaction",
 		"address(es)/:address/name(s)(/)": "names",
@@ -78,6 +80,14 @@ export default AppRouter.extend({
 
 	richlist() {
 		this.container.show(new RichlistView());
+
+		SidebarService.request("activate", {
+			key: "economicon"
+		});
+	},
+
+	addressLookup() {
+		this.container.show(new AddressLookupView());
 
 		SidebarService.request("activate", {
 			key: "economicon"

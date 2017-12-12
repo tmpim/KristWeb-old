@@ -82,6 +82,6 @@ export default LayoutView.extend({
 	},
 
 	onGotoTransaction() {
-		app.router.navigate(`transaction/${this.ui.gotoTransaction.val()}`, { trigger: true });
+		app.router.navigate(`transaction/${encodeURIComponent(this.ui.gotoTransaction.val())}`, { trigger: true });
 	}
 });
