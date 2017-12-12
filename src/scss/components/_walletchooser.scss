@@ -89,6 +89,11 @@
 			left: 0;
 		}
 	}
+
+	hr {
+		margin: 0 0 0.5rem 0.5rem;
+		border-top: none;
+	}
 }
 
 .wallet-chooser-wallet {
@@ -135,7 +140,9 @@
 		background: #f8f8f8;
 	}
 
-	&.wallet-add {
+	&.wallet-action {
+		margin: 0 0.5rem;
+
 		.wallet-icon {
 			border-color: $primary-blue;
 			display: flex;
@@ -155,6 +162,10 @@
 			}
 		}
 
+		.wallet-info {
+			font-size: 90%;
+		}
+
 		&:hover {
 			.wallet-icon {
 				opacity: 1.0;
@@ -162,34 +173,20 @@
 		}
 	}
 
-	&.wallet-login {
-		.wallet-icon {
-			border-color: $primary-blue-darker;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+	&.wallet-add .wallet-icon:before {
+		content: '\e806';
+	}
 
-			opacity: 0.4;
-			transition: opacity 250ms ease;
+	&.wallet-login .wallet-icon:before {
+		content: '\e808';
+	}
 
-			&:before {
-				display: inline-block;
-				content: '\e808';
-				font-family: 'kristweb';
-				font-size: 16px;
-				cursor: pointer;
-				color: $primary-blue-darker;
-				position: relative;
-				left: -1px;
-				top: -1px;
-			}
-		}
+	&.wallet-import .wallet-icon:before {
+		content: '\e811';
+	}
 
-		&:hover {
-			.wallet-icon {
-				opacity: 1.0;
-			}
-		}
+	&.wallet-export .wallet-icon:before {
+		content: '\e80f';
 	}
 
 	.wallet-controls {
@@ -222,4 +219,16 @@
 		background: $primary-blue-white;
 		border-color: lighten($primary-blue, 15%);
 	}
+}
+
+.wallet-chooser-button-row {
+	display: flex;
+
+	.wallet-chooser-wallet {
+		flex: 1;
+	}
+}
+
+.wallet-chooser-extra-spacing {
+	height: 0.5rem;
 }

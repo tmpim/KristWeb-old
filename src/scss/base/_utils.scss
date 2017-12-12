@@ -427,3 +427,12 @@ $spacers: (
 .code {
 	font-family: monospace;
 }
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid $primary-dark-grey;
+  margin: 0.5rem 0;
+  padding: 0;
+}

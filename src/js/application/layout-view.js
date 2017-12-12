@@ -5,6 +5,8 @@ import Radio from "backbone.radio";
 
 import AddWalletModal from "../modal/add-wallet/modal";
 import LoginWalletModal from "../modal/login-wallet/modal";
+import ImportWalletsModal from "../modal/import-wallets/modal";
+import ExportWalletsModal from "../modal/export-wallets/modal";
 
 import Epic from "../utils/epic";
 
@@ -47,6 +49,8 @@ export default LayoutView.extend({
 		walletChooser: "#wallet-chooser",
 		walletChooserAddWallet: "#wallet-chooser-add-wallet",
 		walletChooserLoginWallet: "#wallet-chooser-login-wallet",
+		walletChooserImportWallets: "#wallet-chooser-import-wallets",
+		walletChooserExportWallets: "#wallet-chooser-export-wallets",
 		topBar: ".topBar",
 		connectionInfo: "#topBar-connectionInfo",
 		loginFirst: "#login-first"
@@ -57,7 +61,9 @@ export default LayoutView.extend({
 		"click @ui.sidebarDim": "click:sidebarDim",
 		"click @ui.walletChooserButton": "toggle:walletChooser",
 		"click @ui.walletChooserAddWallet": "add:wallet",
-		"click @ui.walletChooserLoginWallet": "login:wallet"
+		"click @ui.walletChooserLoginWallet": "login:wallet",
+		"click @ui.walletChooserImportWallets": "import:wallets",
+		"click @ui.walletChooserExportWallets": "export:wallets"
 	},
 
 	initialize() {
@@ -130,6 +136,14 @@ export default LayoutView.extend({
 
 	onLoginWallet() {
 		this.modals.show(new LoginWalletModal());
+	},
+
+	onImportWallets() {
+		this.modals.show(new ImportWalletsModal());
+	},
+
+	onExportWallets() {
+		this.modals.show(new ExportWalletsModal());
 	},
 
 	websocketConnectionStatusChanged(status) {
