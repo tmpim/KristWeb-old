@@ -31,4 +31,5 @@ KristWeb is a web wallet for Krist. It runs fully clientside and supports loggin
 * KristDice
 
 # Known bugs
-* Wallets are not synced between HTTP and HTTPS.
+* Wallets are not synced between HTTP and HTTPS. You can work around this by exporting your HTTP wallets, and importing
+them on a HTTPS KristWeb.
