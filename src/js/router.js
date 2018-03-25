@@ -15,6 +15,7 @@ import NameListView from "./name/list-view";
 import NameView from "./name/view";
 import TransactionView from "./transaction/view";
 import BlockView from "./block/view";
+import BlockListView from "./block/list-view";
 
 import SettingsStorageView from "./settings/storage/view";
 import SettingsNotificationView from "./settings/notifications/view";
@@ -36,6 +37,8 @@ export default AppRouter.extend({
 		"transaction(s)/make": "pay",
 		"transaction(s)/:transaction": "transaction",
 		"block(s)/:block": "block",
+		"block(s)(/)": "blocks",
+		"block(s)/latest(/)": "blocks",
 		"name(s)(/)": "ownNames",
 		"name(s)/:name": "name",
 		"settings/storage": "settingsStorage",
@@ -172,6 +175,14 @@ export default AppRouter.extend({
 		this.container.show(new BlockView({
 			block: block
 		}));
+
+		SidebarService.request("activate", {
+			key: "economicon"
+		});
+	},
+
+	blocks() {
+		this.container.show(new BlockListView());
 
 		SidebarService.request("activate", {
 			key: "economicon"

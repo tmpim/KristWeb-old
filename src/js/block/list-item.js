@@ -4,23 +4,21 @@ import template from "./list-item.hbs";
 export default ItemView.extend({
 	template: template,
 	tagName: "li",
-	className: "activity-transaction",
+	className: "list-block",
 
 	modelEvents: {
 		"change": "render"
 	},
 
-	serializeData() {
+	serialiseData() {
 		return {
-			id: this.model.get("id"),
-			from: this.model.get("from"),
-			to: this.model.get("to"),
-			value: this.model.get("value") || 0,
+			height: this.model.get("height"),
+			address: this.model.get("address"),
+			hash: this.model.get("hash"),
+			short_hash: this.model.get("short_hash"),
+			value: this.model.get("value"),
 			time: this.model.get("time"),
-			name: this.model.get("name"),
-			metadata: this.model.get("metadata"),
-			a: this.model.get("to") === "a",
-			toName: this.model.get("to") === "name"
+			difficulty: this.model.get("difficulty")
 		};
 	},
 

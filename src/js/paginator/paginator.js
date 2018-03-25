@@ -31,7 +31,9 @@ export default LayoutView.extend({
 
 	serializeData() {
 		return {
-			window: this.calculateWindow()
+			window: this.calculateWindow(),
+			total: this.collection.state.totalRecords,
+			pages: this.collection.state.totalPages
 		};
 	},
 
@@ -42,6 +44,10 @@ export default LayoutView.extend({
 
 		normalise(index) {
 			return index + 1;
+		},
+
+		localise(number) {
+			return Number(number).toLocaleString();
 		}
 	},
 
@@ -75,7 +81,7 @@ export default LayoutView.extend({
 							this.slideAmount(windowSize, slideScale));
 		}
 
-		var windowEnd = Math.min(lastPage + 1, windowStart + windowSize);
+		let windowEnd = Math.min(lastPage + 1, windowStart + windowSize);
 
 		return [windowStart, windowEnd];
 	},
