@@ -40,5 +40,38 @@ export default {
 		}
 
 		return prefix;
+	},
+
+	parseCommonMeta(metadata) {
+		if (!metadata) return null;
+
+		const parts = {};
+
+		const metaParts = metadata.split(";");
+		if (metaParts.length <= 0) return null;
+
+		const nameMatches = /^(?:([a-z0-9-_]{1,32})@)?([a-z0-9]{1,64}\.kst)$/.exec(metaParts[0]);
+
+		if (nameMatches) {
+			if (nameMatches[1]) parts.metaname = nameMatches[1];
+			if (nameMatches[2]) parts.name = nameMatches[2];
+
+			parts.recipient = nameMatches[1] ? nameMatches[1] + "@" + nameMatches[2] : nameMatches[2];
+		}
+
+		for (let i = 0; i < metaParts.length; i++) {
+			const metaPart = metaParts[i];
+			const kv = metaPart.split("=", 2);
+
+			if (i === 0 && nameMatches) continue;
+
+			if (kv.length === 1) {
+				parts[i.toString()] = kv[0];
+			} else {
+				parts[kv[0]] = kv.slice(1).join("=");
+			}
+		}
+
+		return parts;
 	}
 };

@@ -1,7 +1,7 @@
 <div class="top">
 	{{#if in}}
 		{{#if from}}
-			<span class="from"><a href="/address/{{from}}"{{#if label}} title="{{from}}"{{/if}}>{{#if label}}{{label}}{{else}}{{from}}{{/if}}</a></span>
+			{{> address address=from name=commonMeta.return class="from" }}
 			<span class="action">
 				<i class="icon-right"></i>
 				{{#if name}}
@@ -11,48 +11,39 @@
 				{{/if}}
 				<i class="icon-right"></i>
 			</span>
-			<span class="to"><a href="/address/{{to}}" title="{{to}}">You</a></span>
+			{{> address address=to name=commonMeta.recipient class="to" }}
 		{{else}}
-			<span class="to"><a href="/address/{{to}}" title="{{to}}">You</a></span>
+			{{> address address=to name=commonMeta.recipient class="to" }}
 			<span class="action">&nbsp;mined&nbsp;</span>
 			<span class="value">{{krist value}}</span>
 		{{/if}}
-	{{else}}
-		{{#if name}}
-			{{#if toName}}
-				<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
-				<span class="action">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
-				<span class="to"><a href="/name/{{name}}">{{name}}.kst</a></span>
-			{{else}}
-				{{#if a}}
-					<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
-					<span class="action">&nbsp;updated&nbsp;</span>
-					<a href="/name/{{name}}" class="value">{{name}}</a>.kst
-				{{else}}
-					<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
-					<span class="action">
-						<i class="icon-right"></i>
-						<a href="/name/{{name}}" class="value">{{name}}</a>.kst
-						<i class="icon-right"></i>
-					</span>
-					<span class="to"><a href="/address/{{to}}"{{#if label}} title="{{to}}"{{/if}}>{{#if label}}{{label}}{{else}}{{to}}{{/if}}</a></span>
-				{{/if}}
-			{{/if}}
+	{{else if name}}
+		{{#if toName}}
+			{{> address address=from name=commonMeta.return class="from" }}
+			<span class="action">&nbsp;purchased&nbsp;(<span class="value">{{krist value}}</span>)&nbsp;</span>
+			<span class="to"><a href="/name/{{name}}">{{name}}.kst</a></span>
+		{{else if a}}
+			{{> address address=from name=commonMeta.return class="from" }}
+			<span class="action">&nbsp;updated&nbsp;</span>
+			<a href="/name/{{name}}" class="value">{{name}}</a>.kst
 		{{else}}
-			<span class="from"><a href="/address/{{from}}" title="{{from}}">You</a></span>
-			<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
-			<span class="to"><a href="/address/{{to}}"{{#if label}} title="{{to}}"{{/if}}>{{#if label}}{{label}}{{else}}{{to}}{{/if}}</a></span>
+			{{> address address=from name=commonMeta.return class="from" }}
+			<span class="action">
+				<i class="icon-right"></i>
+				<a href="/name/{{name}}" class="value">{{name}}</a>.kst
+				<i class="icon-right"></i>
+			</span>
+			{{> address address=to name=commonMeta.recipient class="to" }}
 		{{/if}}
+	{{else}}
+		{{> address address=from name=commonMeta.return class="from" }}
+		<span class="action"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
+		{{> address address=to name=commonMeta.recipient class="to" }}
 	{{/if}}
 </div>
 <div class="info">
 	<a href="/transaction/{{id}}"><time class="text-mini" datetime="{{time}}"></time></a>
 </div>
 {{#if metadata}}
-	<div class="meta">
-		<i class="icon-quote-left"></i>
-		<p>
-			{{nl2br metadata}}
-		</p>
-	</div>
+	<div class="meta"></div>
 {{/if}}

@@ -38,6 +38,23 @@ Handlebars.registerHelper("nl2br", function(text) {
 	return new Handlebars.SafeString(nl2br);
 });
 
+import AddressPartial from "./partials/address.hbs";
+Handlebars.registerPartial("address", AddressPartial);
+
+Handlebars.registerHelper("addressLabel", address => {
+	address = Handlebars.Utils.escapeExpression(address);
+
+	const app = window.app;
+	if (!app) return new Handlebars.SafeString(address);
+	if (app.activeWallet && address === app.activeWallet.get("address")) return new Handlebars.SafeString("You");
+	if (!app.friends || !app.wallets) return new Handlebars.SafeString(address);
+
+	const search = { address, syncNode: app.syncNode };
+	const label = app.friends.findWhere(search) || app.wallets.findWhere(search);
+
+	return new Handlebars.SafeString((label ? label.get("label") : address) || address);
+});
+
 if (window.__agent) {
 	window.__agent.start(Backbone, Marionette);
 }

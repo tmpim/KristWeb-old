@@ -5,28 +5,26 @@
 	<div class="top">
 		{{#if name}}
 			{{#if toName}}
-				<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
+				{{> address address=from name=commonMeta.return class="from" }}
 				<span class="action large">&nbsp;purchased&nbsp;</span>
 				<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
+			{{else if a}}
+				{{> address address=from name=commonMeta.return class="from" }}
+				<span class="action large">&nbsp;updated&nbsp;</span>
+				<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
 			{{else}}
-				{{#if a}}
-					<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
-					<span class="action large">&nbsp;updated&nbsp;</span>
-					<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
-				{{else}}
-					<span class="from"><a href="/address/{{from}}">{{from}}</a></span>
-					<span class="action large">
+				{{> address address=from name=commonMeta.return class="from" }}
+				<span class="action large">
 					<i class="icon-right"></i>
 					<a href="/name/{{name}}" class="value">{{name}}</a><span class="kst">.kst</span>
 					<i class="icon-right"></i>
 				</span>
-					<span class="from"><a href="/address/{{to}}">{{to}}</a></span>
-				{{/if}}
+				{{> address address=to name=commonMeta.recipient class="to" }}
 			{{/if}}
 		{{else}}
-			<span class="from">{{#if from}}<a href="/address/{{from}}">{{from}}</a>{{else}}Mined{{/if}}</span>
+			{{> address address=from name=commonMeta.return class="from" }}
 			<span class="action large"><i class="icon-right"></i><span class="value">{{krist value}}</span><i class="icon-right"></i></span>
-			<span class="to"><a href="/address/{{to}}">{{to}}</a></span>
+			{{> address address=to name=commonMeta.recipient class="to" }}
 		{{/if}}
 	</div>
 	<div class="info">
@@ -34,14 +32,7 @@
 		<a {{#unless first}}href="/transaction/{{lastTransaction}}"{{/unless}} class="u-floatLeft{{#if first}} u-invisible{{/if}}">&laquo; Prev</a>
 		<a href="/transaction/{{nextTransaction}}" class="u-floatRight">Next &raquo;</a>
 	</div>
-	<div class="meta">
-		{{#if metadata}}
-			<div class="metadata">
-				<i class="icon-quote-left"></i>
-				<p>
-					{{nl2br metadata}}
-				</p>
-			</div>
-		{{/if}}
-	</div>
+	{{#if metadata}}
+		<div class="meta"></div>
+	{{/if}}
 </div>

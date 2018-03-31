@@ -1,12 +1,19 @@
-import {ItemView} from "backbone.marionette";
+import {LayoutView} from "backbone.marionette";
 import template from "./activity-template.hbs";
 
-import app from "../../app";
+import CommonMetaView from "../../transaction/commonmeta/view";
 
-export default ItemView.extend({
+import app from "../../app";
+import krist from "../../utils/krist";
+
+export default LayoutView.extend({
 	template: template,
 	tagName: "li",
 	className: "activity-transaction",
+
+	regions: {
+		metadata: ".meta"
+	},
 
 	modelEvents: {
 		"change": "render"
@@ -24,11 +31,7 @@ export default ItemView.extend({
 			in: app.activeWallet ? this.model.get("to") === app.activeWallet.boundAddress.get("address") : null,
 			a: this.model.get("to") === "a",
 			toName: this.model.get("to") === "name",
-			label: (this.model.get("to") === app.activeWallet.boundAddress.get("address") ?
-			((app.friends.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }) && app.friends.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }).get("label")) ||
-			(app.wallets.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }) && app.wallets.findWhere({ address: this.model.get("from"), syncNode: app.syncNode }).get("label"))) :
-			((app.friends.findWhere({ address: this.model.get("to"), syncNode: app.syncNode }) && app.friends.findWhere({ address: this.model.get("to"), syncNode: app.syncNode }).get("label")) ||
-			(app.wallets.findWhere({ address: this.model.get("to"), syncNode: app.syncNode }) && app.wallets.findWhere({ address: this.model.get("to"), syncNode: app.syncNode }).get("label"))))
+			commonMeta: krist.parseCommonMeta(this.model.get("metadata"))
 		};
 	},
 
@@ -44,5 +47,11 @@ export default ItemView.extend({
 
 	onRender() {
 		this.$("time").timeago();
+
+		if (this.model.get("metadata")) {
+			this.metadata.show(new CommonMetaView({
+				model: this.model
+			}));
+		}
 	}
 });

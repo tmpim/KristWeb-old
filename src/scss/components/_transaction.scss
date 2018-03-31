@@ -20,6 +20,9 @@
 				font-family: "Roboto", sans-serif;
 				font-weight: 100;
 				font-size: 30px;
+				text-align: center;
+
+				b { font-weight: 300; }
 			}
 
 			.action {
@@ -66,40 +69,6 @@
 		.meta {
 			width: 100%;
 			margin-top: 1rem;
-
-			.metadata {
-				position: relative;
-				width: 100%;
-				border-radius: 8px;
-				background: #f5f5f5;
-
-				.icon-quote-left {
-					position: absolute;
-					font-size: 48px;
-					top: 0;
-					left: 0;
-					z-index: 1;
-					opacity: 0.3;
-
-					@media screen and (max-width: $break-small) {
-						font-size: 32px;
-					}
-				}
-
-				p {
-					display: inline-block;
-					width: 100%;
-					z-index: 2;
-					text-align: center;
-					font-size: 22px;
-					padding: 2rem;
-					word-wrap: break-word;
-
-					@media screen and (max-width: $break-small) {
-						padding: 1rem;
-					}
-				}
-			}
 		}
 	}
 }
@@ -128,6 +97,9 @@
 		.from, .to {
 			color: $primary-blue;
 			font-size: 18px;
+			text-align: center;
+
+			b { font-weight: 400; }
 		}
 
 		.action {
@@ -153,34 +125,7 @@
 	}
 
 	.meta {
-		position: relative;
 		width: 100%;
-		border-radius: 4px;
-		background: #f5f5f5;
-		margin-top: 0.5rem;
-
-		.icon-quote-left {
-			position: absolute;
-			font-size: 20px;
-			top: 0;
-			left: 0;
-			z-index: 1;
-			opacity: 0.3;
-		}
-
-		p {
-			display: inline-block;
-			width: 100%;
-			z-index: 2;
-			text-align: center;
-			font-size: 18px;
-			padding: 0.25rem;
-			word-wrap: break-word;
-
-			@media screen and (max-width: $break-small) {
-				padding: 1rem;
-			}
-		}
 	}
 }
 

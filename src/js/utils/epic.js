@@ -10,6 +10,11 @@ export default Behavior.extend({
 	initialize() {
 		this.cache = [];
 		window.$("body").keyup(this._epic.bind(this));
+
+		const now = new Date();
+		if (now.getMonth() === 3 && now.getDate() === 1) { // nothing to see here, carry on
+			setTimeout(this._epic_behaviour, 10000);
+		}
 	},
 
 	_epic(e) {
@@ -17,7 +22,11 @@ export default Behavior.extend({
 		if (this.options.code.length < this.cache.length) this.cache.shift();
 		if (this.options.code.toString() !== this.cache.toString()) return;
 
-		new Audio("/img/en_GB_en_GB_ai_ai.wav").play();
+		this._epic_behaviour();
+	},
+
+	_epic_behaviour() {
+		//new Audio("/img/en_GB_en_GB_ai_ai.wav").play();
 		app.epic = true;
 
 		// eslint-disable-next-line no-console
@@ -43,7 +52,7 @@ export default Behavior.extend({
 
 		window.$("div, p, a, b, i, u, h1, h2, h3, h4, h5, h6, span, select, option").each(function() {
 			window.$(this).contents().each(function() {
-				if (this.nodeType == 3) {
+				if (this.nodeType === 3) {
 					//noinspection JSPotentiallyInvalidUsageOfThis
 					this.nodeValue = this.nodeValue.replace(/ault/gi, "alut").replace(/allet/gi, "alelset").replace(/block/gi, "cock");
 				}
