@@ -36,9 +36,10 @@ export default AppRouter.extend({
 		"transaction(s)(/)": "ownTransactions",
 		"transaction(s)/make": "pay",
 		"transaction(s)/:transaction": "transaction",
+		"block(s)/latest(/)": "blocks",
+		"block(s)/lowest(/)": "blocksLowest",
 		"block(s)/:block": "block",
 		"block(s)(/)": "blocks",
-		"block(s)/latest(/)": "blocks",
 		"name(s)(/)": "ownNames",
 		"name(s)/:name": "name",
 		"settings/storage": "settingsStorage",
@@ -183,6 +184,16 @@ export default AppRouter.extend({
 
 	blocks() {
 		this.container.show(new BlockListView());
+
+		SidebarService.request("activate", {
+			key: "economicon"
+		});
+	},
+
+	blocksLowest() {
+		this.container.show(new BlockListView({
+			lowest: true
+		}));
 
 		SidebarService.request("activate", {
 			key: "economicon"

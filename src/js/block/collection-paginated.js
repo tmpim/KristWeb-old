@@ -8,8 +8,14 @@ import app from "../app";
 export default PageableCollection.extend({
 	model: Block,
 
+	initialize(models, options) {
+		this.lowest = options ? options.lowest : null;
+		console.log(options);
+	},
+
 	url() {
-		return (app.syncNode || "https://krist.ceriat.net") + "/blocks/latest";
+		console.log(this.lowest);
+		return (app.syncNode || "https://krist.ceriat.net") + "/blocks/" + (this.lowest ? "lowest" : "latest");
 	},
 
 	parseRecords(data) {

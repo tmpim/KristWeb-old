@@ -29,7 +29,9 @@ export default LayoutView.extend({
 
 		NProgress.start();
 
-		self.blocks = new BlockCollection();
+		self.blocks = new BlockCollection(null, {
+			lowest: options.lowest
+		});
 
 		self.blocks.fetch({
 			success() {

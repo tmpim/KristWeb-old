@@ -55,3 +55,56 @@
 		}
 	}
 }
+
+.list-block {
+	 display: flex;
+	 flex-direction: column;
+	 align-items: center;
+	 width: 100%;
+
+	 border-bottom: 1px solid #eee;
+
+	 &:last-child {
+		 border-bottom: 0;
+	 }
+
+	 .top {
+		 display: flex;
+		 flex: 1;
+		 flex-direction: row;
+		 align-items: center;
+		 justify-content: center;
+		 flex-wrap: wrap;
+		 line-height: 1;
+
+		 .from, .to {
+			 color: $primary-blue;
+			 font-size: 18px;
+		 }
+
+		 .action {
+			 display: flex;
+			 flex-direction: row;
+			 align-items: center;
+		 }
+
+		 .icon-right {
+			 margin: 0 0.5rem;
+		 }
+
+		 .value {
+			 font-size: 20px;
+			 color: $primary-green;
+		 }
+	 }
+
+	 .info, .blockinfo {
+		 width: 100%;
+		 text-align: center;
+		 line-height: 1;
+	 }
+
+	.blockinfo {
+		margin-bottom: 0.5rem;
+	}
+ }
