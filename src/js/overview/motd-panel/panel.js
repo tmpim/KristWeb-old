@@ -41,7 +41,7 @@ export default LayoutView.extend({
 				this.work = workData.work;
 				this.render();
 			});
-		}); 
+		});
 	},
 
 	checkValue() {
