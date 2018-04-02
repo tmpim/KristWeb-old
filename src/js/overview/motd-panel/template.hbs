@@ -14,6 +14,18 @@
 			Waiting for login...
 		</p>
 	{{/if}}
+	{{#if work}}
+		<p class="m-t-1">
+			<span class="grey-heading" title="Krist Mining Difficulty">Current Work</span>
+			<span class="text-mute">&mdash;</span>
+			<span class="blockvalue" id="blockvalue">
+				<span class="green">{{localise work}}</span>
+				{{#if showHashrate}}
+					(estimated network hashrate: <span class="green">{{estimateHashrate work}}</span>)
+				{{/if}}
+			</span>
+		</p>
+	{{/if}}
 	{{#if blockValue}}
 		<p class="m-t-1">
 			<span class="grey-heading" title="Krist Block Reward Value">Block Value</span>

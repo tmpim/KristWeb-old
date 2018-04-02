@@ -108,7 +108,10 @@ const WebsocketService = Service.extend({
 						break;
 
 					case "block":
-						appChannel.trigger("krist:block", message.block);
+						appChannel.trigger("krist:block", {
+							block: message.block,
+							newWork: message.new_work
+						});
 
 						this.send("me").then(data => {
 							if (data.address.balance !== app.activeWallet.boundAddress.get("balance")) {

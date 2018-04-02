@@ -1,4 +1,5 @@
 import $ from "jquery";
+import moment from "moment";
 
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
@@ -18,8 +19,34 @@ export default LayoutView.extend({
 			if (!this.isDestroyed) this.render();
 		});
 
-		$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/blocks/value`).done(data => {
+		appChannel.on("krist:block", data => {
 			if (this.isDestroyed) return;
+
+			this.showHashrate = true;
+			this.work = data.newWork;
+
+			this.checkValue();
+			this.render();
+		});
+
+		this.checkValue();
+
+		$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/blocks/last`).done(blockData => {
+			if (this.isDestroyed || !blockData.ok) return;
+
+			this.showHashrate = moment().isAfter(moment(blockData.block.time).subtract(15, "minutes"));
+
+			$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/work`).done(workData => {
+				if (this.isDestroyed || !workData.ok) return;
+				this.work = workData.work;
+				this.render();
+			});
+		}); 
+	},
+
+	checkValue() {
+		$.ajax(`${app.syncNode || "https://krist.ceriat.net"}/blocks/value`).done(data => {
+			if (this.isDestroyed || !data.ok) return;
 
 			this.blockValue = data.value;
 			this.baseValue = data.base_value;
@@ -47,13 +74,24 @@ export default LayoutView.extend({
 
 		localise(number) {
 			return Number(number).toLocaleString();
+		},
+
+		estimateHashrate(work) {
+			const rate = 1 / (Number(work) / (Math.pow(256, 6)) * 60); // TODO: seconds per block and bytes per hash from /info
+			if (rate === 0) return "0 H/s";
+
+			const sizes = ["H", "KH", "MH", "GH", "TH"];
+			const i = Math.floor(Math.log(rate) / Math.log(1000));
+			return parseFloat((rate / Math.pow(1000, i)).toFixed(2)) + " " + sizes[i] + "/s";
 		}
 	},
 
 	serializeData() {
 		return {
 			blockValue: this.blockValue || 0,
-			baseValue: this.baseValue || 0
+			baseValue: this.baseValue || 0,
+			work: this.work || 0,
+			showHashrate: this.showHashrate
 		};
 	},
 
