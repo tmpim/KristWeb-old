@@ -43,8 +43,6 @@ export default LayoutView.extend({
 
 	onRender() {
 		if (this.blocks) {
-			console.log(this.blocks);
-
 			this.blockList.show(new BlockListView({
 				collection: this.blocks
 			}));

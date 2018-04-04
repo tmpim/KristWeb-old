@@ -10,10 +10,6 @@ export default ItemView.extend({
 	template: template,
 	class: "commonmeta-view",
 
-	modelEvents: {
-		"all": "render"
-	},
-
 	serializeData() {
 		return {
 			raw: this.model.get("metadata"),

@@ -10,12 +10,12 @@ export default PageableCollection.extend({
 
 	initialize(models, options) {
 		this.lowest = options ? options.lowest : null;
-		console.log(options);
 	},
 
 	url() {
-		console.log(this.lowest);
-		return (app.syncNode || "https://krist.ceriat.net") + "/blocks/" + (this.lowest ? "lowest" : "latest");
+		return (app.syncNode || "https://krist.ceriat.net")
+			+ "/blocks/"
+			+ (this.lowest ? "lowest" : "latest");
 	},
 
 	parseRecords(data) {

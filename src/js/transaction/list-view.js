@@ -2,7 +2,6 @@ import {LayoutView} from "backbone.marionette";
 import template from "./list-template.hbs";
 
 import Address from "../address/model";
-import Transaction from "../transaction/model";
 import TransactionCollection from "./collection-paginated";
 
 import TransactionListView from "./list-collectionview";
@@ -35,6 +34,7 @@ export default LayoutView.extend({
 
 	initialize(options) {
 		this.target = options.target;
+		this.excludeMined = true;
 
 		if (this.target) {
 			let self = this;
@@ -42,14 +42,7 @@ export default LayoutView.extend({
 			NProgress.start();
 
 			if (this.target === "all") {
-				self.transactions = new TransactionCollection();
-
-				self.transactions.fetch({
-					success() {
-						NProgress.done();
-						if (!self.isDestroyed) self.render();
-					}
-				});
+				self.refreshTransactionCollection();
 			} else {
 				new Address({address: this.target}).fetch({
 					success(model, response) {
@@ -67,17 +60,9 @@ export default LayoutView.extend({
 						NProgress.set(0.25);
 
 						self.model = model;
+						self.address = self.model.get("address");
 
-						self.transactions = new TransactionCollection(null, {
-							address: self.model.get("address")
-						});
-
-						self.transactions.fetch({
-							success() {
-								NProgress.done();
-								if (!self.isDestroyed) self.render();
-							}
-						});
+						self.refreshTransactionCollection();
 					},
 
 					error(response) {
@@ -94,48 +79,56 @@ export default LayoutView.extend({
 			}
 		} else {
 			if (app.activeWallet && app.activeWallet.boundAddress) {
-				let self = this;
-
 				this.model = app.activeWallet.boundAddress;
+				this.address = this.model.get("address");
 
-				this.transactions = new TransactionCollection(null, {
-					address: this.model.get("address")
-				});
-
-				this.transactions.fetch({
-					success() {
-						NProgress.done();
-						if (!self.isDestroyed) self.render();
-					}
-				});
+				this.refreshTransactionCollection();
 			}
 		}
 
 		walletChannel.on("wallet:activeChanged", () => {
-			if (this.target) return;
-
-			if (app.activeWallet && app.activeWallet.boundAddress) {
-				let self = this;
-
-				this.model = app.activeWallet.boundAddress;
-
-				this.transactions = new TransactionCollection(null, {
-					address: this.model.get("address")
-				});
-
-				this.transactions.fetch({
-					success() {
-						NProgress.done();
-						if (!self.isDestroyed) self.render();
-					}
-				});
+			if (this.target && !this.isDestroyed) {
+				this.refreshTransactionCollection();
+				return this.renderList();
 			}
 
-			if (!this.isDestroyed) this.render();
+			if (app.activeWallet && app.activeWallet.boundAddress) {
+				this.model = app.activeWallet.boundAddress;
+				this.address = this.model.get("address");
+
+				this.refreshTransactionCollection();
+			}
+
+			if (!this.isDestroyed) this.renderList();
 		});
 	},
 
+	templateHelpers() {
+		return {
+			excludeMined: this.excludeMined
+		};
+	},
+
 	onRender() {
+		this.$("#exclude-mined input[type=checkbox]").change(() => {
+			this.excludeMined = this.$("#exclude-mined input[type=checkbox]").is(":checked");
+
+			if (this.transactions) {
+				this.transactions.excludeMined = this.excludeMined;
+
+				NProgress.start();
+
+				const self = this;
+				this.transactions.fetch({
+					success() {
+						NProgress.done();
+
+						if (!self.isDestroyed) self.refreshTransactionCollection();
+					}
+				});
+			}
+		});
+
 		if (this.model) {
 			this.walletOverview.show(new WalletOverview({
 				model: this.model,
@@ -143,27 +136,39 @@ export default LayoutView.extend({
 				showAllTransactionsButton: true
 			}));
 
-			if (this.transactions) {
-				this.transactionList.show(new TransactionListView({
-					collection: this.transactions
-				}));
-
-				this.paginationContainer.show(new PaginationView({
-					collection: this.transactions
-				}));
-			}
-		} else if (this.target && this.target === "all") {
-			if (this.transactions) {
-				this.transactionList.show(new TransactionListView({
-					collection: this.transactions
-				}));
-
-				this.paginationContainer.show(new PaginationView({
-					collection: this.transactions
-				}));
-			}
+			if (this.transactions) this.renderList();
+		} else if (this.target && this.target === "all" && this.transactions) {
+			this.renderList();
 		}
 
 		this.networkFooter.show(new NetworkFooter());
+	},
+
+	renderList() {
+		if (this.isDestroyed) return;
+
+		this.transactionList.show(new TransactionListView({
+			collection: this.transactions
+		}));
+
+		this.paginationContainer.show(new PaginationView({
+			collection: this.transactions
+		}));
+	},
+
+	refreshTransactionCollection() {
+		const self = this;
+
+		this.transactions = new TransactionCollection(null, {
+			address: this.address,
+			excludeMined: this.excludeMined
+		});
+
+		this.transactions.fetch({
+			success() {
+				NProgress.done();
+				if (!self.isDestroyed) self.renderList();
+			}
+		});
 	}
 });

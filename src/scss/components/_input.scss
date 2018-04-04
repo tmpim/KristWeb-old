@@ -238,6 +238,16 @@ input {
     }
 }
 
+.switch-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .switch {
+        margin-left: 0.75rem;
+    }
+}
+
 .input-addon {
     font-size: 20px;
     border: 1px solid $primary-darker-grey;

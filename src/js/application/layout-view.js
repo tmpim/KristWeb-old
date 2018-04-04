@@ -1,3 +1,5 @@
+import packageJSON from "../../../package.json";
+
 import {LayoutView, ItemView} from "backbone.marionette";
 import template from "./layout-template.hbs";
 import Backbone from "backbone";
@@ -170,5 +172,11 @@ export default LayoutView.extend({
 		this.ui.connectionInfo.find(".connectionBulb").on("webkitAnimationEnd oanimationend msAnimationEnd animationend", () => {
 			this.ui.connectionInfo.find(".connectionBulb").removeClass("pulse");
 		});
-	}
+	},
+
+	templateHelpers() {
+		return {
+			appVersion: packageJSON.version
+		};
+	} 
 });

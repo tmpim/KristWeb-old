@@ -10,13 +10,19 @@ export default PageableCollection.extend({
 
 	initialize(models, options) {
 		this.address = options ? options.address : null;
+		this.excludeMined = options ? options.excludeMined : null;
+		this.queryParams.excludeMined = () => this.excludeMined || null;
 	},
 
 	url() {
 		if (this.address) {
-			return (app.syncNode || "https://krist.ceriat.net") + "/addresses/" + (this.address || app.activeWallet.boundAddress.get("address")) + "/transactions";
+			return (app.syncNode || "https://krist.ceriat.net")
+				+ "/addresses/"
+				+ encodeURIComponent(this.address || app.activeWallet.boundAddress.get("address"))
+				+ "/transactions";
 		} else {
-			return (app.syncNode || "https://krist.ceriat.net") + "/transactions/latest";
+			return (app.syncNode || "https://krist.ceriat.net")
+				+ "/transactions/latest";
 		}
 	},
 

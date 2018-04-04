@@ -13,10 +13,6 @@ export default LayoutView.extend({
 		metadata: ".meta"
 	},
 
-	modelEvents: {
-		"all": "render"
-	},
-
 	serializeData() {
 		return {
 			id: this.model.get("id"),
