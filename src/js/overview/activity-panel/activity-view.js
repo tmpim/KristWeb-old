@@ -12,11 +12,7 @@ export default LayoutView.extend({
 	className: "activity-transaction",
 
 	regions: {
-		metadata: ".meta"
-	},
-
-	modelEvents: {
-		"change": "render"
+		metadata: ".meta" 
 	},
 
 	serializeData() {

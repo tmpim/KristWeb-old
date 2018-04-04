@@ -49,7 +49,7 @@ export default LayoutView.extend({
 
 		walletChannel.on("wallet:transaction", transaction => {
 			app.activeWallet.activityCollection.pop();
-			app.activeWallet.activityCollection.add(new Transaction(transaction), { at: 0 });
+			app.activeWallet.activityCollection.add(new Transaction(transaction), { at: 0 }); 
 		});
 	},
 

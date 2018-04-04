@@ -97,8 +97,26 @@ const WebsocketService = Service.extend({
 					case "transaction":
 						walletChannel.trigger("wallet:transaction", message.transaction);
 
+						if (app.wallets) {
+							app.wallets.each(wallet => {
+								if (!wallet) return;
+
+								const address = wallet.get("address");
+								const syncNode = wallet.get("syncNode") || "https://krist.ceriat.net";
+
+								if (address === message.transaction.from || address === message.transaction.to) {
+									$.ajax(`${syncNode}/addresses/${encodeURIComponent(wallet.get("address"))}`).done(data => {
+										if (!data.ok || !data.address) return;
+
+										wallet.set("balance", data.address.balance);
+										wallet.save();
+									});
+								}
+							});
+						}
+
 						this.send("me").then(data => {
-							if (data.address.balance !== app.activeWallet.boundAddress.get("balance")) {
+							if (app.activeWallet && data.address.balance !== app.activeWallet.boundAddress.get("balance")) {
 								app.activeWallet.boundAddress.set("balance", data.address.balance);
 
 								walletChannel.trigger("wallet:balanceChanged", data.address.balance);
@@ -114,7 +132,7 @@ const WebsocketService = Service.extend({
 						});
 
 						this.send("me").then(data => {
-							if (data.address.balance !== app.activeWallet.boundAddress.get("balance")) {
+							if (app.activeWallet && data.address.balance !== app.activeWallet.boundAddress.get("balance")) {
 								app.activeWallet.boundAddress.set("balance", data.address.balance);
 
 								walletChannel.trigger("wallet:balanceChanged", data.address.balance);

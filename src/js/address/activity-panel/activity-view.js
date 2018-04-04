@@ -1,10 +1,17 @@
-import {ItemView} from "backbone.marionette";
+import {ItemView, LayoutView} from "backbone.marionette";
 import template from "./activity-template.hbs";
 
-export default ItemView.extend({
+import CommonMetaView from "../../transaction/commonmeta/view";
+import krist from "../../utils/krist";
+
+export default LayoutView.extend({
 	template: template,
 	tagName: "li",
 	className: "activity-transaction",
+
+	regions: {
+		metadata: ".meta"
+	},
 
 	modelEvents: {
 		"change": "render"
@@ -20,7 +27,8 @@ export default ItemView.extend({
 			name: this.model.get("name"),
 			metadata: this.model.get("metadata"),
 			a: this.model.get("to") === "a",
-			toName: this.model.get("to") === "name"
+			toName: this.model.get("to") === "name",
+			commonMeta: krist.parseCommonMeta(this.model.get("metadata"))
 		};
 	},
 
@@ -36,5 +44,11 @@ export default ItemView.extend({
 
 	onRender() {
 		this.$("time").timeago();
+
+		if (this.model.get("metadata")) {
+			this.metadata.show(new CommonMetaView({
+				model: this.model
+			}));
+		}
 	}
 });

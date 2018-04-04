@@ -43,6 +43,12 @@ export default ItemView.extend({
 		}
 	},
 
+	templateHelpers: {
+		krist(number) {
+			return Number(number).toLocaleString() + " KST";
+		}
+	},
+
 	serializeData() {
 		return {
 			address: this.model.get("address"),
@@ -50,7 +56,8 @@ export default ItemView.extend({
 			icon: this.model.get("icon"),
 			username: this.model.get("username"),
 			format: this.model.get("format"),
-			active: app.activeWallet && app.activeWallet == this.model
+			active: app.activeWallet && app.activeWallet == this.model,
+			balance: this.model.get("balance")
 		};
 	},
 

@@ -23,6 +23,10 @@ export default LayoutView.extend({
 		appChannel.on("syncNode:changed", () => {
 			if (!this.isDestroyed) this.loadData();
 		});
+
+		appChannel.on("krist:block", () => {
+			if (!this.isDestroyed) this.loadData();
+		});
 	},
 
 	loadData() {
