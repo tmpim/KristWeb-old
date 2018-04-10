@@ -157,14 +157,13 @@ export default AppRouter.extend({
 	},
 
 	name(name) {
-		if (/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst|all)$/.test(name)) {
+		if (/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|all)$/.test(name)) {
 			this.container.show(new NameListView({
 				target: name
 			}));
 		} else {
-			console.log(name);
 			this.container.show(new NameView({
-				name: name.replace(/^(?:[a-z0-9-_]{1,32}@)?/, "").replace(/\.kst$/, "")
+				name: name.replace(/^(?:[a-z0-9-_]{1,32}@)/, "").replace(/\.kst$/, "")
 			}));
 		}
 
