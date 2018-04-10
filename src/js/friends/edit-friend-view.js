@@ -3,7 +3,6 @@ import template from "./edit-friend-template.hbs";
 
 import ConfirmModal from "../modal/confirm/modal";
 import WalletIconModal from "../modal/wallet-icon/modal";
-import Radio from "backbone.radio";
 
 import app from "../app";
 import NProgress from "nprogress";
@@ -54,7 +53,8 @@ export default ItemView.extend({
 		return {
 			address: this.model.get("address"),
 			label: this.model.get("label"),
-			icon: this.model.get("icon")
+			icon: this.model.get("icon"),
+			isName: this.model.get("isName")
 		};
 	},
 
@@ -97,15 +97,13 @@ export default ItemView.extend({
 	onClickSave() {
 		if (!this.$("#friend-address").val()) {
 			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Field is required.");
-
 			return false;
 		} else {
 			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
 		}
 
-		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(this.$el.find("#friend-address").val())) {
-			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
-
+		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/.test(this.$("#friend-address").val())) {
+			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address or name.");
 			return false;
 		} else {
 			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
@@ -120,7 +118,8 @@ export default ItemView.extend({
 		this.model.set({
 			address: address,
 			label: label,
-			icon: icon
+			icon: icon,
+			isName: /^(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst$/.test(address)
 		});
 
 		this.model.save();

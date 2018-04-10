@@ -178,5 +178,5 @@ export default LayoutView.extend({
 		return {
 			appVersion: packageJSON.version
 		};
-	} 
+	}
 });

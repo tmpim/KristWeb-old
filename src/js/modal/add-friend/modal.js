@@ -1,9 +1,6 @@
 import AddFriendModalTemplate from "./template.hbs";
 import AddFriendModalButtons from "./buttons.hbs";
 
-import HelpWalletFormatsTemplate from "./../help/wallet-formats.hbs";
-import HelpSyncNodesTemplate from "./../help/sync-nodes.hbs";
-
 import Modal from "./../modal";
 import WalletIconModal from "./../wallet-icon/modal";
 
@@ -50,9 +47,9 @@ export default Modal.extend({
 			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
 		}
 
-		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9})$/.test(this.$el.find("#friend-address").val())) {
+		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/.test(this.$el.find("#friend-address").val())) {
 			e.preventDefault();
-			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
+			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address or name.");
 
 			return false;
 		} else {
@@ -71,6 +68,7 @@ export default Modal.extend({
 			address: address,
 			label: label,
 			icon: icon,
+			isName: /^(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst$/.test(address),
 			position: app.friends.length,
 			syncNode: app.syncNode
 		});

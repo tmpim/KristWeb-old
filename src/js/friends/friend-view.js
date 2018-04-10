@@ -44,6 +44,7 @@ export default ItemView.extend({
 			address: this.model.get("address"),
 			label: this.model.get("label"),
 			icon: this.model.get("icon"),
+			isName: this.model.get("isName"),
 			active: app.selectedFriend && app.selectedFriend == this.model
 		};
 	},

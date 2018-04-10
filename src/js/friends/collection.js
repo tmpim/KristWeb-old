@@ -1,8 +1,6 @@
 import {Collection} from "backbone";
 import LocalStorage from "backbone.localstorage";
 
-import app from "../app";
-
 import FriendModel from "./model";
 import EncryptedLocalStorage from "../application/encrypted-local-storage";
 

@@ -162,8 +162,9 @@ export default AppRouter.extend({
 				target: name
 			}));
 		} else {
+			console.log(name);
 			this.container.show(new NameView({
-				name: name
+				name: name.replace(/^(?:[a-z0-9-_]{1,32}@)?/, "").replace(/\.kst$/, "")
 			}));
 		}
 

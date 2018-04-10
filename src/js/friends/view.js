@@ -1,6 +1,3 @@
-import $ from "jquery";
-import _ from "lodash";
-
 import {LayoutView} from "backbone.marionette";
 import template from "./template.hbs";
 
