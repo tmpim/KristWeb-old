@@ -1,4 +1,3 @@
-import {history} from "backbone";
 import {ItemView} from "backbone.marionette";
 import template from "./template.hbs";
 
