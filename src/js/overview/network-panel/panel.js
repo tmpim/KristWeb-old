@@ -13,6 +13,12 @@ import Radio from "backbone.radio";
 
 let appChannel = Radio.channel("global");
 
+const scaleMap = {
+	"linear": d3.scale.linear(),
+	"log2": d3.scale.log().base(2),
+	"log10": d3.scale.log().base(10)
+};
+
 export default LayoutView.extend({
 	template: template,
 	className: "panel",
@@ -43,8 +49,21 @@ export default LayoutView.extend({
 		});
 	},
 
+	templateHelpers() {
+		return {
+			scale: this.scale || "linear"
+		};
+	},
+
 	onRender() {
 		let self = this;
+
+		this.$("#network-chart-scale").selectize({
+			onChange() {
+				self.scale = self.$("#network-chart-scale").val();
+				self.render();
+			}
+		});
 
 		if (this.work) {
 			nv.addGraph(() => {
@@ -54,15 +73,17 @@ export default LayoutView.extend({
 				let chart = nv.models.lineChart()
 					.showLegend(false)
 					.useInteractiveGuideline(true)
-					.interpolate("basis");
+					.interpolate("basis")
+					.height(256);
 
 				chart.xAxis.axisLabel("Time")
-					.tickFormat(d => {
-						return (length - d) >= 60 ? (Math.floor((length - d) / 60)) + "h" : (length - d) <= 1 ? "now" : (length - d) + "m";
-					});
+					.tickFormat(d => (length - d) >= 60 ? (Math.floor((length - d) / 60)) + "h" : (length - d) <= 1 ? "now" : (length - d) + "m");
 
 				chart.yAxis.axisLabel("Work")
 					.tickFormat(d => d.toLocaleString());
+
+				if (self.scale && self.scale !== "linear") chart.yScale(scaleMap[self.scale]);
+				chart.forceY([500, 100000]);
 
 				d3.select("#network-chart")
 					.datum([{

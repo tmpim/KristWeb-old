@@ -55,6 +55,8 @@ Handlebars.registerHelper("addressLabel", address => {
 	return new Handlebars.SafeString((label ? label.get("label") : address) || address);
 });
 
+Handlebars.registerHelper("ifeq", function(a, b, options) { return (a === b ? options.fn : options.inverse)(this); });
+
 if (window.__agent) {
 	window.__agent.start(Backbone, Marionette);
 }
