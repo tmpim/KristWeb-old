@@ -149,8 +149,18 @@
 			flex-wrap: wrap;
 			flex: 1;
 
-			input, #recipient-container {
+			input, #recipient-container, .send-amount-container {
 				width: 100%;
+			}
+
+			.send-amount-container {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+
+				.input-group-addons {
+					margin-right: 0.5rem;
+				}
 			}
 
 			.action {

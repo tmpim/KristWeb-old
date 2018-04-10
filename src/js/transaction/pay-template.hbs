@@ -3,11 +3,14 @@
 <div class="row text-center m-b-1">
 	<div class="col-xs-12 top">
 		<span class="action">Send</span>
-		<div class="input-group-addons">
-			<input type="number" class="text-input" placeholder="Amount" id="amount" tabindex="1" min="1" value="1" />
-			<div class="input-addon">
-				KST
+		<div class="send-amount-container">
+			<div class="input-group-addons">
+				<input type="number" class="text-input" placeholder="Amount" id="amount" tabindex="1" min="1" value="1" />
+				<div class="input-addon">
+					KST
+				</div>
 			</div>
+			<a class="button button-red send-amount-max" id="send-amount-max" tabindex="7">Max</a>
 		</div>
 		<label for="amount" class="label-hint label-hidden" id="amount-label">&nbsp;</label>
 		<label for="recipient" class="action">to</label>

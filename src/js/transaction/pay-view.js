@@ -3,7 +3,8 @@ import $ from "jquery";
 import {LayoutView} from "backbone.marionette";
 import template from "./pay-template.hbs";
 
-import Transaction from "./model";
+import ConfirmModal from "../modal/confirm/modal";
+import templatePayLargeConfirm from "./pay-large-confirm.hbs";
 
 import RecipientContainer from "./recipient-container";
 
@@ -22,10 +23,12 @@ export default LayoutView.extend({
 	id: "make-transaction",
 
 	ui: {
+		max: "#send-amount-max",
 		send: "#transaction-send"
 	},
 
 	triggers: {
+		"click @ui.max": "click:max",
 		"click @ui.send": "click:send"
 	},
 
@@ -53,6 +56,10 @@ export default LayoutView.extend({
 		this.recipientContainer.show(this.recipientView);
 	},
 
+	onClickMax() {
+		this.$el.find("#amount").val(app.activeWallet.get("balance").toString());
+	},
+
 	onClickSend() {
 		let recipient = this.$el.find("#recipient").val();
 
@@ -76,7 +83,33 @@ export default LayoutView.extend({
 
 		let metadata = this.$el.find("#metadata").val().substring(0, 255) || null;
 
-		let self = this;
+		if (app.activeWallet && app.activeWallet.get("balance")) {
+			const balance = app.activeWallet.get("balance");
+
+			if (amount >= balance / 2) {
+				const self = this;
+				return app.layout.modals.show(new (ConfirmModal.extend({
+					title: "Send Krist",
+					extraData: {
+						text: templatePayLargeConfirm({
+							amount: amount.toLocaleString() + " KST",
+							all: balance === amount
+						}),
+						bad: true
+					},
+
+					submit() {
+						self.send(recipient, amount, metadata);
+					}
+				}))());
+			}
+		}
+
+		this.send(recipient, amount, metadata);
+	},
+
+	send(recipient, amount, metadata) {
+		const self = this;
 
 		NProgress.start();
 
