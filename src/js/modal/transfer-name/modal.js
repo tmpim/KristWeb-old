@@ -51,7 +51,7 @@ export default Modal.extend({
 	beforeSubmit() {
 		let recipient = this.$("#recipient").val();
 
-		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/.test(recipient)) {
+		if (!recipient || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|[a-z0-9]{1,64}\.kst)$/i.test(recipient)) {
 			this.$("#recipient-label").removeClass("label-hidden").addClass("text-red").text("Invalid address.");
 
 			return false;

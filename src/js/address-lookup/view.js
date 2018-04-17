@@ -25,7 +25,7 @@ export default LayoutView.extend({
 
 		let address = this.$el.find("#address").val();
 
-		if (!address || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/.test(address)) {
+		if (!address || !/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/i.test(address)) {
 			this.$("#address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address or name.");
 			return;
 		} else {

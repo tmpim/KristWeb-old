@@ -102,7 +102,7 @@ export default ItemView.extend({
 			this.$("#friend-address-label").addClass("label-hidden").removeClass("text-red");
 		}
 
-		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/.test(this.$("#friend-address").val())) {
+		if (!/^(?:[a-f0-9]{10}|k[a-z0-9]{9}|(?:[a-z0-9-_]{1,32}@)?[a-z0-9]{1,64}\.kst)$/i.test(this.$("#friend-address").val())) {
 			this.$("#friend-address-label").removeClass("label-hidden").addClass("text-red").text("Invalid address or name.");
 			return false;
 		} else {
