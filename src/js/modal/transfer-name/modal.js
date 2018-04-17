@@ -28,7 +28,7 @@ export default Modal.extend({
 		this.$(".bbm-modal").css("overflow", "visible");
 
 		this.recipientView = new RecipientContainer();
-		this.$("#recipient-container").append(this.recipientView.render().el);
+		this.$("#recipient-container").empty().append(this.recipientView.render().el);
 
 		let recipient = this.$("#recipient");
 
