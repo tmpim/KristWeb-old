@@ -53,13 +53,14 @@
 	animation-fill-mode: both;
 
 	max-width: 620px;
-	max-height: calc(100vh - 2rem);
+	max-height: calc(100vh - 4rem);
 
 	overflow-x: hidden;
 	overflow-y: auto;
 
 	@media screen and (max-width: $break-small) {
 		min-width: 128px;
+		max-height: calc(100vh - 8rem);
 		width: 95vw;
 		font-size: 95%;
 	}
