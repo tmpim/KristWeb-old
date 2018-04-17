@@ -1,24 +1,24 @@
 <div class="top">
 	{{#if name}}
 		{{#if toName}}
-			{{> address address=from name=commonMeta.return class="from" }}
+			{{> "/_address" address=from name=commonMeta.return class="from" }}
 			<span class="action">&nbsp;purchased&nbsp;</span>
 			<a href="/name/{{name}}" class="value">{{name}}</a>.kst
 		{{else if a}}
-			{{> address address=from name=commonMeta.return class="from" }}
+			{{> "/_address" address=from name=commonMeta.return class="from" }}
 			<span class="action">&nbsp;updated&nbsp;</span>
 			<a href="/name/{{name}}" class="value">{{name}}</a>.kst
 		{{else}}
-			{{> address address=from name=commonMeta.return class="from" }}
+			{{> "/_address" address=from name=commonMeta.return class="from" }}
 			<span class="action">
 				<i class="icon-right"></i>
 				<a href="/name/{{name}}" class="value">{{name}}</a>.kst
 				<i class="icon-right"></i>
 			</span>
-			{{> address address=to name=commonMeta.recipient class="to" }}
+			{{> "/_address" address=to name=commonMeta.recipient class="to" }}
 		{{/if}}
 	{{else}}
-		{{> address address=from name=commonMeta.return class="from" }}
+		{{> "/_address" address=from name=commonMeta.return class="from" }}
 		<span class="action">
 			<i class="icon-right"></i>
 			{{#if name}}
@@ -28,7 +28,7 @@
 			{{/if}}
 			<i class="icon-right"></i>
 		</span>
-		{{> address address=to name=commonMeta.recipient class="to" }}
+		{{> "/_address" address=to name=commonMeta.recipient class="to" }}
 	{{/if}}
 </div>
 <div class="info">

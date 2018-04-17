@@ -8,8 +8,6 @@ import WebsocketService from "./websockets";
 
 import Address from "../address/model";
 
-import Alert from "../alert/view";
-
 import WalletCollection from "../wallet/collection";
 import WalletChooserView from "../wallet/chooser-view";
 import WalletInfoView from "../wallet/view-wallet-info";

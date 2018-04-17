@@ -61,46 +61,26 @@
 
 		loaderText.innerText = "Loading required files";
 
-		var vendor = new XMLHttpRequest();
+		var app = new XMLHttpRequest();
 
-		vendor.addEventListener("progress", function (e) {
+		app.addEventListener("progress", function (e) {
 			if (e.lengthComputable) {
-				loaderText.innerText = "Loading required files (" + Math.floor(e.loaded / e.total * 100) + "%)";
+				loaderText.innerText = "Loading KristWeb (" + Math.floor(e.loaded / e.total * 100) + "%)";
 				progress.style.width = (Math.floor(e.loaded / e.total * progressBar.offsetWidth)) + "px";
 			} else {
-				loaderText.innerText = "Loading required files";
+				loaderText.innerText = "Loading KristWeb";
 			}
 		});
 
-		vendor.addEventListener("load", function () {
+		app.addEventListener("load", function () {
+			progressBar.style.opacity = 0;
 			loaderText.innerText = "Loading...";
 
 			eval(this.responseText);
-
-			var app = new XMLHttpRequest();
-
-			app.addEventListener("progress", function (e) {
-				if (e.lengthComputable) {
-					loaderText.innerText = "Loading Kristweb (" + Math.floor(e.loaded / e.total * 100) + "%)";
-					progress.style.width = (Math.floor(e.loaded / e.total * progressBar.offsetWidth)) + "px";
-				} else {
-					loaderText.innerText = "Loading Kristweb";
-				}
-			});
-
-			app.addEventListener("load", function () {
-				progressBar.style.opacity = 0;
-				loaderText.innerText = "Loading...";
-
-				eval(this.responseText);
-			});
-
-			app.open("GET", "/js/app.js");
-			app.send();
 		});
 
-		vendor.open("GET", "/js/vendor.js");
-		vendor.send();
+		app.open("GET", "/js/app.js");
+		app.send();
 	</script>
 </body>
 </html>

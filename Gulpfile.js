@@ -1,148 +1,86 @@
-var gulp = require("gulp");
-var $ = require("gulp-load-plugins")();
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
-var buffer = require("vinyl-buffer");
-var nodeResolve = require('resolve');
-var _ = require("lodash");
+const _ = require("lodash");
+const gulp = require("gulp");
+const $ = require("gulp-load-plugins")();
 
-gulp.task("html", function() {
-	return gulp.src("./src/index.html")
-		.pipe($.plumber())
-		.pipe(gulp.dest("./dist"));
-});
+const eslint = require("rollup-plugin-eslint");
+const resolve = require("rollup-plugin-node-resolve");
+const commonjs = require("rollup-plugin-commonjs");
+const rootImport = require("rollup-plugin-root-import");
+const handlebars = require("rollup-plugin-handlebars-plus");
+const json = require("rollup-plugin-json");
+const globals = require("rollup-plugin-node-globals");
+const builtins = require("rollup-plugin-node-builtins");
+const uglify = require("rollup-plugin-uglify");
 
-gulp.task("files", function() {
+gulp.task("html", () => gulp.src("./src/index.html")
+		.pipe(gulp.dest("./dist")));
+
+gulp.task("files", () => {
 	gulp.src("./src/font/**/*.*").pipe(gulp.dest("./dist/font"));
 	gulp.src("./src/img/**/*.*").pipe(gulp.dest("./dist/img"));
 });
 
-gulp.task("sass", function() {
-	return gulp
-		.src("./src/scss/**/*.scss")
-		.pipe($.sass({ errLogToConsole: true, outputStyle: "compressed"	})
-		.on("error", $.sass.logError))
-		.pipe(gulp.dest("./dist/css"));
-});
+gulp.task("sass", () => gulp
+	.src("./src/scss/**/*.scss")
+	.pipe($.sass({ errLogToConsole: true, outputStyle: "compressed"	})
+	.on("error", $.sass.logError))
+	.pipe(gulp.dest("./dist/css")));
 
-gulp.task("lint", function() {
-	return gulp.src(["src/js/**/*.js", "!src/js/**/*.min.js", "!src/js/libs/**/*.js"])
-		.pipe($.eslint({
-			extends: "eslint:recommended",
-			parser: "babel-eslint",
-			parserOptions: {
-				sourceType: "module",
-				ecmaFeatures: {
-					modules: true
+gulp.task("js", () => gulp
+	.src("./src/js/app.js")
+	.pipe($.sourcemaps.init({ loadMaps: true }))
+	.pipe($.betterRollup({
+		plugins: [
+			eslint({
+				exclude: [ "**/*.hbs", "**/*.json" ]
+			}),
+			resolve({
+				browser: true,
+				extensions: [ ".js", ".json" ],
+				preferBuiltins: false
+			}),
+			rootImport({
+				root: [`${__dirname}/src/js/partials/`]
+			}),
+			handlebars({
+				helpers: [`${__dirname}/src/js/helpers/helpers.js`],
+				partialRoot: [`${__dirname}/src/js/partials/`]
+			}),
+			commonjs({
+				include: "node_modules/**",
+				namedExports: {
+					"./node_modules/backbone.marionette/lib/core/backbone.marionette.js": ["VERSION", "noConflict", "Deferred", "extend", "isNodeAttached", "mergeOptions", "getOption", "proxyGetOption", "_getValue", "normalizeMethods", "normalizeUIString", "normalizeUIKeys", "normalizeUIValues", "actAsCollection", "_triggerMethod", "triggerMethod", "triggerMethodOn", "MonitorDOMRefresh", "Error", "Callbacks", "Controller", "Object", "Region", "RegionManager", "TemplateCache", "Renderer", "View", "ItemView", "CollectionView", "CompositeView", "LayoutView", "Behavior", "Behaviors", "AppRouter", "Application", "Module", ],
+					"./node_modules/backbone/": ["VERSION", "noConflict", "$", "emulateHTTP", "emulateJSON", "sync", "ajax", "history", "Model", "Collection", "Router", "View", "History"]
 				}
-			},
-			plugins: [
-				"babel"
-			],
-			envs: [
-				"browser",
-				"es6",
-				"commonjs"
-			],
-			ecmaFeatures: {
-				sourceType: "module"
-			},
-			rules: {
-				"no-unused-vars": 0,
-				"no-console": 0,
-				"quotes": ["error", "double"],
-				"semi": ["error", "always"]
-			}
-		}))
-		.pipe($.eslint.formatEach("compact", process.stderr));
-});
-
-var vendorBundler = _.memoize(function() {
-	var b = browserify();
-
-	getNPMPackageIds().forEach(function (id) {
-		b.require(nodeResolve.sync(id), { expose: id });
-	});
-
-	return b;
-});
-
-var appBundler = _.memoize(function() {
-	var b = browserify("./src/js/app.js");
-
-	getNPMPackageIds().forEach(function (id) {
-		b.external(id);
-	});
-
-	return b;
-});
-
-function handleErrors() {
-	var args = Array.prototype.slice.call(arguments);
-	delete args[0].stream;
-	$.util.log.apply(null, args);
-	this.emit("end");
-}
-
-function vendorBundle(cb) {
-	return vendorBundler().bundle()
-		.on("error", handleErrors)
-		.pipe(source("vendor.js"))
-		.pipe(buffer())
-		.pipe($.uglify())
-		.pipe(gulp.dest("./dist/js"))
-		.on("end", cb);
-}
-
-function appBundle(cb, watch) {
-	return appBundler(watch).bundle()
-		.on("error", handleErrors)
-		.pipe(source("app.js"))
-		.pipe(buffer())
-		.pipe($.uglify())
-		.pipe(gulp.dest("./dist/js"))
-		.on("end", cb);
-}
-
-function getNPMPackageIds() {
-	return _.union(_.keys(require('./package.json').dependencies) || [], [
-		"browserify-cryptojs/components/enc-base64",
-		"browserify-cryptojs/components/md5",
-		"browserify-cryptojs/components/evpkdf",
-		"browserify-cryptojs/components/cipher-core",
-		"browserify-cryptojs/components/aes",
-		"browserify-cryptojs/components/sha256"
-	]);
-}
-
-gulp.task("vendor", function(cb) {
-	vendorBundle(cb);
-});
-
-gulp.task("app", function(cb) {
-	appBundle(cb, true);
-});
+			}),
+			json(),
+			globals(),
+			builtins(),
+			// uglify()
+		]
+	}, "umd"))
+	.on("error", console.error)
+	.pipe($.sourcemaps.write("."))
+	.pipe(gulp.dest("./dist/js")));
 
 gulp.task("build", [
 	"html",
 	"sass",
-	"lint",
-	"vendor",
-	"app",
+	"js",
 	"files"
 ]);
 
-gulp.task("watch", ["build"], function() {
+gulp.task("watch", ["build"], () => {
 	gulp.watch("./src/scss/**/*.scss", ["sass"]);
 	gulp.watch("./src/**/*.html", ["html"]);
-	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["app", "lint"]);
+	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["js"]);
 	gulp.watch(["./src/img/**/*.*", "./src/font/**/*.*"], ["files"]);
 });
 
-gulp.task("watchWithoutBuild", ["html", "sass", "app", "files", "lint"], function() {
+gulp.task("watchWithoutBuild", ["html", "sass", "js", "files"], () => {
 	gulp.watch("./src/scss/**/*.scss", ["sass"]);
 	gulp.watch("./src/**/*.html", ["html"]);
-	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["app", "lint"]);
+	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["js"]);
 	gulp.watch(["./src/img/**/*.*", "./src/font/**/*.*"], ["files"]);
 });
 

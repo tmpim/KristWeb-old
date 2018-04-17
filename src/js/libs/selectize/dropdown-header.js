@@ -14,6 +14,8 @@
  * @author Brian Reavis <brian@thirdroute.com>
  */
 
+/* eslint-disable */
+
 import Selectize from "selectize";
 
 Selectize.define('dropdown_header', function(options) {
