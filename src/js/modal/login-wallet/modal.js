@@ -85,7 +85,7 @@ export default Modal.extend({
 
 		this.$("#wallet-password").on("keyup change click", () => {
 			let password = this.$("#wallet-password").val();
-			let strength = zxcvbn(password);
+			const score = password.length >= 128 ? 5 : zxcvbn(password).score;
 
 			for (let i = 0; i <= 4; i++) {
 				this.$("#password-strength").removeClass(`s${i}`);
@@ -96,12 +96,12 @@ export default Modal.extend({
 					this.$(segment).removeClass(`s${i}`);
 				}
 
-				if (i <= strength.score) {
-					this.$(segment).addClass(`s${strength.score}`);
+				if (i <= score) {
+					this.$(segment).addClass(`s${score}`);
 				}
 			});
 
-			this.$("#password-strength").addClass(`s${strength.score}`);
+			this.$("#password-strength").addClass(`s${score}`);
 		});
 	},
 
