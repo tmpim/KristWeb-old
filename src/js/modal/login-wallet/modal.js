@@ -85,12 +85,7 @@ export default Modal.extend({
 
 		this.$("#wallet-password").on("keyup change click", () => {
 			let password = this.$("#wallet-password").val();
-			if (password.length >= 128) {
-				let score = 5;
-			} else {
-				let strength = zxcvbn(password);
-				let score = strength.score;
-			}
+			const score = password.length >= 128 ? 5 : zxcvbn(password).score;
 
 			for (let i = 0; i <= 4; i++) {
 				this.$("#password-strength").removeClass(`s${i}`);
