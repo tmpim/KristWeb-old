@@ -43,12 +43,6 @@ export default ItemView.extend({
 		}
 	},
 
-	templateHelpers: {
-		krist(number) {
-			return Number(number).toLocaleString() + " KST";
-		}
-	},
-
 	serializeData() {
 		return {
 			address: this.model.get("address"),

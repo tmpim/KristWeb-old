@@ -12,7 +12,7 @@ export default LayoutView.extend({
 	className: "activity-transaction",
 
 	regions: {
-		metadata: ".meta" 
+		metadata: ".meta"
 	},
 
 	serializeData() {
@@ -29,12 +29,6 @@ export default LayoutView.extend({
 			toName: this.model.get("to") === "name",
 			commonMeta: krist.parseCommonMeta(this.model.get("metadata"))
 		};
-	},
-
-	templateHelpers: {
-		krist(number) {
-			return Number(number).toLocaleString() + " KST";
-		}
 	},
 
 	onAttach() {

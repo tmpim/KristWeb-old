@@ -1,6 +1,6 @@
 {
   "name": "kristweb",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Krist Web Wallet",
   "main": "index.html",
   "scripts": {

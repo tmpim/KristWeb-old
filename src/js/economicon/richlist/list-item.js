@@ -20,11 +20,5 @@ export default ItemView.extend({
 			label: (app.friends && (app.friends.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }) && app.friends.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }).get("label"))) ||
 			(app.wallets && (app.wallets.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }) && app.wallets.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }).get("label")))
 		};
-	},
-
-	templateHelpers: {
-		krist(number) {
-			return Number(number).toLocaleString() + " KST";
-		}
 	}
 });

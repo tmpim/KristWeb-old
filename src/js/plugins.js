@@ -57,6 +57,10 @@ Handlebars.registerHelper("addressLabel", address => {
 
 Handlebars.registerHelper("ifeq", function(a, b, options) { return (a === b ? options.fn : options.inverse)(this); });
 
+Handlebars.registerHelper("krist", function(number) {
+	return Number(number).toLocaleString() + " KST";
+});
+
 if (window.__agent) {
 	window.__agent.start(Backbone, Marionette);
 }

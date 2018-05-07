@@ -27,10 +27,6 @@ export default ItemView.extend({
 	},
 
 	templateHelpers: {
-		krist(number) {
-			return Number(number).toLocaleString() + " KST";
-		},
-
 		localise(number) {
 			return Number(number).toLocaleString();
 		},

@@ -141,7 +141,13 @@ export default LayoutView.extend({
 
 			self.overview.show(new AlertView({
 				title: "Success",
-				text: `Successfully sent ${amount.toLocaleString()} KST to ${recipient}.`,
+				parts: [
+					"Successfully sent ",
+					{ type: "krist", amount },
+					" to ",
+					{ type: "address", address: recipient },
+					"."
+				],
 				style: "green"
 			}));
 		}).fail(response => {

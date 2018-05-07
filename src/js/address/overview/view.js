@@ -29,10 +29,6 @@ export default ItemView.extend({
 	},
 
 	templateHelpers: {
-		krist(number) {
-			return Number(number).toLocaleString() + " KST";
-		},
-
 		pluralize(number, single, plural) {
 			return Number(number) == 1 ? single : plural;
 		}

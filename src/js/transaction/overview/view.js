@@ -31,10 +31,6 @@ export default LayoutView.extend({
 	},
 
 	templateHelpers: {
-		krist(number) {
-			return Number(number).toLocaleString() + " KST";
-		},
-
 		localise(number) {
 			return Number(number).toLocaleString();
 		}
