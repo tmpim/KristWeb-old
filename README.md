@@ -10,10 +10,7 @@ KristWeb is a web wallet for Krist. It runs fully clientside and supports loggin
 * KristPay
 
 ## High priority
-* Economicon pages: latest blocks, address lookup, lowest hashes
-* Block browser
 * Settings page: notifications, themes
-* Wallet importing and exporting between clients
 * Displaying the Krist supply (requires API call)
 
 ## Other stuff
