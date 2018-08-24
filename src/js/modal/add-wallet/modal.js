@@ -145,12 +145,12 @@ export default Modal.extend({
 					this.$(segment).removeClass(`s${i}`);
 				}
 
-				if (i <= strength.score) {
-					this.$(segment).addClass(`s${strength.score}`);
+				if (i <= score) {
+					this.$(segment).addClass(`s${score}`);
 				}
 			});
 
-			this.$("#password-strength").addClass(`s${strength.score}`);
+			this.$("#password-strength").addClass(`s${score}`);
 		});
 	},
 
