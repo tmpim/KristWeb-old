@@ -7,14 +7,22 @@ import ImportWalletsModalButtons from "./buttons.hbs";
 
 import Modal from "./../modal";
 import Wallet from "../../wallet/model.js";
-
-import NProgress from "nprogress";
+import Friend from "../../friends/model.js";
 
 export default Modal.extend({
 	dialog: ImportWalletsModalTemplate,
 	buttons: ImportWalletsModalButtons,
 
 	title: "Import Wallets",
+
+	onShow() {
+		this.$("#wallets-code-file-import").change(() => {
+			const file = this.$("#wallets-code-file-import")[0].files[0];
+			const reader = new FileReader();
+			reader.readAsText(file, "UTF-8");
+			reader.onload = e =>	this.$("#wallets-code").val(e.target.result);
+		});
+	},
 
 	beforeSubmit(e) {
 		if (!this.$el.find("#master-password").val()) {
@@ -35,9 +43,17 @@ export default Modal.extend({
 			this.$el.find("#code-label").addClass("label-hidden").removeClass("text-red");
 		}
 
-		let rawData = this.$el.find("#wallets-code").val();
-		let plainData = window.atob(rawData);
-		let data = JSON.parse(plainData);
+		let rawData, plainData, data;
+		try {
+			rawData = this.$el.find("#wallets-code").val();
+			plainData = window.atob(rawData);
+			data = JSON.parse(plainData);
+		} catch (err) {
+			e.preventDefault();
+			console.error(err);
+			this.$el.find("#code-label").removeClass("label-hidden").addClass("text-red").text("Code is invalid.");
+			return false;			
+		}
 
 		let pass = this.$el.find("#master-password").val();
 
@@ -58,30 +74,30 @@ export default Modal.extend({
 
 			return false;
 		}
-	},
 
-	submit() {
-		NProgress.start();
+		try {
+			_.forOwn(data.wallets, (value, key) => {
+				if (!key.startsWith("Wallet-")) return;
 
-		let rawData = this.$el.find("#wallets-code").val();
-		let plainData = window.atob(rawData);
-		let data = JSON.parse(plainData);
-
-		let pass = this.$el.find("#master-password").val();
-
-		_.forOwn(data.wallets, (value, key) => {
-			if (!key.startsWith("Wallet-")) return;
-
-			try {
 				let walletData = JSON.parse(window.CryptoJS.AES.decrypt(value, pass).toString(window.CryptoJS.enc.Utf8));
 				let wallet = new Wallet(walletData);
 				app.wallets.add(wallet);
 				wallet.save();
-			} catch (e) {
-				console.error(e);
-			}
-		});
+			});
 
-		NProgress.done();
+			_.forOwn(data.friends, (value, key) => {
+				if (!key.startsWith("Friend-")) return;
+
+				let friendData = JSON.parse(window.CryptoJS.AES.decrypt(value, pass).toString(window.CryptoJS.enc.Utf8));
+				let friend = new Friend(friendData);
+				app.friends.add(friend);
+				friend.save();
+			});
+		} catch (err) {
+			e.preventDefault();
+			console.error(err);
+			this.$el.find("#code-label").removeClass("label-hidden").addClass("text-red").text("Data is invalid.");
+			return false;			
+		}
 	}
 });
