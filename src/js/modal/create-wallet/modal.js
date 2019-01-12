@@ -30,7 +30,8 @@ export default Modal.extend({
 		"click #wallet-password-reload": "generatePassword",
 		"click .wallet-format-help": "walletFormatHelp",
 		"click .sync-node-help": "syncNodeHelp",
-		"click #wallet-icon": "changeIcon"
+		"click #wallet-icon": "changeIcon",
+		"click #advanced-collapse-button": "clickAdvancedCollapse"
 	},
 
 	walletFormatHelp() {
@@ -71,6 +72,11 @@ export default Modal.extend({
 				self.$("#wallet-icon").text("Icon").css("background-image", "");
 			}
 		}))());
+	},
+
+	clickAdvancedCollapse() {
+		this.$("#advanced-collapse-button + .collapse-inner").slideToggle();
+		this.$("#advanced-collapse-button .collapse-arrow").toggleClass("collapse-arrow-open");
 	},
 
 	onShow() {
