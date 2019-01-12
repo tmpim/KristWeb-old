@@ -57,6 +57,7 @@ export default ItemView.extend({
 
 	onClickEdit() {
 		app.layout.modals.show(new (AddWalletModel.extend({
+			title: "Edit Wallet",
 			extraData: {
 				editing: true
 			},

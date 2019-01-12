@@ -15,7 +15,7 @@
 	right: 0;
 
 	margin: 0.5rem;
-	width: 320px;
+	width: 340px;
 
 	z-index: 105;
 
@@ -81,7 +81,7 @@
 
 		overflow-y: auto;
 
-		@media all and (max-width: 320px) {
+		@media all and (max-width: 340px) {
 			max-width: 100%;
 			min-width: unset;
 			max-width: unset;
@@ -178,20 +178,31 @@
 		}
 	}
 
+	&.wallet-create {
+		.wallet-info {
+			font-weight: 400;
+		}
+
+		.wallet-icon {
+			border-color: $primary-green;
+
+			&:before {
+				content: '\e812';
+				color: $primary-green;
+			}
+		}
+	}
+
 	&.wallet-add .wallet-icon:before {
 		content: '\e806';
 	}
 
-	&.wallet-login .wallet-icon:before {
-		content: '\e808';
-	}
-
 	&.wallet-import .wallet-icon:before {
-		content: '\e811';
+		content: '\e80f';
 	}
 
 	&.wallet-export .wallet-icon:before {
-		content: '\e80f';
+		content: '\e811';
 	}
 
 	.wallet-controls {

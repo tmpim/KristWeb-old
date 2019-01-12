@@ -29,6 +29,35 @@
 	}
 }
 
+.wallet-create-password-group {
+	display: flex;
+	flex-direction: row;
+	
+	#wallet-password {
+		border-right: 0;
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		flex: 1;
+
+		font-family: monospace;
+		font-weight: 300;
+		background: $primary-light-grey;
+	}
+
+	.button {
+		margin-right: 0;
+		padding: 0.25rem 0.5rem;
+		border-radius: 0;
+		border-right: 1px solid $primary-blue-darker;
+
+		&:last-child {
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			border-right: 0;
+		}
+	}
+}
+
 #wallet-icon-crop {
 	.cropper-container {
 		margin: 0 auto;

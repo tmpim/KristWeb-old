@@ -1,9 +1,8 @@
 {{#unless editing}}
 	<p class="m-b-1">
-		<b>Enter your secret password to access your Krist wallet.</b><br />
-		If this is your first time using Krist, type your desired password.
+		<b>Enter your secret private key to access your Krist wallet.</b><br />
 		You will be able to access your Krist wallet on any computer, any server and from any wallet as long as you type
-		in the same password.
+		in the same private key.
 	</p>
 {{/unless}}
 
@@ -17,7 +16,7 @@
 <input type="text" class="text-input u-hidden" placeholder="Wallet username" id="wallet-username" tabindex="3" />
 <label for="wallet-username" class="label-hint label-hidden u-hidden" id="wallet-username-label">&nbsp;</label>
 
-<input type="password" class="text-input no-bottom" placeholder="Wallet password" id="wallet-password" tabindex="4" />
+<input type="password" class="text-input no-bottom" placeholder="Wallet private key" id="wallet-password" tabindex="4" />
 <div id="password-strength" class="strength-indicator">
 	<div class="strength-segment"></div>
 	<div class="strength-segment"></div>
@@ -44,3 +43,13 @@
 
 <input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" tabindex="6" />
 <label for="wallet-syncnode" class="label-hint label-hidden" id="wallet-syncnode-label">&nbsp;</label>
+
+{{#unless editing}}
+	<div class="switch-container">
+		Save this wallet in KristWeb
+		<label class="switch" id="wallet-save">
+			<input type="checkbox" checked>
+			<div class="switch-inner"></div>
+		</label>
+	</div>
+{{/unless}}

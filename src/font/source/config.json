@@ -119,6 +119,24 @@
       "css": "upload",
       "code": 59409,
       "src": "fontawesome"
+    },
+    {
+      "uid": "d58dc0a0927a7dea2992f615f2fbf400",
+      "css": "wallet",
+      "code": 59410,
+      "src": "linecons"
+    },
+    {
+      "uid": "a73c5deb486c8d66249811642e5d719a",
+      "css": "reload",
+      "code": 59411,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "c9bef3dc67fea47e94c4a5030ea64dad",
+      "css": "clipboard",
+      "code": 59412,
+      "src": "elusive"
     }
   ]
 }

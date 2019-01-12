@@ -166,6 +166,7 @@ export default Modal.extend({
 		let username = this.$("#wallet-username").val();
 		let format = this.$("#wallet-format").val();
 		let syncNode = this.$("#wallet-syncnode").val();
+		let saveWallet = this.$("#wallet-save input[type=checkbox]").is(":checked");
 		let icon = this.icon;
 
 		let masterkey = "";
@@ -217,8 +218,12 @@ export default Modal.extend({
 				position: app.wallets.length
 			});
 
-			app.wallets.add(wallet);
-			wallet.save();
+			if (saveWallet) {
+				app.wallets.add(wallet);
+				wallet.save();
+			}
+			
+			app.switchWallet(wallet);
 		}
 
 		NProgress.done();

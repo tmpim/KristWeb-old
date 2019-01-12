@@ -5,8 +5,8 @@ import template from "./layout-template.hbs";
 import Backbone from "backbone";
 import Radio from "backbone.radio";
 
+import CreateWalletModal from "../modal/create-wallet/modal";
 import AddWalletModal from "../modal/add-wallet/modal";
-import LoginWalletModal from "../modal/login-wallet/modal";
 import ImportWalletsModal from "../modal/import-wallets/modal";
 import ExportWalletsModal from "../modal/export-wallets/modal";
 
@@ -49,8 +49,8 @@ export default LayoutView.extend({
 		walletChooserButton: "#wallet-chooser-button",
 		walletChooserContainer: "#wallet-chooser-container",
 		walletChooser: "#wallet-chooser",
+		walletChooserCreateWallet: "#wallet-chooser-create-wallet",
 		walletChooserAddWallet: "#wallet-chooser-add-wallet",
-		walletChooserLoginWallet: "#wallet-chooser-login-wallet",
 		walletChooserImportWallets: "#wallet-chooser-import-wallets",
 		walletChooserExportWallets: "#wallet-chooser-export-wallets",
 		topBar: ".topBar",
@@ -62,8 +62,8 @@ export default LayoutView.extend({
 		"click @ui.sidebarOpener": "click:sidebarOpener",
 		"click @ui.sidebarDim": "click:sidebarDim",
 		"click @ui.walletChooserButton": "toggle:walletChooser",
+		"click @ui.walletChooserCreateWallet": "create:wallet",
 		"click @ui.walletChooserAddWallet": "add:wallet",
-		"click @ui.walletChooserLoginWallet": "login:wallet",
 		"click @ui.walletChooserImportWallets": "import:wallets",
 		"click @ui.walletChooserExportWallets": "export:wallets"
 	},
@@ -132,12 +132,12 @@ export default LayoutView.extend({
 		});
 	},
 
-	onAddWallet() {
-		this.modals.show(new AddWalletModal());
+	onCreateWallet() {
+		this.modals.show(new CreateWalletModal());
 	},
 
-	onLoginWallet() {
-		this.modals.show(new LoginWalletModal());
+	onAddWallet() {
+		this.modals.show(new AddWalletModal());
 	},
 
 	onImportWallets() {

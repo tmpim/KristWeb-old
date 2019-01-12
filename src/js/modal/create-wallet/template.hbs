@@ -1,0 +1,23 @@
+<div class="wallet-label-group">
+	<div class="wallet-icon focusable focusable-border" id="wallet-icon" tabindex="1">Icon</div>
+	<input type="text" class="text-input" placeholder="Wallet label (optional)" maxlength="30" id="wallet-label" tabindex="2" />
+</div>
+
+<label for="wallet-label" class="label-hint label-hidden" id="wallet-label-label">&nbsp;</label>
+
+<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+	Wallet Private Key (KristWallet format)
+</p>
+
+<div class="wallet-create-password-group">
+	<input type="text" class="text-input readonly" placeholder="Wallet private key" id="wallet-password" tabindex="3" size="32" readonly />
+	<a class="button button-primary" id="wallet-password-copy" tabindex="4" data-clipboard-target="#wallet-password"><i class="icon icon-clipboard"></i></a>
+	<a class="button button-primary" id="wallet-password-reload" tabindex="5"><i class="icon icon-reload"></i></a>
+</div>
+
+<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+	Sync Node (<a class="sync-node-help" data-bypass>learn more</a>)
+</p>
+
+<input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" tabindex="6" />
+<label for="wallet-syncnode" class="label-hint label-hidden" id="wallet-syncnode-label">&nbsp;</label>

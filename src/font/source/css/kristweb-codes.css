@@ -17,4 +17,7 @@
 .icon-download:before { content: '\e80f'; } /* '' */
 .icon-right:before { content: '\e810'; } /* '' */
 .icon-upload:before { content: '\e811'; } /* '' */
+.icon-wallet:before { content: '\e812'; } /* '' */
+.icon-reload:before { content: '\e813'; } /* '' */
+.icon-clipboard:before { content: '\e814'; } /* '' */
 .icon-hash:before { content: '\f029'; } /* '' */
