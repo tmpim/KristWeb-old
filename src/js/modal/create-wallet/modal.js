@@ -28,12 +28,25 @@ export default Modal.extend({
 
 	events: {
 		"click #wallet-password-reload": "generatePassword",
+		"click .wallet-format-help": "walletFormatHelp",
 		"click .sync-node-help": "syncNodeHelp",
 		"click #wallet-icon": "changeIcon"
 	},
 
+	walletFormatHelp() {
+		app.layout.modals.show(new (Modal.extend({
+			dialog: HelpWalletFormatsTemplate,
+			title: "Help: Wallet Formats"
+		}))());
+	},
+
 	generatePassword() {
-		this.$("#wallet-password").val(password(32)); 
+		this.$("#wallet-password").val(password({
+			length: 32,
+			// exclude some characters that have the possibility to break some badly-programmed forms
+			// underscores are excluded because some browsers don't render them properly
+			exclusions: ["_", " ", "\"", "'", "\\", "%"]
+		})); 
 	},
 
 	syncNodeHelp() {
