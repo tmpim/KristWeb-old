@@ -26,7 +26,8 @@ export default Modal.extend({
   events: {
     "click .wallet-format-help": "walletFormatHelp",
     "click .sync-node-help": "syncNodeHelp",
-    "click #wallet-icon": "changeIcon"
+    "click #wallet-icon": "changeIcon",
+    "click #advanced-collapse-button": "clickAdvancedCollapse"
   },
 
   walletFormatHelp() {
@@ -59,6 +60,11 @@ export default Modal.extend({
       }
     }))());
   },
+
+  clickAdvancedCollapse() {
+    this.$("#advanced-collapse-button + .collapse-inner").slideToggle();
+    this.$("#advanced-collapse-button .collapse-arrow").toggleClass("collapse-arrow-open");
+  }
 
   beforeSubmit(e) {
     if (!this.$el.find("#wallet-password").val()) {
@@ -134,7 +140,7 @@ export default Modal.extend({
 
     this.$("#wallet-password").on("keyup change click", () => {
       let password = this.$("#wallet-password").val();
-      let strength = zxcvbn(password);
+      const score = password.length >= 48 ? 5 : zxcvbn(password).score;
 
       for (let i = 0; i <= 4; i++) {
         this.$("#password-strength").removeClass(`s${i}`);
@@ -145,12 +151,12 @@ export default Modal.extend({
           this.$(segment).removeClass(`s${i}`);
         }
 
-        if (i <= strength.score) {
-          this.$(segment).addClass(`s${strength.score}`);
+        if (i <= score) {
+          this.$(segment).addClass(`s${score}`);
         }
       });
 
-      this.$("#password-strength").addClass(`s${strength.score}`);
+      this.$("#password-strength").addClass(`s${score}`);
     });
   },
 
@@ -166,6 +172,7 @@ export default Modal.extend({
     let username = this.$("#wallet-username").val();
     let format = this.$("#wallet-format").val();
     let syncNode = this.$("#wallet-syncnode").val();
+    let saveWallet = this.$("#wallet-save input[type=checkbox]").is(":checked");
     let icon = this.icon;
 
     let masterkey = "";
@@ -214,8 +221,12 @@ export default Modal.extend({
         position: app.wallets.length
       });
 
-      app.wallets.add(wallet);
-      wallet.save();
+      if (saveWallet) {
+        app.wallets.add(wallet);
+        wallet.save();
+      }
+
+      app.switchWallet(wallet);
     }
 
     NProgress.done();

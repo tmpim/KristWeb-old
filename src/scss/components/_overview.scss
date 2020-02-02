@@ -1,66 +1,66 @@
 #address-overview, #wallet-overview {
-	width: 100%;
+  width: 100%;
 
-	#wallet-overview-container {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		width: 100%;
+  #wallet-overview-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
 
-		.left-col {
-			display: flex;
-			flex-direction: column;
-			line-height: 1;
-			flex-shrink: 0;
+    .left-col {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+      flex-shrink: 0;
 
-			border-right: 1px solid $primary-light-grey;
-			padding-right: 2rem;
+      border-right: 1px solid $primary-light-grey;
+      padding-right: 2rem;
 
-			.address {
-				color: $primary-blue;
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 36px;
-			}
+      .address {
+        color: $primary-blue;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 36px;
+      }
 
-			.balance {
-				color: $primary-green;
-				font-size: 18px;
-			}
-		}
+      .balance {
+        color: $primary-green;
+        font-size: 18px;
+      }
+    }
 
-		.right-col {
-			padding-left: 2rem;
+    .right-col {
+      padding-left: 2rem;
 
-			.button {
-				display: block;
-				width: 100%;
-			}
+      .button {
+        display: block;
+        width: 100%;
+      }
 
-			.badge {
-				margin-top: 0.25rem;
-			}
-		}
+      .badge {
+        margin-top: 0.25rem;
+      }
+    }
 
-		@media screen and (max-width: 700px) {
-			flex-direction: column;
-			align-items: flex-start;
+    @media screen and (max-width: 700px) {
+      flex-direction: column;
+      align-items: flex-start;
 
-			.left-col {
-				border-right: none;
-				padding-right: 0;
-				padding-bottom: 1rem;
-			}
+      .left-col {
+        border-right: none;
+        padding-right: 0;
+        padding-bottom: 1rem;
+      }
 
-			.right-col {
-				padding-left: 0;
-				flex-direction: row;
-				align-items: center;
+      .right-col {
+        padding-left: 0;
+        flex-direction: row;
+        align-items: center;
 
-				.button {
-					margin-right: 1rem;
-				}
-			}
-		}
-	}
+        .button {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
 }

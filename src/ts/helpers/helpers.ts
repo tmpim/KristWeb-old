@@ -23,4 +23,8 @@ export default function(Handlebars) {
   Handlebars.registerHelper("ifeq", function(a, b, options) {
     return (a === b ? options.fn : options.inverse)(this);
   });
+
+  Handlebars.registerHelper("krist", function(number) {
+    return Number(number).toLocaleString() + " KST";
+  });
 }

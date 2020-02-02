@@ -1,14 +1,14 @@
 {{#if wallets}}
-	<optgroup label="Your Wallets" id="recipient-group-wallets">
-		{{#each wallets}}
-			<option value="{{address}}">{{#if label}}{{label}} ({{address}}){{else}}{{address}}{{/if}}</option>
-		{{/each}}
-	</optgroup>
+  <optgroup label="Your Wallets" id="recipient-group-wallets">
+    {{#each wallets}}
+      <option value="{{address}}">{{#if label}}{{label}} ({{address}}){{else}}{{address}}{{/if}}</option>
+    {{/each}}
+  </optgroup>
 {{/if}}
 {{#if friends}}
-	<optgroup label="Address Book" id="recipient-group-friends">
-		{{#each friends}}
-			<option value="{{address}}">{{#if label}}{{label}} ({{address}}){{else}}{{address}}{{/if}}</option>
-		{{/each}}
-	</optgroup>
+  <optgroup label="Address Book" id="recipient-group-friends">
+    {{#each friends}}
+      <option value="{{address}}">{{#if label}}{{label}} ({{address}}){{else}}{{address}}{{/if}}</option>
+    {{/each}}
+  </optgroup>
 {{/if}}

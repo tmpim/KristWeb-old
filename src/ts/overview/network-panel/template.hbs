@@ -1,12 +1,12 @@
 <div class="panel-header">
-	<h4 class="panel-title">Work</h4>
+  <h4 class="panel-title">Work</h4>
 </div>
 <div class="panel-body">
     <svg id="network-chart" height="256"></svg>
 
-	<select class="dropdown-input" id="network-chart-scale" style="width: 100%;">
-		<option value="linear" {{#ifeq scale "linear"}}selected{{/ifeq}}>Linear</option>
-		<option value="log2" {{#ifeq scale "log2"}}selected{{/ifeq}}>Log (base 2)</option>
-		<option value="log10" {{#ifeq scale "log10"}}selected{{/ifeq}}>Log (base 10)</option>
-	</select>
+  <select class="dropdown-input" id="network-chart-scale" style="width: 100%;">
+    <option value="log2" {{#ifeq scale "log2"}}selected{{/ifeq}}>Log (base 2)</option>
+    <option value="log10" {{#ifeq scale "log10"}}selected{{/ifeq}}>Log (base 10)</option>
+    <option value="linear" {{#ifeq scale "linear"}}selected{{/ifeq}}>Linear</option>
+  </select>
 </div>

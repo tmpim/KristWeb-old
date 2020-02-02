@@ -39,12 +39,6 @@ export default View.extend({
     }
   },
 
-  templateContext: {
-    krist(number) {
-      return Number(number).toLocaleString() + " KST";
-    }
-  },
-
   serializeData() {
     return {
       address: this.model.get("address"),
@@ -59,6 +53,7 @@ export default View.extend({
 
   onClickEdit() {
     app.layout.modals.show(new (AddWalletModel.extend({
+      title: "Edit Wallet",
       extraData: {
         editing: true
       },

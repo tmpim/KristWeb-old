@@ -31,12 +31,6 @@ export default View.extend({
     };
   },
 
-  templateContext: {
-    krist(number) {
-      return Number(number).toLocaleString() + " KST";
-    }
-  },
-
   onAttach() {
     this.$("time").timeago();
   },

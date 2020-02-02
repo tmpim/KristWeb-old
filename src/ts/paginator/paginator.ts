@@ -78,7 +78,7 @@ export default View.extend({
 
     if (currentPage <= lastPage - this.slideAmount()) {
       windowStart += (this.shouldSlide(currentPage, windowSize) *
-							this.slideAmount(windowSize, slideScale));
+              this.slideAmount(windowSize, slideScale));
     }
 
     let windowEnd = Math.min(lastPage + 1, windowStart + windowSize);

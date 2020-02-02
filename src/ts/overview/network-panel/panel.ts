@@ -24,6 +24,8 @@ export default View.extend({
   className: "panel",
 
   initialize() {
+    this.scale = "linear";
+    
     this.loadData();
 
     appChannel.on("syncNode:changed", () => {
@@ -55,19 +57,39 @@ export default View.extend({
     };
   },
 
+  updateData() {
+    if (!this.chart) {
+      if (!this.isDestroyed) this.render();
+      return;
+    }
+
+    if (this.scale) this.chart.yScale(scaleMap[this.scale]);
+
+    d3.select("#network-chart")
+      .datum([{
+        values: this.work,
+        key: "Work",
+        color: "#3897d9"
+      }])
+      .call(this.chart);
+  },
+
   onRender() {
-    let self = this;
+    $(".nvtooltip").remove();
+    const scale = this.$("#network-chart-scale");
+    if (scale) scale.selectize()[0].selectize.destroy();
+
+    const self = this;
 
     this.$("#network-chart-scale").selectize({
       onChange() {
         self.scale = self.$("#network-chart-scale").val();
-        self.render();
+        self.updateData();
       }
     });
 
     if (this.work) {
       nv.addGraph(() => {
-        let work = self.work;
         let length = self.work.length;
 
         let chart = nv.models.lineChart()
@@ -76,27 +98,30 @@ export default View.extend({
           .interpolate("basis")
           .height(256);
 
+        self.chart = chart;
+
         chart.xAxis.axisLabel("Time")
           .tickFormat(d => (length - d) >= 60 ? (Math.floor((length - d) / 60)) + "h" : (length - d) <= 1 ? "now" : (length - d) + "m");
 
         chart.yAxis.axisLabel("Work")
           .tickFormat(d => d.toLocaleString());
 
-        if (self.scale && self.scale !== "linear") chart.yScale(scaleMap[self.scale]);
         chart.forceY([500, 100000]);
 
-        d3.select("#network-chart")
-          .datum([{
-            values: work,
-            key: "Work",
-            color: "#3897d9"
-          }])
-          .call(chart);
+        self.updateData();
 
-        nv.utils.windowResize(chart.update);
+        nv.utils.windowResize(self.chart.update);
 
         return chart;
       });
     }
+  },
+
+  onBeforeDestroy() {
+    console.log("Destroying chart");
+    $(".nvtooltip").remove();
+
+    const scale = this.$("#network-chart-scale");
+    if (scale) scale.selectize()[0].selectize.destroy();
   }
 });

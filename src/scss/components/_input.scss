@@ -95,7 +95,7 @@ input {
 
     &.no-bottom {
         border-radius: 3px 3px 0 0;
-		border-bottom: 0;
+    border-bottom: 0;
     }
 }
 
@@ -106,7 +106,7 @@ input {
     border: 1px solid $primary-darker-grey;
 
     .strength-segment {
-		flex: 1;
+    flex: 1;
         border-right: 1px solid $primary-darker-grey;
         height: 6px;
 
@@ -114,50 +114,50 @@ input {
             border-right: 0;
         }
 
-		&.s0, &.s1, &.s2, &.s3, &.s4 {
-			border-right: 1px solid #fff;
+    &.s0, &.s1, &.s2, &.s3, &.s4 {
+      border-right: 1px solid #fff;
 
-			&:last-of-type {
-				border-right: 1px solid $primary-darker-grey;
-			}
+      &:last-of-type {
+        border-right: 1px solid $primary-darker-grey;
+      }
 
-			&:last-child {
-				border-right: 0;
-			}
-		}
-
-		&.s0, &.s1 {
-			background: $primary-red;
-		}
-
-		&.s2 {
-			background: $primary-orange;
-		}
-
-		&.s3 {
-			background: $primary-yellow-green;
-		}
-
-		&.s4 {
-			background: $primary-green;
-		}
+      &:last-child {
+        border-right: 0;
+      }
     }
 
-	&.s0, &.s1 {
-		border-color: $primary-red;
-	}
+    &.s0, &.s1 {
+      background: $primary-red;
+    }
 
-	&.s2 {
-		border-color: $primary-orange;
-	}
+    &.s2 {
+      background: $primary-orange;
+    }
 
-	&.s3 {
-		border-color: $primary-yellow-green;
-	}
+    &.s3 {
+      background: $primary-yellow-green;
+    }
 
-	&.s4 {
-		border-color: $primary-green;
-	}
+    &.s4 {
+      background: $primary-green;
+    }
+    }
+
+  &.s0, &.s1 {
+    border-color: $primary-red;
+  }
+
+  &.s2 {
+    border-color: $primary-orange;
+  }
+
+  &.s3 {
+    border-color: $primary-yellow-green;
+  }
+
+  &.s4 {
+    border-color: $primary-green;
+  }
 }
 
 .label-hint {

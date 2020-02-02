@@ -1,0 +1,31 @@
+<div class="wallet-label-group">
+  <div class="wallet-icon focusable focusable-border" id="wallet-icon" tabindex="1">Icon</div>
+  <input type="text" class="text-input" placeholder="Wallet label (optional)" maxlength="30" id="wallet-label" tabindex="2" />
+</div>
+
+<label for="wallet-label" class="label-hint label-hidden" id="wallet-label-label">&nbsp;</label>
+
+<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+  Wallet Private Key (<a class="wallet-format-help" data-bypass>KristWallet format</a>)
+</p>
+
+<div class="wallet-create-password-group">
+  <input type="text" class="text-input readonly" placeholder="Wallet private key" id="wallet-password" tabindex="3" size="32" readonly />
+  <a class="button button-primary" id="wallet-password-copy" tabindex="4" data-clipboard-target="#wallet-password"><i class="icon icon-clipboard"></i></a>
+  <a class="button button-primary" id="wallet-password-reload" tabindex="5"><i class="icon icon-reload"></i></a>
+</div>
+<p class="text-small text-red">
+  Make sure to save this somewhere <b>secure</b>! It <b>cannot</b> be recovered.
+</p>
+
+<div id="advanced-collapse" class="collapse-container">
+  <h1 class="collapse-button" id="advanced-collapse-button"><span class="collapse-arrow"></span>Advanced Options</h1>
+  <div class="collapse-inner" style="display: none">
+    <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+      Sync Node (<a class="sync-node-help" data-bypass>learn more</a>)
+    </p>
+
+    <input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" tabindex="6" />
+    <label for="wallet-syncnode" class="label-hint label-hidden" id="wallet-syncnode-label">&nbsp;</label>
+  </div>
+</div>

@@ -18,13 +18,7 @@ export default View.extend({
       address: this.model.get("address"),
       balance: this.model.get("balance"),
       label: (app.friends && (app.friends.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }) && app.friends.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }).get("label"))) ||
-			(app.wallets && (app.wallets.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }) && app.wallets.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }).get("label")))
+      (app.wallets && (app.wallets.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }) && app.wallets.findWhere({ address: this.model.get("address"), syncNode: app.syncNode }).get("label")))
     };
-  },
-
-  templateContext: {
-    krist(number) {
-      return Number(number).toLocaleString() + " KST";
-    }
   }
 });

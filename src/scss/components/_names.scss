@@ -1,59 +1,59 @@
 #name-list {
-	.name {
-		line-height: 1.1;
-		border-bottom: 1px solid #eee;
+  .name {
+    line-height: 1.1;
+    border-bottom: 1px solid #eee;
 
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
 }
 
 #name-overview {
-	width: 100%;
+  width: 100%;
 
-	#name-overview-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
+  #name-overview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
-		.top {
-			display: flex;
-			flex: 1;
-			flex-direction: row;
-			align-items: center;
-			justify-content: center;
-			flex-wrap: wrap;
+    .top {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
 
-			.name {
-				font-size: 30px;
+      .name {
+        font-size: 30px;
 
-				.name-name {
-					color: $primary-green;
-					font-family: "Roboto", sans-serif;
-					font-weight: 100;
-				}
-			}
+        .name-name {
+          color: $primary-green;
+          font-family: "Roboto", sans-serif;
+          font-weight: 100;
+        }
+      }
 
-			.action {
-				display: flex;
-				flex-direction: row;
-				align-items: center;
+      .action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
 
-				&.large {
-					font-family: "Roboto", sans-serif;
-					font-weight: 100;
-					font-size: 34px;
-				}
-			}
-		}
-	}
+        &.large {
+          font-family: "Roboto", sans-serif;
+          font-weight: 100;
+          font-size: 34px;
+        }
+      }
+    }
+  }
 
-	#name-edit-container {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		width: 100%;
-	}
+  #name-edit-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
 }

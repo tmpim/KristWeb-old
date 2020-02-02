@@ -1,28 +1,28 @@
 <div class="col-xs-12 m-b-1" id="name-overview-container">
-	<div class="top">
-		<span class="name"><span class="name-name">{{name}}</span>.kst</span>
-	</div>
-	<div class="info">
-		{{#if transferred}}
-			<span class="action large">Sent to</span>
-		{{else}}
-			<span class="action large">Purchased by</span>
-		{{/if}}
-		<span class="owner"><a href="/address/{{owner}}">{{owner}}</a></span>
-	</div>
-	{{#if a}}
-		<div class="a">
-			<span class="text-mini">Points to</span>
-			<a class="a-record" href="{{a}}" data-bypass>{{a}}</a>
-		</div>
-	{{/if}}
-	<div class="bottom">
-		<a href="/name/{{name}}"><time class="text-mini" datetime="{{updated}}"></time></a>
-	</div>
+  <div class="top">
+    <span class="name"><span class="name-name">{{name}}</span>.kst</span>
+  </div>
+  <div class="info">
+    {{#if transferred}}
+      <span class="action large">Sent to</span>
+    {{else}}
+      <span class="action large">Purchased by</span>
+    {{/if}}
+    <span class="owner"><a href="/address/{{owner}}">{{owner}}</a></span>
+  </div>
+  {{#if a}}
+    <div class="a">
+      <span class="text-mini">Points to</span>
+      <a class="a-record" href="{{a}}" data-bypass>{{a}}</a>
+    </div>
+  {{/if}}
+  <div class="bottom">
+    <a href="/name/{{name}}"><time class="text-mini" datetime="{{updated}}"></time></a>
+  </div>
 </div>
 {{#if isOwn}}
-	<div class="col-xs-12 m-b-1" id="name-edit-container">
-		<a class="button button-primary" id="update-a-record">Update A record</a>
-		<a class="button button-primary" id="transfer-name">Transfer</a>
-	</div>
+  <div class="col-xs-12 m-b-1" id="name-edit-container">
+    <a class="button button-primary" id="update-a-record">Update A record</a>
+    <a class="button button-primary" id="transfer-name">Transfer</a>
+  </div>
 {{/if}}

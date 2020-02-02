@@ -1,110 +1,110 @@
 #block-overview {
-	width: 100%;
+  width: 100%;
 
-	#block-overview-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 100%;
+  #block-overview-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 
-		.top {
-			display: flex;
-			flex: 1;
-			flex-direction: row;
-			align-items: center;
-			justify-content: center;
-			flex-wrap: wrap;
+    .top {
+      display: flex;
+      flex: 1;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
 
-			.address {
-				color: $primary-blue;
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 36px;
-			}
+      .address {
+        color: $primary-blue;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 36px;
+      }
 
-			.action {
-				font-size: 30px;
-				margin: 0 0.5rem;
-			}
+      .action {
+        font-size: 30px;
+        margin: 0 0.5rem;
+      }
 
-			.value {
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 36px;
-				color: $primary-green;
-			}
-		}
+      .value {
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 36px;
+        color: $primary-green;
+      }
+    }
 
-		.info {
-			#block-time {
-				display: inline-block;
-				padding: 0 2rem;
+    .info {
+      #block-time {
+        display: inline-block;
+        padding: 0 2rem;
 
-				@media screen and (max-width: $break-small) {
-					display: block;
-				}
-			}
-		}
+        @media screen and (max-width: $break-small) {
+          display: block;
+        }
+      }
+    }
 
-		.panel {
-			max-width: calc(100vw - 2rem);
+    .panel {
+      max-width: calc(100vw - 2rem);
 
-			.hash {
-				word-wrap: break-word;
-			}
-		}
-	}
+      .hash {
+        word-wrap: break-word;
+      }
+    }
+  }
 }
 
 .list-block {
-	 display: flex;
-	 flex-direction: column;
-	 align-items: center;
-	 width: 100%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
 
-	 border-bottom: 1px solid #eee;
+   border-bottom: 1px solid #eee;
 
-	 &:last-child {
-		 border-bottom: 0;
-	 }
+   &:last-child {
+     border-bottom: 0;
+   }
 
-	 .top {
-		 display: flex;
-		 flex: 1;
-		 flex-direction: row;
-		 align-items: center;
-		 justify-content: center;
-		 flex-wrap: wrap;
-		 line-height: 1;
+   .top {
+     display: flex;
+     flex: 1;
+     flex-direction: row;
+     align-items: center;
+     justify-content: center;
+     flex-wrap: wrap;
+     line-height: 1;
 
-		 .from, .to {
-			 color: $primary-blue;
-			 font-size: 18px;
-		 }
+     .from, .to {
+       color: $primary-blue;
+       font-size: 18px;
+     }
 
-		 .action {
-			 display: flex;
-			 flex-direction: row;
-			 align-items: center;
-		 }
+     .action {
+       display: flex;
+       flex-direction: row;
+       align-items: center;
+     }
 
-		 .icon-right {
-			 margin: 0 0.5rem;
-		 }
+     .icon-right {
+       margin: 0 0.5rem;
+     }
 
-		 .value {
-			 font-size: 20px;
-			 color: $primary-green;
-		 }
-	 }
+     .value {
+       font-size: 20px;
+       color: $primary-green;
+     }
+   }
 
-	 .info, .blockinfo {
-		 width: 100%;
-		 text-align: center;
-		 line-height: 1;
-	 }
+   .info, .blockinfo {
+     width: 100%;
+     text-align: center;
+     line-height: 1;
+   }
 
-	.blockinfo {
-		margin-bottom: 0.5rem;
-	}
+  .blockinfo {
+    margin-bottom: 0.5rem;
+  }
  }

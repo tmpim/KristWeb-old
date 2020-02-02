@@ -1,195 +1,195 @@
 .economicon {
-	height: 100%;
+  height: 100%;
 
-	.economicon-tiles {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-		height: 100%;
+  .economicon-tiles {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 100%;
 
-		margin: -0.5rem;
+    margin: -0.5rem;
 
-		.tile {
-			display: flex;
+    .tile {
+      display: flex;
 
-			padding: 0.5rem;
+      padding: 0.5rem;
 
-			width: 50%;
-			height: 50%;
+      width: 50%;
+      height: 50%;
 
-			color: #fff;
+      color: #fff;
 
-			.tile-inner {
-				display: flex;
-				flex-direction: column;
-				align-items: center;																																																																																																		
-				justify-content: center;
+      .tile-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;                                                                                                                                                                                                    
+        justify-content: center;
 
-				flex: 1;
+        flex: 1;
 
-				width: 100%;
+        width: 100%;
 
-				transition: all 250ms ease;
+        transition: all 250ms ease;
 
-				cursor: pointer;
+        cursor: pointer;
 
-				color: #fff;
+        color: #fff;
 
-				.tile-icon {
-					font-size: 64px;
+        .tile-icon {
+          font-size: 64px;
 
-					@media screen and (min-width: 1280px) {
-						font-size: 96px;
-					}
-				}
+          @media screen and (min-width: 1280px) {
+            font-size: 96px;
+          }
+        }
 
-				.tile-text {
-					font-size: 24px;
+        .tile-text {
+          font-size: 24px;
 
-					@media screen and (min-width: 1280px) {
-						font-size: 32px;
-					}
-				}
+          @media screen and (min-width: 1280px) {
+            font-size: 32px;
+          }
+        }
 
-				.tile-note {
-					font-size: 20px;
-					opacity: 0.75;
-				}
-			}
+        .tile-note {
+          font-size: 20px;
+          opacity: 0.75;
+        }
+      }
 
-			&.tile-blue .tile-inner {
-				background: $primary-blue;
+      &.tile-blue .tile-inner {
+        background: $primary-blue;
 
-				&:hover {
-					background: $primary-blue-lighter;
-				}
-			}
+        &:hover {
+          background: $primary-blue-lighter;
+        }
+      }
 
-			&.tile-green .tile-inner {
-				background: $primary-green;
+      &.tile-green .tile-inner {
+        background: $primary-green;
 
-				&:hover {
-					background: lighten($primary-green, 10%);
-				}
-			}
+        &:hover {
+          background: lighten($primary-green, 10%);
+        }
+      }
 
-			@media screen and (max-width: $break-small) {
-				width: 100%;
-				height: auto;
-				flex-grow: 1;
+      @media screen and (max-width: $break-small) {
+        width: 100%;
+        height: auto;
+        flex-grow: 1;
 
-				.tile-inner {
-					padding: 1rem;
-					text-align: center;
-				}
-			}
-		}
+        .tile-inner {
+          padding: 1rem;
+          text-align: center;
+        }
+      }
+    }
 
-		@media screen and (max-width: $break-small) {
-			flex-wrap: nowrap;
-			height: auto;
-		}
-	}
+    @media screen and (max-width: $break-small) {
+      flex-wrap: nowrap;
+      height: auto;
+    }
+  }
 }
 
 .economicon-rich-list {
-	.address-list-item {
-		display: flex;
-		flex-direction: row;
-		border-bottom: 1px solid #eee;
-		align-items: center;
+  .address-list-item {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #eee;
+    align-items: center;
 
-		.left, .mid, .right {
-			padding: 1rem;
-		}
+    .left, .mid, .right {
+      padding: 1rem;
+    }
 
-		.left {
-			.hash {
-				color: $primary-dark-grey;
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 32px;
-			}
+    .left {
+      .hash {
+        color: $primary-dark-grey;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 32px;
+      }
 
-			.number {
-				color: $primary-green;
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 36px;
-			}
-		}
+      .number {
+        color: $primary-green;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 36px;
+      }
+    }
 
-		.mid {
-			display: flex;
-			flex-direction: column;
+    .mid {
+      display: flex;
+      flex-direction: column;
 
-			flex: 1;
-			justify-content: center;
+      flex: 1;
+      justify-content: center;
 
-			line-height: 1;
+      line-height: 1;
 
-			.address {
-				color: $primary-blue;
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 30px;
-			}
+      .address {
+        color: $primary-blue;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 30px;
+      }
 
-			.label {
-				color: #999;
-				font-family: "Roboto", sans-serif;
-				font-weight: 100;
-				font-size: 22px;
-			}
-		}
+      .label {
+        color: #999;
+        font-family: "Roboto", sans-serif;
+        font-weight: 100;
+        font-size: 22px;
+      }
+    }
 
-		.right {
-			.balance {
-				color: $primary-green;
-				font-size: 26px;
-			}
-		}
+    .right {
+      .balance {
+        color: $primary-green;
+        font-size: 26px;
+      }
+    }
 
-		@media screen and (max-width: $break-medium) {
-			.left, .mid, .right {
-				padding: 0.8rem;
-			}
+    @media screen and (max-width: $break-medium) {
+      .left, .mid, .right {
+        padding: 0.8rem;
+      }
 
-			.left {
-				.hash {
-					font-size: 28px;
-				}
+      .left {
+        .hash {
+          font-size: 28px;
+        }
 
-				.number {
-					font-size: 32px;
-				}
-			}
+        .number {
+          font-size: 32px;
+        }
+      }
 
-			.mid .address {
-				font-size: 28px;
-			}
+      .mid .address {
+        font-size: 28px;
+      }
 
-			.right .balance {
-				font-size: 24px;
-			}
-		}
+      .right .balance {
+        font-size: 24px;
+      }
+    }
 
-		@media screen and (max-width: $break-small) {
-			padding: 0.5rem;
-			line-height: 1;
-			flex-direction: column;
+    @media screen and (max-width: $break-small) {
+      padding: 0.5rem;
+      line-height: 1;
+      flex-direction: column;
 
-			.left, .mid, .right {
-				padding: 0;
-			}
+      .left, .mid, .right {
+        padding: 0;
+      }
 
-			.mid {
-				align-items: center;
-			}
-		}
+      .mid {
+        align-items: center;
+      }
+    }
 
-		&:last-child {
-			border-bottom: 0;
-		}
-	}
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
 }

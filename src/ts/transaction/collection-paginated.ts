@@ -17,12 +17,12 @@ export default PageableCollection.extend({
   url() {
     if (this.address) {
       return (app.syncNode || "https://krist.ceriat.net")
-				+ "/addresses/"
-				+ encodeURIComponent(this.address || app.activeWallet.boundAddress.get("address"))
-				+ "/transactions";
+        + "/addresses/"
+        + encodeURIComponent(this.address || app.activeWallet.boundAddress.get("address"))
+        + "/transactions";
     } else {
       return (app.syncNode || "https://krist.ceriat.net")
-				+ "/transactions/latest";
+        + "/transactions/latest";
     }
   },
 

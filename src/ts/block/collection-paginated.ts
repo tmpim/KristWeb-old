@@ -14,8 +14,8 @@ export default PageableCollection.extend({
 
   url() {
     return (app.syncNode || "https://krist.ceriat.net")
-			+ "/blocks/"
-			+ (this.lowest ? "lowest" : "latest");
+      + "/blocks/"
+      + (this.lowest ? "lowest" : "latest");
   },
 
   parseRecords(data) {

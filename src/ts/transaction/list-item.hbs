@@ -1,39 +1,39 @@
 <div class="top">
-	{{#if name}}
-		{{#if toName}}
-			{{> "/_address" address=from name=commonMeta.return class="from" }}
-			<span class="action">&nbsp;purchased&nbsp;</span>
-			<a href="/name/{{name}}" class="value">{{name}}</a>.kst
-		{{else if a}}
-			{{> "/_address" address=from name=commonMeta.return class="from" }}
-			<span class="action">&nbsp;updated&nbsp;</span>
-			<a href="/name/{{name}}" class="value">{{name}}</a>.kst
-		{{else}}
-			{{> "/_address" address=from name=commonMeta.return class="from" }}
-			<span class="action">
-				<i class="icon-right"></i>
-				<a href="/name/{{name}}" class="value">{{name}}</a>.kst
-				<i class="icon-right"></i>
-			</span>
-			{{> "/_address" address=to name=commonMeta.recipient class="to" }}
-		{{/if}}
-	{{else}}
-		{{> "/_address" address=from name=commonMeta.return class="from" }}
-		<span class="action">
-			<i class="icon-right"></i>
-			{{#if name}}
-				<a href="/name/{{name}}" class="value">{{name}}</a>.kst
-			{{else}}
-				<span class="value">{{krist value}}</span>
-			{{/if}}
-			<i class="icon-right"></i>
-		</span>
-		{{> "/_address" address=to name=commonMeta.recipient class="to" }}
-	{{/if}}
+  {{#if name}}
+    {{#if toName}}
+      {{> "/_address" address=from name=commonMeta.return class="from" }}
+      <span class="action">&nbsp;purchased&nbsp;</span>
+      <a href="/name/{{name}}" class="value">{{name}}</a>.kst
+    {{else if a}}
+      {{> "/_address" address=from name=commonMeta.return class="from" }}
+      <span class="action">&nbsp;updated&nbsp;</span>
+      <a href="/name/{{name}}" class="value">{{name}}</a>.kst
+    {{else}}
+      {{> "/_address" address=from name=commonMeta.return class="from" }}
+      <span class="action">
+        <i class="icon-right"></i>
+        <a href="/name/{{name}}" class="value">{{name}}</a>.kst
+        <i class="icon-right"></i>
+      </span>
+      {{> "/_address" address=to name=commonMeta.recipient class="to" }}
+    {{/if}}
+  {{else}}
+    {{> "/_address" address=from name=commonMeta.return class="from" }}
+    <span class="action">
+      <i class="icon-right"></i>
+      {{#if name}}
+        <a href="/name/{{name}}" class="value">{{name}}</a>.kst
+      {{else}}
+        <span class="value">{{krist value}}</span>
+      {{/if}}
+      <i class="icon-right"></i>
+    </span>
+    {{> "/_address" address=to name=commonMeta.recipient class="to" }}
+  {{/if}}
 </div>
 <div class="info">
-	<a href="/transaction/{{id}}"><time class="text-mini" datetime="{{time}}"></time></a>
+  <a href="/transaction/{{id}}"><time class="text-mini" datetime="{{time}}"></time></a>
 </div>
 {{#if metadata}}
-	<div class="meta"></div>
+  <div class="meta"></div>
 {{/if}}

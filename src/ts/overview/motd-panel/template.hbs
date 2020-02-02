@@ -1,36 +1,36 @@
 <div class="panel-header">
-	<h4 class="panel-title">Krist</h4>
+  <h4 class="panel-title">Krist</h4>
 </div>
 <div class="panel-body">
-	{{#if motd}}
-		<p>
-			<span class="grey-heading" title="Server Message of the Day">MOTD</span>
-			<span class="text-mute">&mdash;</span>
-			<span class="motd" id="motd">{{motd}}</span>
-		</p>
-		<time class="text-mini" id="motd-set" style="display: block; overflow: hidden;" datetime="{{time}}"></time>
-	{{else}}
-		<p class="text-mini">
-			Waiting for login...
-		</p>
-	{{/if}}
-	{{#if work}}
-		<p class="m-t-1">
-			<span class="grey-heading" title="Krist Mining Difficulty">Current Work</span>
-			<span class="text-mute">&mdash;</span>
-			<span class="blockvalue" id="blockvalue">
-				<span class="green">{{localise work}}</span>
-				{{#if showHashrate}}
-					(estimated network hashrate: <span class="green">{{estimateHashrate work}}</span>)
-				{{/if}}
-			</span>
-		</p>
-	{{/if}}
-	{{#if blockValue}}
-		<p class="m-t-1">
-			<span class="grey-heading" title="Krist Block Reward Value">Block Value</span>
-			<span class="text-mute">&mdash;</span>
-			<span class="blockvalue" id="blockvalue"><span class="green">{{localise blockValue}}</span> KST (<span class="green">{{localise baseValue}}</span> KST base)</span>
-		</p>
-	{{/if}}
+  {{#if motd}}
+    <p>
+      <span class="grey-heading" title="Server Message of the Day">MOTD</span>
+      <span class="text-mute">&mdash;</span>
+      <span class="motd" id="motd">{{motd}}</span>
+    </p>
+    <time class="text-mini" id="motd-set" style="display: block; overflow: hidden;" datetime="{{time}}"></time>
+  {{else}}
+    <p class="text-mini">
+      Waiting for login...
+    </p>
+  {{/if}}
+  {{#if work}}
+    <p class="m-t-1">
+      <span class="grey-heading" title="Krist Mining Difficulty">Current Work</span>
+      <span class="text-mute">&mdash;</span>
+      <span class="blockvalue" id="blockvalue">
+        <span class="green">{{localise work}}</span>
+        {{#if showHashrate}}
+          (estimated network hashrate: <span class="green">{{estimateHashrate work}}</span>)
+        {{/if}}
+      </span>
+    </p>
+  {{/if}}
+  {{#if blockValue}}
+    <p class="m-t-1">
+      <span class="grey-heading" title="Krist Block Reward Value">Block Value</span>
+      <span class="text-mute">&mdash;</span>
+      <span class="blockvalue" id="blockvalue"><span class="green">{{localise blockValue}}</span> KST (<span class="green">{{localise baseValue}}</span> KST base)</span>
+    </p>
+  {{/if}}
 </div>

@@ -1,26 +1,26 @@
 {{#if loggedIn}}
-	<div class="col-xs-12 m-b-1" id="wallet-overview-container">
-		<div class="left-col">
-			<span class="address">{{address}}</span>
-			<span class="balance">{{krist balance}}</span>
-		</div>
-		<div class="right-col">
-			{{#if buyName}}
-				<a class="button button-green" id="buy-name">Register name</a>
-			{{else}}
-				{{#if isOwn}}
-					<a class="button button-green" href="/transactions/make" {{#if showAllTransactionsButton}}style="margin-right: 0;"{{/if}}><i class="icon-send"></i>Send Krist</a>
-				{{else}}
-					<a class="button button-green" id="send-krist" {{#if showAllTransactionsButton}}style="margin-right: 0;"{{/if}}><i class="icon-send"></i>Send Krist to {{address}}</a>
-				{{/if}}
-			{{/if}}
-			{{#if showAllTransactionsButton}}
-				<a href="/transactions/all" class="button button-primary" id="show-all-transactions" style="margin-top: 0.25rem;">Show all network transactions</a>
-			{{/if}}
-			{{#if showAllNamesButton}}
-				<a href="/names/all" class="button button-primary" id="show-all-names" style="margin-top: 0.25rem;">Show all network names</a>
-			{{/if}}
-			{{#unless hideNames}}<span class="badge badge-green-light">{{#if fetchedNames}}{{names}}{{else}}<div class="loading-indicator inline white"></div>{{/if}} {{pluralize (names) "name" "names"}}</span>{{/unless}}
-		</div>
-	</div>
+  <div class="col-xs-12 m-b-1" id="wallet-overview-container">
+    <div class="left-col">
+      <span class="address">{{address}}</span>
+      <span class="balance">{{krist balance}}</span>
+    </div>
+    <div class="right-col">
+      {{#if buyName}}
+        <a class="button button-green" id="buy-name">Register name</a>
+      {{else}}
+        {{#if isOwn}}
+          <a class="button button-green" href="/transactions/make" {{#if showAllTransactionsButton}}style="margin-right: 0;"{{/if}}><i class="icon-send"></i>Send Krist</a>
+        {{else}}
+          <a class="button button-green" id="send-krist" {{#if showAllTransactionsButton}}style="margin-right: 0;"{{/if}}><i class="icon-send"></i>Send Krist to {{address}}</a>
+        {{/if}}
+      {{/if}}
+      {{#if showAllTransactionsButton}}
+        <a href="/transactions/all" class="button button-primary" id="show-all-transactions" style="margin-top: 0.25rem;">Show all network transactions</a>
+      {{/if}}
+      {{#if showAllNamesButton}}
+        <a href="/names/all" class="button button-primary" id="show-all-names" style="margin-top: 0.25rem;">Show all network names</a>
+      {{/if}}
+      {{#unless hideNames}}<span class="badge badge-green-light">{{#if fetchedNames}}{{names}}{{else}}<div class="loading-indicator inline white"></div>{{/if}} {{pluralize (names) "name" "names"}}</span>{{/unless}}
+    </div>
+  </div>
 {{/if}}

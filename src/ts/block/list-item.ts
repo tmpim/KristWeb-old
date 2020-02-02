@@ -23,10 +23,6 @@ export default View.extend({
   },
 
   templateContext: {
-    krist(number) {
-      return Number(number).toLocaleString() + " KST";
-    },
-
     formatHeight(number) {
       return Number(number).toLocaleString();
     }

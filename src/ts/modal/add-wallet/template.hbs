@@ -1,15 +1,14 @@
 {{#unless editing}}
-	<p class="m-b-1">
-		<b>Enter your secret password to access your Krist wallet.</b><br />
-		If this is your first time using Krist, type your desired password.
-		You will be able to access your Krist wallet on any computer, any server and from any wallet as long as you type
-		in the same password.
-	</p>
+  <p class="m-b-1">
+    <b>Enter your secret private key to access your Krist wallet.</b><br />
+    You will be able to access your Krist wallet on any computer, any server and from any wallet as long as you type
+    in the same private key.
+  </p>
 {{/unless}}
 
 <div class="wallet-label-group">
-	<div class="wallet-icon focusable focusable-border" id="wallet-icon" tabindex="1">Icon</div>
-	<input type="text" class="text-input" placeholder="Wallet label (optional)" maxlength="30" id="wallet-label" tabindex="2" />
+  <div class="wallet-icon focusable focusable-border" id="wallet-icon" tabindex="1">Icon</div>
+  <input type="text" class="text-input" placeholder="Wallet label (optional)" maxlength="30" id="wallet-label" tabindex="2" />
 </div>
 
 <label for="wallet-label" class="label-hint label-hidden" id="wallet-label-label">&nbsp;</label>
@@ -17,30 +16,45 @@
 <input type="text" class="text-input u-hidden" placeholder="Wallet username" id="wallet-username" tabindex="3" />
 <label for="wallet-username" class="label-hint label-hidden u-hidden" id="wallet-username-label">&nbsp;</label>
 
-<input type="password" class="text-input no-bottom" placeholder="Wallet password" id="wallet-password" tabindex="4" />
+<input type="password" class="text-input no-bottom" placeholder="Wallet private key" id="wallet-password" tabindex="4" />
 <div id="password-strength" class="strength-indicator">
-	<div class="strength-segment"></div>
-	<div class="strength-segment"></div>
-	<div class="strength-segment"></div>
-	<div class="strength-segment"></div>
-	<div class="strength-segment"></div>
+  <div class="strength-segment"></div>
+  <div class="strength-segment"></div>
+  <div class="strength-segment"></div>
+  <div class="strength-segment"></div>
+  <div class="strength-segment"></div>
 </div>
 <label for="wallet-password" class="label-hint label-hidden" id="wallet-password-label">&nbsp;</label>
 
-<label for="wallet-format" style="display: inline-block; padding-bottom: 0.5rem;">
-	Wallet Format (<a class="wallet-format-help" data-bypass>learn more</a>)
-</label>
+<div id="advanced-collapse" class="collapse-container">
+  <h1 class="collapse-button" id="advanced-collapse-button"><span class="collapse-arrow"></span>Advanced Options</h1>
+  <div class="collapse-inner" style="display: none">
+    <label for="wallet-format" style="display: inline-block; padding-bottom: 0.5rem;">
+      Wallet Format (<a class="wallet-format-help" data-bypass>learn more</a>)
+    </label>
 
-<select class="dropdown-input" id="wallet-format" tabindex="5" style="width: 100%;">
-	<option value="kristwallet">KristWallet, KWallet (recommended)</option>
-	<option value="krist">Local Vault, krist.dia, Krist API</option>
-	<option value="kristwallet_username_appendhashes">KW-Username (appendhashes)</option>
-	<option value="kristwallet_username">KW-Username (pre-appendhashes)</option>
-</select>
+    <select class="dropdown-input" id="wallet-format" tabindex="5" style="width: 100%;">
+      <option value="kristwallet">KristWallet, KWallet (recommended)</option>
+      <option value="krist">Local Vault, krist.dia, Krist API</option>
+      <option value="kristwallet_username_appendhashes">KW-Username (appendhashes)</option>
+      <option value="kristwallet_username">KW-Username (pre-appendhashes)</option>
+    </select>
 
-<p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
-	Sync Node (<a class="sync-node-help" data-bypass>learn more</a>)
-</p>
+    <p style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+      Sync Node (<a class="sync-node-help" data-bypass>learn more</a>)
+    </p>
 
-<input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" tabindex="6" />
-<label for="wallet-syncnode" class="label-hint label-hidden" id="wallet-syncnode-label">&nbsp;</label>
+    <input type="text" class="text-input" value="https://krist.ceriat.net" id="wallet-syncnode" tabindex="6" />
+    <label for="wallet-syncnode" class="label-hint label-hidden" id="wallet-syncnode-label">&nbsp;</label>
+  </div>
+</div>
+
+{{#unless editing}}
+  <div class="switch-container">
+    Save this wallet in KristWeb
+    <label class="switch" id="wallet-save">
+      <input type="checkbox" checked>
+      <div class="switch-inner"></div>
+    </label>
+  </div>
+{{/unless}}
