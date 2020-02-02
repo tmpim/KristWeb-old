@@ -34,32 +34,37 @@
 <body class="dense-retina">
 	<div id="app">
 		<div class="preloader">
-			<noscript>
+			<noscript class="error">
 				KristWeb requires JavaScript to be enabled in order to run. Please enable it in your browser, or exclude
 				KristWeb in your NoScript addon.
 			</noscript>
 
-			<div id="loader-spinner"></div>
-			<div id="loader-text">Loading...</div>
-			<div id="loader-progress-bar" style="opacity: 0;"><div class="progress" id="loader-progress"></div></div>
+			<div id="loader-spinner" style="display: none;"></div>
+			<div id="loader-text" style="display: none;">Loading...</div>
+			<div id="loader-progress-bar" style="display: none; opacity: 0;"><div class="progress" id="loader-progress"></div></div>
+
+			<div id="loader-error-container" style="display: none"></div>
 
 			<script>
 				if (navigator.userAgent.indexOf("MSIE") != -1) {
-					document.write("btw ur browser sucks");
+					document.write("KristWeb does not support Internet Explorer.");
 				}
 			</script>
 		</div>
 	</div>
 
-	<script>
+	<!--<script>
+		var loaderSpinner = document.getElementById("loader-spinner");
+		var loaderText = document.getElementById("loader-text");
 		var progressBar = document.getElementById("loader-progress-bar");
 		var progress = document.getElementById("loader-progress");
+		var errorContainer = document.getElementById("loader-error-container");
 
-		var loaderText = document.getElementById("loader-text");
-
-		progressBar.style.opacity = 1.0;
-
+		loaderSpinner.style.display = "block";
 		loaderText.innerText = "Loading required files";
+		loaderText.style.display = "block";
+		progressBar.style.opacity = 1.0;
+		progressBar.style.display = "block";
 
 		var app = new XMLHttpRequest();
 
@@ -73,14 +78,25 @@
 		});
 
 		app.addEventListener("load", function () {
-			progressBar.style.opacity = 0;
+			progressBar.style.opacity = 0.0;
 			loaderText.innerText = "Loading...";
 
-			eval(this.responseText);
+			try {
+				eval(this.responseText);
+			} catch (e) {
+				console.error(e);
+
+				loaderSpinner.style.opacity = 0.0;
+				loaderText.innerText = "There was an error loading KristWeb.";
+				
+				errorContainer.innerText = e.message;
+				errorContainer.style.display = "block";
+			}
 		});
 
 		app.open("GET", "/js/app.js");
 		app.send();
-	</script>
+	</script>-->
+	<script src="/js/app.js"></script>
 </body>
 </html>

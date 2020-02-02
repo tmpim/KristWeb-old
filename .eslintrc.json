@@ -1,7 +1,7 @@
 {
   "extends": "eslint:recommended",
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": 2017,
     "sourceType": "module"
   },
   "env": {
@@ -12,7 +12,18 @@
   "rules": {
     "no-unused-vars": 0,
     "no-console": 0,
-    "quotes": ["error", "double"],
-    "semi": ["error", "always"]
+    "no-debugger": 0,
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
+    "quotes": ["error", "double", {
+      "avoidEscape": true,
+      "allowTemplateLiterals": true
+    }],
+    "semi": ["error", "always"],
+    "array-bracket-spacing": ["error", "never"],
+    "object-curly-spacing": ["error", "always"],
+    "object-shorthand": ["error", "always"],
+    "no-case-declarations": 0
   }
 }

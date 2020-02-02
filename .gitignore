@@ -4,3 +4,5 @@
 node_modules
 dist/
 .madgerc
+.vscode
+src/scss/base/_iconfont.scss
