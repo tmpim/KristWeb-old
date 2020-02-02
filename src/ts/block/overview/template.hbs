@@ -1,0 +1,30 @@
+<div class="col-xs-12 m-b-1" id="block-overview-container">
+  <div class=id">
+    <p class="text-mini u-textCenter">Block #{{localise height}}{{#if first}} (genesis block){{/if}}</p>
+  </div>
+  <div class="top">
+    <span class="address"><a href="/address/{{address}}">{{address}}</a></span>
+    <span class="action">{{#if first}}created{{else}}mined{{/if}}</span>
+    <span class="value">{{krist value}}</span>
+  </div>
+  <div class="info">
+    <time id="block-time" datetime="{{time}}"></time>
+    <a {{#unless first}}href="/block/{{lastBlock}}"{{/unless}} class="u-floatLeft{{#if first}} u-invisible{{/if}}">&laquo; Prev</a>
+    <a href="/block/{{nextBlock}}" class="u-floatRight">Next &raquo;</a>
+  </div>
+  <div class="panel m-t-1">
+    <div class="panel-header">
+      Block Info
+    </div>
+    <ul class="panel-body panel-list">
+      <li>
+        <h3>Hash</h3>
+        <p class="hash">{{{boldHash}}}</p>
+      </li>
+      <li>
+        <h3>Difficulty</h3>
+        <p>{{localise difficulty}}</p>
+      </li>
+    </ul>
+  </div>
+</div>

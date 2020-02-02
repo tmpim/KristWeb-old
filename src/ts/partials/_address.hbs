@@ -1,0 +1,10 @@
+{{#if name}}
+  <span class="address {{class}}">
+    {{name}}
+    (<b><a href="/address/{{address}}" title="{{address}}">{{addressLabel address}}</a></b>)
+  </span>
+{{else if address}}
+  <span class="address {{class}}"><a href="/address/{{address}}">{{addressLabel address}}</a></span>
+{{else}}
+  <span class="address {{class}}">Mined</span>
+{{/if}}

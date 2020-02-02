@@ -1,86 +1,86 @@
 .wallet-label-group {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-	.wallet-icon {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 38px;
-		height: 38px;
+  .wallet-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
 
-		flex: 0 0 38px;
+    flex: 0 0 38px;
 
-		margin-top: 0.5rem;
-		margin-right: 0.5rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
 
-		border: 1px solid $primary-darker-grey;
-		border-radius: 3px;
+    border: 1px solid $primary-darker-grey;
+    border-radius: 3px;
 
-		color: $primary-darker-grey;
-		font-size: 14px;
+    color: $primary-darker-grey;
+    font-size: 14px;
 
-		cursor: pointer;
+    cursor: pointer;
 
-		&:hover {
-			border-color: darken($primary-darker-grey, 10%);
-			color: darken($primary-darker-grey, 10%);
-		}
-	}
+    &:hover {
+      border-color: darken($primary-darker-grey, 10%);
+      color: darken($primary-darker-grey, 10%);
+    }
+  }
 }
 
 .wallet-create-password-group {
-	display: flex;
-	flex-direction: row;
-	
-	#wallet-password {
-		border-right: 0;
-		border-top-right-radius: 0;
-		border-bottom-right-radius: 0;
-		flex: 1;
+  display: flex;
+  flex-direction: row;
 
-		font-family: monospace;
-		font-weight: 300;
-		font-size: 80%;
-		background: $primary-light-grey;
-	}
+  #wallet-password {
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    flex: 1;
 
-	.button {
-		margin-right: 0;
-		padding: 0.25rem 0.5rem;
-		border-radius: 0;
-		border-right: 1px solid $primary-blue-darker;
+    font-family: monospace;
+    font-weight: 300;
+    font-size: 80%;
+    background: $primary-light-grey;
+  }
 
-		&:last-child {
-			border-top-right-radius: 3px;
-			border-bottom-right-radius: 3px;
-			border-right: 0;
-		}
-	}
+  .button {
+    margin-right: 0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0;
+    border-right: 1px solid $primary-blue-darker;
+
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+      border-right: 0;
+    }
+  }
 }
 
 #wallet-icon-crop {
-	.cropper-container {
-		margin: 0 auto;
-	}
+  .cropper-container {
+    margin: 0 auto;
+  }
 
-	.wallet-asdfghjkl-group {
-		display: flex;
-		flex-direction: row;
-		align-items: center;
-		justify-content: center;
+  .wallet-asdfghjkl-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
-		.wallet-icon {
-			width: 38px;
-			height: 38px;
-			margin-right: 0.5rem;
+    .wallet-icon {
+      width: 38px;
+      height: 38px;
+      margin-right: 0.5rem;
 
-			border: 1px solid $primary-darker-grey;
-			border-radius: 3px;
+      border: 1px solid $primary-darker-grey;
+      border-radius: 3px;
 
-			overflow: hidden;
+      overflow: hidden;
 
-			background-size: cover;
-		}
-	}
+      background-size: cover;
+    }
+  }
 }

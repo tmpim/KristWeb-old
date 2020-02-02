@@ -1,50 +1,50 @@
 #app.theme-blue-yellow-stripes-with-green-ish-dots {
-	* {
-		border: 3px dashed yellow;
-		color: lime !important;
-	}
+  * {
+    border: 3px dashed yellow;
+    color: lime !important;
+  }
 
-	.topBar {
-		background: $primary-blue;
+  .topBar {
+    background: $primary-blue;
 
-		.sidebar-opener {
-			border-right: 1px solid $primary-blue-darker;
+    .sidebar-opener {
+      border-right: 1px solid $primary-blue-darker;
 
-			&:hover {
-				background: $primary-blue-lighter;
-			}
-		}
+      &:hover {
+        background: $primary-blue-lighter;
+      }
+    }
 
-		.topBar-addressSelector {
-			&:hover {
-				background: $primary-blue-lighter;
-			}
-		}
-	}
+    .topBar-addressSelector {
+      &:hover {
+        background: $primary-blue-lighter;
+      }
+    }
+  }
 
-	.sidebar {
-		background: $primary-blue-darker;
+  .sidebar {
+    background: $primary-blue-darker;
 
-		.sidebar-item {
-			color: #fff;
+    .sidebar-item {
+      color: #fff;
 
-			&:not(.sidebar-search) {
-				&:focus {
-					background: lighten($primary-blue, 5%);
-				}
+      &:not(.sidebar-search) {
+        &:focus {
+          background: lighten($primary-blue, 5%);
+        }
 
-				&:hover {
-					background: $primary-blue;
-				}
+        &:hover {
+          background: $primary-blue;
+        }
 
-				&.active {
-					background: $primary-blue-lighter;
+        &.active {
+          background: $primary-blue-lighter;
 
-					&:hover {
-						background: lighten($primary-blue-lighter, 10%);
-					}
-				}
-			}
-		}
-	}
+          &:hover {
+            background: lighten($primary-blue-lighter, 10%);
+          }
+        }
+      }
+    }
+  }
 }

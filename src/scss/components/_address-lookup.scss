@@ -1,27 +1,27 @@
 #address-lookup {
-	width: 100%;
+  width: 100%;
 
-	.row {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 
-		.top {
-			width: 100%;
-			max-width: 600px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			flex-wrap: wrap;
-			flex: 1;
+    .top {
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex: 1;
 
-			.action {
-				font-size: 26px;
-				padding: 0.5rem 0;
-			}
-		}
-	}
+      .action {
+        font-size: 26px;
+        padding: 0.5rem 0;
+      }
+    }
+  }
 }

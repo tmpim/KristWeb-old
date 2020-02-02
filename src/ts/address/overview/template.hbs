@@ -1,0 +1,10 @@
+<div class="col-xs-12 m-b-1" id="wallet-overview-container">
+  <div class="left-col">
+    <span class="address">{{address}}</span>
+    <span class="balance">{{krist balance}}</span>
+  </div>
+  <div class="right-col">
+    <a class="button button-green" id="send-krist"><i class="icon-send"></i>Send Krist to {{address}}</a>
+    <span class="badge badge-green-light">{{#if fetchedNames}}{{names}}{{else}}<div class="loading-indicator inline white"></div>{{/if}} {{pluralize names "name" "names"}}</span>
+  </div>
+</div>

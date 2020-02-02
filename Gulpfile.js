@@ -1,149 +1,165 @@
-var gulp = require("gulp");
-var $ = require("gulp-load-plugins")();
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
-var buffer = require("vinyl-buffer");
-var nodeResolve = require('resolve');
-var _ = require("lodash");
+const _ = require("lodash");
+const { promisify } = require("util");
+const fs = require("fs");
+const path = require("path");
+const mkdirp = require("mkdirp");
 
-gulp.task("html", function() {
-	return gulp.src("./src/index.html")
-		.pipe($.plumber())
-		.pipe(gulp.dest("./dist"));
+// Gulp
+const gulp = require("gulp");
+const util = require("gulp-util");
+const gulpif = require("gulp-if");
+
+const sourcemaps = require("gulp-sourcemaps");
+
+const source = require("vinyl-source-stream");
+const buffer = require("vinyl-buffer");
+
+const browserSync = require("browser-sync");
+const history = require("connect-history-api-fallback");
+
+// CSS
+const sass = require("gulp-sass");
+const postcss = require("gulp-postcss");
+const autoprefixer = require("autoprefixer");
+const cssnano = require("cssnano");
+
+// JS/TS
+const rollup = require("@rollup/stream");
+const resolve = require("@rollup/plugin-node-resolve");
+const commonjs = require("@rollup/plugin-commonjs");
+const json = require("@rollup/plugin-json");
+const typescript = require("rollup-plugin-typescript2");
+const rootImport = require("rollup-plugin-root-import");
+const handlebars = require("rollup-plugin-handlebars-plus");
+const globals = require("rollup-plugin-node-globals");
+const builtins = require("rollup-plugin-node-builtins");
+const conditional = require("rollup-plugin-conditional");
+const { terser } = require("rollup-plugin-terser");
+
+// Iconfont
+const fontelloDownload = require("fontello-download");
+
+let cache; // Rollup cache
+
+gulp.task("html", () => gulp.src("src/index.html")
+  .pipe(gulp.dest("dist")));
+
+gulp.task("files", () => gulp.src("src/font/**/*.*")
+  .pipe(gulp.dest("dist/font")));
+
+gulp.task("sass", () => gulp.src("src/scss/**/*.scss")
+  .pipe(sourcemaps.init({ loadMaps: true }))
+  .pipe(sass())
+  /**.pipe(postcss([
+    autoprefixer(),
+    util.env.production ? cssnano() : false
+  ]))*/
+  .on("error", sass.logError)
+  .pipe(sourcemaps.write("."))
+  .pipe(gulp.dest("dist/css"))
+  .pipe(browserSync.stream()));
+	
+gulp.task("iconfont", async () => {
+  const fontConfig = JSON.parse(fs.readFileSync("src/font/iconfont/config.json"));
+  const fontZip = await promisify(fontelloDownload)(fontConfig);
+
+  mkdirp.sync("dist/font/iconfont");
+
+  // find non-directory files in a path like /fontello-(ID)/font/
+  const fontFiles = _.filter(_.values(fontZip.files), o => !o.dir && o.name.match(/^fontello-\w+\/font\//));
+
+  for (const file of fontFiles) {
+    const data = await fontZip.file(file.name).async("uint8array");
+    fs.writeFileSync(path.join("dist/font/iconfont/", path.basename(file.name)), new Buffer(data));
+  }
+
+  // find the /fontello-(ID)/css/(NAME).css file
+  const fontName = fontConfig.name;
+  const cssNameRegex = new RegExp("^fontello-\\w+\\/css\\/" + fontName + "\\.css$");
+  const cssFile = _.find(_.values(fontZip.files), o => !o.dir && o.name.match(cssNameRegex));
+  const cssFileData = await fontZip.file(cssFile.name).async("string");
+  // prepend header and replace all relative font paths with absolute ones
+  const newCSSFileData = "/* AUTO GENERATED FILE, DO NOT MODIFY */\n\n" +
+		cssFileData.replace(/\.\.\/font\//g, "/font/iconfont/");
+
+  fs.writeFileSync("src/scss/base/_iconfont.scss", newCSSFileData);
 });
 
-gulp.task("files", function() {
-	gulp.src("./src/font/**/*.*").pipe(gulp.dest("./dist/font"));
-	gulp.src("./src/img/**/*.*").pipe(gulp.dest("./dist/img"));
+gulp.task("app", () => rollup({
+  input: "./src/ts/app.ts",
+  output: {
+    sourcemap: !util.env.production,
+    format: "umd",
+    name: "kristweb"
+  },
+  cache,
+  plugins: [
+    //eslint({ // doesn't work in current version, switching to typescript anyway
+    //  exclude: ["**/*.hbs", "**/*.json", "node_modules/**"]
+    //}),
+    builtins({
+      crypto: false
+    }),
+    resolve({
+      browser: true,
+      extensions: [".js", ".json", ".ts", ".hbs"],
+      preferBuiltins: false
+    }),
+    rootImport({
+      root: [`${__dirname}/src/ts/`, `${__dirname}/src/ts/partials/`],
+      extensions: [".js", ".ts", ".hbs"]
+    }),
+    handlebars({
+      helpers: [`${__dirname}/src/ts/helpers/helpers.ts`],
+      partialRoot: [`${__dirname}/src/ts/partials/`]
+    }),
+    json(),
+    typescript({
+      verbosity: 2
+    }),
+    commonjs({
+      include: "node_modules/**",
+      extensions: [".js", ".ts"],
+      namedExports: {
+        "./node_modules/backbone.marionette/lib/backbone.marionette.js": ["noConflict", "bindEvents", "unbindEvents", "bindRequests", "unbindRequests", "mergeOptions", "getOption", "normalizeMethods", "extend", "isNodeAttached", "deprecate", "triggerMethod", "triggerMethodOn", "isEnabled", "setEnabled", "monitorViewEvents", "Behaviors", "Application", "AppRouter", "Renderer", "TemplateCache", "View", "CollectionView", "NextCollectionView", "CompositeView", "Behavior", "Region", "Error", "Object", "DEV_MODE", "FEATURES", "VERSION", "DomApi", "setDomApi"],
+        "./node_modules/backbone/": ["VERSION", "noConflict", "$", "emulateHTTP", "emulateJSON", "sync", "ajax", "history", "Model", "Collection", "Router", "View", "History"],
+        "./node_modules/backbone.localstorage/build/backbone.localStorage.js": ["LocalStorage"]
+      }
+    }),
+    globals(),
+    conditional(!!util.env.production, [terser()])
+  ],
+  external: ["crypto"]
+})
+  .on("bundle", bundle => cache = bundle)
+  .pipe(source("app.ts", "./src/ts"))
+  .pipe(buffer())
+  .pipe(gulpif(!util.env.production, sourcemaps.init({ loadMaps: true })))
+  .pipe(gulpif(!util.env.production, sourcemaps.write({ includeContent: false, sourceRoot: "/js", largeFile: true })))
+  .pipe(gulp.dest("./dist/js")));
+
+gulp.task("browser-sync", () => browserSync({
+  server: {
+    baseDir: "dist",
+    middleware: [
+      history()
+    ]
+  }
+}));
+
+gulp.task("browser-sync-reload", done => {
+  browserSync.reload();
+  done();
 });
 
-gulp.task("sass", function() {
-	return gulp
-		.src("./src/scss/**/*.scss")
-		.pipe($.sass({ errLogToConsole: true, outputStyle: "compressed"	})
-		.on("error", $.sass.logError))
-		.pipe(gulp.dest("./dist/css"));
-});
+gulp.task("build", gulp.parallel("html", "files", gulp.series("iconfont", "sass"), "app"));
 
-gulp.task("lint", function() {
-	return gulp.src(["src/js/**/*.js", "!src/js/**/*.min.js", "!src/js/libs/**/*.js"])
-		.pipe($.eslint({
-			extends: "eslint:recommended",
-			parser: "babel-eslint",
-			parserOptions: {
-				sourceType: "module",
-				ecmaFeatures: {
-					modules: true
-				}
-			},
-			plugins: [
-				"babel"
-			],
-			envs: [
-				"browser",
-				"es6",
-				"commonjs"
-			],
-			ecmaFeatures: {
-				sourceType: "module"
-			},
-			rules: {
-				"no-unused-vars": 0,
-				"no-console": 0,
-				"quotes": ["error", "double"],
-				"semi": ["error", "always"]
-			}
-		}))
-		.pipe($.eslint.formatEach("compact", process.stderr));
-});
+gulp.task("watch", gulp.series("build", done => {
+  gulp.watch("src/scss/**/*.scss", gulp.series("sass"));
+  gulp.watch("src/**/*.html", gulp.series("html", "browser-sync-reload"));
+  gulp.watch(["src/**/*.hbs", "src/**/*.js", "src/**/*.ts"], gulp.series("app", "browser-sync-reload"));
+  gulp.watch(["src/img/**/*.*", "src/font/**/*.*"], gulp.series("files", "browser-sync-reload"));
+  done();
+}));
 
-var vendorBundler = _.memoize(function() {
-	var b = browserify();
-
-	getNPMPackageIds().forEach(function (id) {
-		b.require(nodeResolve.sync(id), { expose: id });
-	});
-
-	return b;
-});
-
-var appBundler = _.memoize(function() {
-	var b = browserify("./src/js/app.js");
-
-	getNPMPackageIds().forEach(function (id) {
-		b.external(id);
-	});
-
-	return b;
-});
-
-function handleErrors() {
-	var args = Array.prototype.slice.call(arguments);
-	delete args[0].stream;
-	$.util.log.apply(null, args);
-	this.emit("end");
-}
-
-function vendorBundle(cb) {
-	return vendorBundler().bundle()
-		.on("error", handleErrors)
-		.pipe(source("vendor.js"))
-		.pipe(buffer())
-		.pipe($.uglify())
-		.pipe(gulp.dest("./dist/js"))
-		.on("end", cb);
-}
-
-function appBundle(cb, watch) {
-	return appBundler(watch).bundle()
-		.on("error", handleErrors)
-		.pipe(source("app.js"))
-		.pipe(buffer())
-		.pipe($.uglify())
-		.pipe(gulp.dest("./dist/js"))
-		.on("end", cb);
-}
-
-function getNPMPackageIds() {
-	return _.union(_.keys(require('./package.json').dependencies) || [], [
-		"browserify-cryptojs/components/enc-base64",
-		"browserify-cryptojs/components/md5",
-		"browserify-cryptojs/components/evpkdf",
-		"browserify-cryptojs/components/cipher-core",
-		"browserify-cryptojs/components/aes",
-		"browserify-cryptojs/components/sha256"
-	]);
-}
-
-gulp.task("vendor", function(cb) {
-	vendorBundle(cb);
-});
-
-gulp.task("app", function(cb) {
-	appBundle(cb, true);
-});
-
-gulp.task("build", [
-	"html",
-	"sass",
-	"lint",
-	"vendor",
-	"app",
-	"files"
-]);
-
-gulp.task("watch", ["build"], function() {
-	gulp.watch("./src/scss/**/*.scss", ["sass"]);
-	gulp.watch("./src/**/*.html", ["html"]);
-	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["app", "lint"]);
-	gulp.watch(["./src/img/**/*.*", "./src/font/**/*.*"], ["files"]);
-});
-
-gulp.task("watchWithoutBuild", ["html", "sass", "app", "files", "lint"], function() {
-	gulp.watch("./src/scss/**/*.scss", ["sass"]);
-	gulp.watch("./src/**/*.html", ["html"]);
-	gulp.watch(["./src/**/*.hbs", "./src/**/*.js"], ["app", "lint"]);
-	gulp.watch(["./src/img/**/*.*", "./src/font/**/*.*"], ["files"]);
-});
-
-gulp.task("default", ["watch"]);
+gulp.task("default", gulp.parallel("browser-sync", "watch"));

@@ -13,6 +13,10 @@
 
     background-color: $primary-blue;
 
+    padding: 2rem;
+
+    text-align: center;
+
     noscript {
         color: #fff;
         font-size: 18px;
@@ -50,6 +54,18 @@
         color: $primary-blue-lighter;
 
         font-size: 20px;
+    }
+
+    .error, #loader-error-container {
+        padding: 1rem;
+
+        color: $primary-red;
+        font-size: 80%;
+        font-family: monospace;
+        
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
     }
 
     #loader-progress-bar {

@@ -1,0 +1,9 @@
+{{#unless hideCloseButton}}<i class="alert-close u-floatRight icon-cancel"></i>{{/unless}}
+{{#if title}}<h1 class="alert-title">{{title}}</h1>{{/if}}
+<p class="alert-text">
+  {{#if parts}}
+    {{#each parts}}{{#ifeq type "text"}}{{text}}{{/ifeq}}{{#ifeq type "krist"}}<b>{{krist amount}}</b>{{/ifeq}}{{#ifeq type "address"}}<a href="/addresses/{{address}}"><b>{{address}}</b></a>{{/ifeq}}{{/each}}
+  {{else}}
+    {{text}}
+  {{/if}}
+</p>

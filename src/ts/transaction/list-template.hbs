@@ -1,0 +1,18 @@
+<div class="row" id="overview"></div>
+<div class="row" id="wallet-overview"></div>
+
+<div class="row row-list m-b-1" id="transaction-list">
+  <div class="loading-indicator"></div>
+</div>
+<div class="row" id="pagination-container"></div>
+<div class="row" id="exclude-mined-container">
+  <div class="switch-container">
+    Hide mined transactions
+    <label class="switch" id="exclude-mined">
+      <input type="checkbox" {{#if excludeMined}}checked{{/if}}>
+      <div class="switch-inner"></div>
+    </label>
+  </div>
+</div>
+
+<div id="network-footer" class="m-t-2"></div>
